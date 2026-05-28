@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prompts de IA — AV Pro Tools</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080810;
+      --card: #12121e;
+      --card2: #1a1a2e;
+      --border: #2a2a3e;
+      --accent: #ff6b35;
+      --accent2: #ffd166;
+      --purple: #8a63ff;
+      --green: #4ade80;
+      --text: #f0f0f5;
+      --muted: #8888aa;
+      --radius: 16px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif;
+      min-height: 100vh;
+      padding-bottom: 60px;
+    }
+
+    header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    header a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .85rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color .2s;
+    }
+    header a:hover { color: var(--text); }
+    header h1 { font-size: 1.1rem; font-weight: 700; }
+
+    /* HERO */
+    .hero {
+      max-width: 900px;
+      margin: 36px auto 0;
+      padding: 0 24px;
+    }
+
+    .hero h2 { font-size: 1.6rem; font-weight: 800; margin-bottom: 10px; }
+    .hero p { color: var(--muted); font-size: .95rem; line-height: 1.7; max-width: 560px; }
+
+    /* FILTER TABS */
+    .tabs {
+      max-width: 900px;
+      margin: 28px auto 0;
+      padding: 0 24px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tab {
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: .82rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      transition: all .2s;
+    }
+
+    .tab.active {
+      background: var(--purple);
+      border-color: var(--purple);
+      color: white;
+    }
+
+    /* PROMPTS GRID */
+    .grid {
+      max-width: 900px;
+      margin: 24px auto 0;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+      gap: 16px;
+    }
+
+    @media (max-width: 600px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+
+    .prompt-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: border-color .2s;
+    }
+
+    .prompt-card:hover { border-color: rgba(138,99,255,.4); }
+
+    .pc-header {
+      padding: 18px 20px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pc-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .pc-cat {
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 999px;
+    }
+
+    .cat-pre    { background: rgba(255,107,53,.15); color: var(--accent); }
+    .cat-admin  { background: rgba(255,209,102,.12); color: var(--accent2); }
+    .cat-social { background: rgba(74,222,128,.12); color: var(--green); }
+    .cat-pos    { background: rgba(138,99,255,.15); color: var(--purple); }
+    .cat-criativo { background: rgba(240,100,200,.12); color: #f064c8; }
+
+    .pc-title {
+      font-size: .98rem;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .pc-desc {
+      font-size: .82rem;
+      color: var(--muted);
+      margin-top: 4px;
+      line-height: 1.5;
+    }
+
+    .pc-body {
+      padding: 16px 20px;
+    }
+
+    .prompt-text {
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: .83rem;
+      line-height: 1.75;
+      color: var(--text);
+      font-family: inherit;
+      white-space: pre-wrap;
+      position: relative;
+      max-height: 180px;
+      overflow: hidden;
+      transition: max-height .3s ease;
+    }
+
+    .prompt-text.expanded { max-height: 2000px; }
+
+    .prompt-text::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: linear-gradient(transparent, var(--card2));
+      pointer-events: none;
+      transition: opacity .2s;
+    }
+
+    .prompt-text.expanded::after { opacity: 0; }
+
+    .highlight {
+      color: var(--accent2);
+      font-weight: 600;
+    }
+
+    .pc-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .btn-copy-prompt {
+      flex: 1;
+      padding: 10px;
+      background: var(--purple);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: .82rem;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      transition: opacity .2s;
+    }
+    .btn-copy-prompt:hover { opacity: .85; }
+
+    .btn-expand {
+      padding: 10px 14px;
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: .82rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: color .2s;
+    }
+    .btn-expand:hover { color: var(--text); }
+
+    /* HOW TO USE */
+    .howto {
+      max-width: 900px;
+      margin: 0 auto 32px;
+      padding: 0 24px;
+    }
+
+    .howto-box {
+      background: rgba(138,99,255,.08);
+      border: 1px solid rgba(138,99,255,.2);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+    }
+
+    .howto-box h3 { font-size: .95rem; font-weight: 700; margin-bottom: 12px; color: var(--purple); }
+
+    .howto-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+    }
+
+    .step {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .step-num {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--purple);
+    }
+
+    .step-txt {
+      font-size: .82rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .empty { display: none; }
+    .empty.show {
+      display: block;
+      text-align: center;
+      color: var(--muted);
+      padding: 40px;
+      font-size: .9rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Início
+  </a>
+  <h1>🤖 Prompts de IA Prontos</h1>
+</header>
+
+<div class="hero">
+  <h2>Prompts que economizam horas</h2>
+  <p>Copie, cole no ChatGPT ou Claude e personalize com os dados do seu projeto. Os campos em <span style="color:var(--accent2); font-weight:600;">[COLCHETES]</span> são para você preencher.</p>
+</div>
+
+<div class="tabs" id="tabs">
+  <button class="tab active" onclick="filtrar('todos', this)">Todos</button>
+  <button class="tab" onclick="filtrar('pre', this)">Pré-produção</button>
+  <button class="tab" onclick="filtrar('admin', this)">Administrativo</button>
+  <button class="tab" onclick="filtrar('pos', this)">Pós-produção</button>
+  <button class="tab" onclick="filtrar('social', this)">Social Media</button>
+  <button class="tab" onclick="filtrar('criativo', this)">Criativo</button>
+</div>
+
+<div class="grid" id="grid"></div>
+<div class="empty" id="empty">Nenhum prompt nesta categoria.</div>
+
+<script>
+const PROMPTS = [
+  // PRÉ-PRODUÇÃO
+  {
+    id: 1, cat: 'pre', catLabel: 'Pré-produção',
+    title: 'Proposta de orçamento profissional',
+    desc: 'Gera uma proposta completa para enviar ao cliente por e-mail ou WhatsApp.',
+    text: `Você é um videomaker freelancer profissional no Brasil. Escreva uma proposta de orçamento formal e persuasiva com base nas informações abaixo.
+
+DADOS DO PROJETO:
+- Tipo de serviço: [TIPO — ex: filmagem e edição de evento corporativo]
+- Cliente: [NOME DA EMPRESA / PESSOA]
+- Data do evento: [DATA]
+- Local: [CIDADE / LOCAL]
+- Entregáveis: [ex: 1 vídeo principal de 3 min + 10 stories editados]
+- Prazo de entrega: [PRAZO]
+- Valor: R$ [VALOR]
+
+INSTRUÇÕES:
+- Tom profissional mas acessível
+- Destacar o valor que o cliente recebe, não apenas o serviço
+- Incluir o que está INCLUSO e o que NÃO está incluso
+- Finalizar com CTA claro para aprovação
+- Máximo 400 palavras`
+  },
+  {
+    id: 2, cat: 'pre', catLabel: 'Pré-produção',
+    title: 'Briefing para novo cliente',
+    desc: 'Lista de perguntas para extrair todas as informações necessárias de um novo projeto.',
+    text: `Atue como um videomaker experiente em [TIPO DE TRABALHO — ex: social media, wedding, eventos].
+
+Crie um briefing completo para enviar ao cliente antes de fechar o projeto. O briefing deve cobrir:
+- Objetivos do vídeo
+- Público-alvo
+- Referências visuais e de tom
+- Logística do dia (local, horário, duração)
+- Entregáveis esperados
+- Prazo e preferências de formato (Instagram Reels, YouTube, etc.)
+- Orçamento disponível (de forma sutil)
+
+Formate como perguntas numeradas, linguagem informal e simpática. Máximo 15 perguntas.`
+  },
+  {
+    id: 3, cat: 'pre', catLabel: 'Pré-produção',
+    title: 'Roteiro de entrevista / depoimento',
+    desc: 'Cria perguntas estratégicas para entrevistar alguém em vídeo.',
+    text: `Crie um roteiro de entrevista para gravar um depoimento em vídeo.
+
+CONTEXTO:
+- Quem será entrevistado: [ex: cliente satisfeito de um salão de beleza]
+- Objetivo do vídeo: [ex: prova social para Instagram da marca]
+- Tom desejado: [ex: espontâneo, emocional, profissional]
+- Duração final do vídeo: [ex: 60 segundos para Reels]
+
+ENTREGUE:
+1. 5 perguntas abertas que gerem respostas emotivas e espontâneas
+2. 2 perguntas de aquecimento para deixar a pessoa à vontade
+3. 1 frase guia para o entrevistado terminar com um CTA natural
+4. Dica de direção: o que pedir para a pessoa fazer/sentir na câmera`
+  },
+  {
+    id: 4, cat: 'pre', catLabel: 'Pré-produção',
+    title: 'Script para Reels / TikTok',
+    desc: 'Cria um roteiro de vídeo curto otimizado para engajamento.',
+    text: `Crie um script completo para um vídeo de [DURAÇÃO — ex: 30 segundos] para [PLATAFORMA — Instagram Reels / TikTok].
+
+DADOS:
+- Tema / assunto: [ex: "3 erros que arruínam o áudio do seu vídeo"]
+- Tom: [ex: educativo, descontraído, inspiracional]
+- Público: [ex: videomakers iniciantes]
+- CTA final: [ex: seguir o perfil, salvar o vídeo]
+
+ENTREGUE:
+- Hook (primeiros 3 segundos) — direto, curioso ou provocativo
+- Corpo do vídeo (desenvolvimento rápido)
+- CTA final
+- Sugestão de legenda para o post com até 3 hashtags relevantes
+- Sugestão de música / tipo de trilha`
+  },
+
+  // ADMINISTRATIVO
+  {
+    id: 5, cat: 'admin', catLabel: 'Administrativo',
+    title: 'Contrato de prestação de serviços',
+    desc: 'Gera um contrato básico e profissional para proteger você e o cliente.',
+    text: `Redija um contrato de prestação de serviços audiovisuais para freelancer brasileiro.
+
+DADOS:
+- Nome do prestador (você): [SEU NOME / NOME DA EMPRESA]
+- CPF/CNPJ: [SEU CPF OU CNPJ]
+- Nome do contratante: [NOME DO CLIENTE]
+- Serviço contratado: [DESCRIÇÃO DO SERVIÇO]
+- Data de execução: [DATA]
+- Valor total: R$ [VALOR]
+- Forma de pagamento: [ex: 50% na assinatura, 50% na entrega]
+- Prazo de entrega: [PRAZO]
+
+INCLUA CLÁUSULAS SOBRE:
+- Direitos autorais (quem fica com os arquivos brutos)
+- Política de revisões (quantas revisões estão inclusas)
+- Cancelamento e reembolso
+- Uso do material para portfólio
+- Penalidade por atraso de pagamento
+
+Linguagem jurídica mas acessível. Formatado com numeração de cláusulas.`
+  },
+  {
+    id: 6, cat: 'admin', catLabel: 'Administrativo',
+    title: 'Follow-up após envio de orçamento',
+    desc: 'Mensagem para enviar quando o cliente está em silêncio após receber a proposta.',
+    text: `Escreva uma mensagem de follow-up para enviar no WhatsApp para um cliente que recebeu um orçamento mas não respondeu.
+
+CONTEXTO:
+- Dias desde o envio: [ex: 3 dias]
+- Serviço orçado: [ex: filmagem de evento corporativo]
+- Tom da relação: [ex: foi uma indicação de amigo / lead frio do Instagram]
+
+INSTRUÇÕES:
+- Curta (máximo 5 linhas no WhatsApp)
+- Não parecer desesperado nem agressivo
+- Oferecer abertura para negociação ou dúvidas
+- Tom leve e humano
+- Pode sugerir 2 versões: uma mais direta e uma mais descontraída`
+  },
+  {
+    id: 7, cat: 'admin', catLabel: 'Administrativo',
+    title: 'Resposta a pedido de desconto',
+    desc: 'Como responder quando o cliente pede desconto sem desvalorizar seu trabalho.',
+    text: `Escreva uma resposta profissional para um cliente que pediu desconto no meu orçamento.
+
+CONTEXTO:
+- Serviço: [SERVIÇO]
+- Valor orçado: R$ [VALOR]
+- O cliente disse: "[O QUE O CLIENTE DISSE — ex: 'você pode baixar para R$ X?']"
+- Minha margem para negociar: [ex: sem margem / posso dar 10%]
+
+INSTRUÇÕES:
+- Defender o valor com argumentos de valor, não de custo
+- Se não há margem: explicar por que o preço é justo e oferecer alternativa (pacote menor, prazo diferente)
+- Se tem margem: criar uma concessão que pareça especial, não padrão
+- Tom: firme, educado, sem subserviência
+- Versão para WhatsApp (informal) e versão para e-mail (formal)`
+  },
+  {
+    id: 8, cat: 'admin', catLabel: 'Administrativo',
+    title: 'E-mail de entrega do projeto',
+    desc: 'Comunicação profissional ao entregar o material finalizado.',
+    text: `Escreva um e-mail de entrega de projeto audiovisual para o cliente.
+
+DADOS:
+- Cliente: [NOME]
+- Projeto: [NOME / DESCRIÇÃO]
+- O que está sendo entregue: [ex: 1 filme principal + 15 stories + arquivos brutos]
+- Link de entrega: [DEIXAR ESPAÇO PARA O LINK]
+- Senha (se houver): [SENHA]
+- Prazo para o cliente solicitar ajustes: [ex: 7 dias úteis]
+
+INCLUA:
+- Abertura calorosa
+- O que está incluso no link
+- Instruções de como baixar / acessar
+- Prazo e política de revisão
+- CTA pedindo avaliação / depoimento (de forma sutil)
+- Assinar com nome e contato`
+  },
+
+  // PÓS-PRODUÇÃO
+  {
+    id: 9, cat: 'pos', catLabel: 'Pós-produção',
+    title: 'Estrutura de edição para evento',
+    desc: 'Roteiro de edição com estrutura narrativa para vídeos de evento.',
+    text: `Crie uma estrutura de edição para um vídeo de [TIPO DE EVENTO — ex: casamento / evento corporativo / festa de 15 anos].
+
+DADOS:
+- Duração final do vídeo: [ex: 4 minutos]
+- Tom desejado: [ex: emocional e cinematográfico / energético e moderno]
+- Plataforma de entrega: [ex: YouTube para os noivos / Instagram do fotógrafo]
+
+ENTREGUE:
+1. Estrutura em atos (abertura, desenvolvimento, clímax, fechamento) com duração sugerida para cada parte
+2. Tipo de cenas recomendadas para cada momento
+3. Dicas de ritmo de corte (quando cortar rápido, quando deixar respirar)
+4. Sugestão de estrutura de trilha sonora (intro, letra, instrumental, saída)
+5. Onde inserir takes de áudio ambiente para dar autenticidade`
+  },
+  {
+    id: 10, cat: 'pos', catLabel: 'Pós-produção',
+    title: 'Feedback para cliente difícil',
+    desc: 'Como responder a uma revisão excessiva ou pedido fora do escopo.',
+    text: `Escreva uma resposta educada mas firme para um cliente que está pedindo alterações que estão fora do escopo contratado.
+
+CONTEXTO:
+- O que estava no contrato: [ex: 2 rodadas de revisão, entrega em 7 dias]
+- O que o cliente está pedindo agora: [ex: "refaz tudo com outra música / muda toda a cor"]
+- Quantas revisões já foram feitas: [NÚMERO]
+- Tom da relação: [ex: ficou bem durante o processo / sempre foi exigente]
+
+INSTRUÇÕES:
+- Não perder o cliente, mas não abrir mão do seu valor
+- Explicar claramente o que está fora do escopo sem ser agressivo
+- Oferecer a opção de fazer a alteração como serviço adicional com valor
+- Manter o profissionalismo
+- Versão para WhatsApp`
+  },
+  {
+    id: 11, cat: 'pos', catLabel: 'Pós-produção',
+    title: 'Pedido de depoimento / avaliação',
+    desc: 'Mensagem para pedir review ou depoimento após entregar o projeto.',
+    text: `Escreva uma mensagem para pedir um depoimento ou avaliação de um cliente depois de entregar o projeto finalizado.
+
+CONTEXTO:
+- Canal: [WhatsApp / e-mail / Google / Instagram]
+- Serviço entregue: [SERVIÇO]
+- Tom da relação: [ex: cliente ficou muito feliz / foi tranquilo]
+
+INSTRUÇÕES:
+- Mensagem curta e direta
+- Não parecer robótico ou automático
+- Deixar claro que o depoimento ajuda outros profissionais / clientes
+- Se for para Instagram: pedir que marque o perfil ou publique nos stories
+- Incluir 2 variações: uma mais formal e uma mais pessoal/amigável`
+  },
+
+  // SOCIAL MEDIA
+  {
+    id: 12, cat: 'social', catLabel: 'Social Media',
+    title: 'Legenda para post de entrega de projeto',
+    desc: 'Caption para quando você publica um trabalho no feed ou stories.',
+    text: `Escreva uma legenda para o Instagram para publicar um projeto audiovisual que acabei de entregar.
+
+DADOS:
+- Tipo de projeto: [ex: vídeo de casamento / vídeo institucional / storymaker em evento]
+- Detalhes que posso revelar: [ex: nome dos noivos, empresa, local]
+- Tom do meu perfil: [ex: pessoal e storytelling / profissional e seco / inspiracional]
+- Incluir CTA?: [ex: sim, quero novos clientes / não, só mostrar o trabalho]
+
+ENTREGUE:
+1. Legenda completa com quebras de linha naturais (estilo Instagram)
+2. Gancho forte na primeira linha (antes do "ver mais")
+3. Hashtags relevantes separadas (máximo 15)
+4. Sugestão de texto para Stories (máximo 3 frames)`
+  },
+  {
+    id: 13, cat: 'social', catLabel: 'Social Media',
+    title: 'Conteúdo de valor para videomaker',
+    desc: 'Ideia de posts educativos para crescer no Instagram/TikTok como videomaker.',
+    text: `Sou videomaker freelancer que filma [TIPOS DE TRABALHO — ex: casamentos, eventos corporativos, social media].
+
+Crie um plano de conteúdo para 1 semana no Instagram / TikTok com foco em atrair novos clientes e mostrar autoridade.
+
+PARA CADA DIA ENTREGUE:
+- Formato sugerido (Reels, carrossel, story, post estático)
+- Título / hook do conteúdo
+- Estrutura resumida (o que mostrar/falar)
+- CTA sugerido
+
+TEMAS A COBRIR NA SEMANA:
+- 1 bastidor / processo de trabalho
+- 1 dica técnica acessível para leigos
+- 1 post de resultado (entrega de projeto)
+- 1 post de prova social / depoimento
+- 1 post pessoal / história`
+  },
+  {
+    id: 14, cat: 'social', catLabel: 'Social Media',
+    title: 'Bio profissional para Instagram',
+    desc: 'Reescreve sua bio para atrair o cliente certo.',
+    text: `Reescreva minha bio do Instagram para atrair clientes como videomaker freelancer.
+
+MINHAS INFORMAÇÕES:
+- O que faço: [ex: filmo e edito casamentos, eventos e conteúdo para social media]
+- Cidade / região: [CIDADE]
+- Diferencial: [ex: entrega em 7 dias / edição cinematográfica / storymaker ao vivo]
+- Público-alvo ideal: [ex: noivos, empresas locais, criadores de conteúdo]
+- Tenho link de portfólio?: [sim/não]
+
+CRIE:
+1. Bio com máximo 150 caracteres (limite do Instagram)
+2. Versão com emojis estratégicos
+3. Versão sem emojis (mais sóbria)
+4. Sugestão de nome de usuário / highlights
+5. Frase para usar no link da bio (se usar Linktree)`
+  },
+  {
+    id: 15, cat: 'social', catLabel: 'Social Media',
+    title: 'Resposta a DM de orçamento',
+    desc: 'Como responder quando alguém pede orçamento no direct de forma que feche o cliente.',
+    text: `Escreva um script de respostas para quando um cliente entra em contato pelo direct do Instagram pedindo orçamento.
+
+MEU SERVIÇO: [TIPO DE SERVIÇO]
+FAIXA DE PREÇO: a partir de R$ [VALOR]
+
+CRIE UM FLUXO DE 3 ETAPAS:
+
+ETAPA 1 — Resposta inicial (receber o lead quente)
+- Resposta acolhedora
+- 2 a 3 perguntas para entender o projeto antes de dar o preço
+
+ETAPA 2 — Após entender o projeto (apresentar o valor)
+- Como apresentar o preço sem perder o cliente
+- Como agregar valor antes de falar o número
+
+ETAPA 3 — Após enviar o orçamento (converter)
+- O que fazer se ele demorar para responder
+- Como fechar sem pressionar`
+  },
+
+  // CRIATIVO
+  {
+    id: 16, cat: 'criativo', catLabel: 'Criativo',
+    title: 'Conceito criativo para vídeo institucional',
+    desc: 'Gera conceito, narrativa e referências visuais para um vídeo de marca.',
+    text: `Atue como diretor criativo especializado em vídeos institucionais.
+
+BRIEFING:
+- Empresa: [NOME E RAMO DE ATIVIDADE]
+- Objetivo do vídeo: [ex: apresentar a empresa para novos clientes / lançar um produto]
+- Público-alvo: [ex: empresários da região / jovens de 20-35 anos]
+- Tom de voz: [ex: sério e confiável / moderno e disruptivo / acolhedor e humano]
+- Duração: [ex: 2 minutos]
+- Orçamento estimado: [FAIXA]
+
+ENTREGUE:
+1. Conceito criativo em 2 parágrafos (a "big idea" do vídeo)
+2. Estrutura narrativa (como contar a história)
+3. Sugestão de estética visual (paleta de cores, ritmo de edição, tipo de trilha)
+4. 3 referências de vídeos que transmitem esse tom (descreva-as, não cite links)
+5. Perguntas para aprofundar o briefing com o cliente`
+  },
+  {
+    id: 17, cat: 'criativo', catLabel: 'Criativo',
+    title: 'Pitch para fechar parceria com empresa',
+    desc: 'Script de abordagem para propor parceria com empresas como videomaker.',
+    text: `Crie um pitch de prospecção ativa para eu enviar para [TIPO DE EMPRESA — ex: buffets, espaços de eventos, marcas de moda] propondo uma parceria como videomaker.
+
+MEU PERFIL:
+- Especialidade: [ESPECIALIDADE]
+- Cidade: [CIDADE]
+- Diferencial: [DIFERENCIAL]
+- Cases (opcional): [ex: já trabalhei com X e Y]
+
+O PITCH DEVE:
+- Ser enviado por e-mail (assunto incluso) e adaptado para WhatsApp
+- Abrir com algo específico sobre a empresa (deixe espaço para personalizar)
+- Explicar brevemente o que ofereço sem ser longo demais
+- Mostrar o benefício concreto para a empresa (mais vendas, mais seguidores, etc.)
+- Propor um próximo passo claro (call, reunião, teste gratuito de 1 vídeo)
+- Máximo 200 palavras no e-mail`
+  },
+  {
+    id: 18, cat: 'criativo', catLabel: 'Criativo',
+    title: 'Descrição de pacotes de serviço',
+    desc: 'Cria descrições vendedoras para os seus pacotes de atendimento.',
+    text: `Crie descrições de venda para [NÚMERO] pacotes de serviço audiovisual.
+
+MEU SERVIÇO: [TIPO DE SERVIÇO — ex: storymaker para eventos / vídeos de casamento / social media]
+
+PARA CADA PACOTE INCLUA:
+- Nome criativo e memorável
+- Lista de entregáveis (bullet points)
+- Frase de posicionamento (para quem é ideal esse pacote)
+- Frase de benefício emocional (o que o cliente VAI SENTIR ao receber)
+
+MEUS PACOTES:
+- Pacote 1 (básico): [DESCREVA O QUE INCLUI]
+- Pacote 2 (intermediário): [DESCREVA]
+- Pacote 3 (premium): [DESCREVA]
+
+Tom: profissional mas acessível. Evitar jargões técnicos. Foco no resultado para o cliente.`
+  },
+];
+
+let currentFilter = 'todos';
+
+function filtrar(cat, btn) {
+  currentFilter = cat;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  renderGrid();
+}
+
+function renderGrid() {
+  const grid = document.getElementById('grid');
+  const empty = document.getElementById('empty');
+  const filtered = currentFilter === 'todos' ? PROMPTS : PROMPTS.filter(p => p.cat === currentFilter);
+
+  if (filtered.length === 0) {
+    grid.innerHTML = '';
+    empty.classList.add('show');
+    return;
+  }
+  empty.classList.remove('show');
+
+  grid.innerHTML = filtered.map(p => `
+    <div class="prompt-card">
+      <div class="pc-header">
+        <div class="pc-meta">
+          <span class="pc-cat cat-${p.cat}">${p.catLabel}</span>
+        </div>
+        <div class="pc-title">${p.title}</div>
+        <div class="pc-desc">${p.desc}</div>
+      </div>
+      <div class="pc-body">
+        <div class="prompt-text" id="pt-${p.id}">${formatPrompt(p.text)}</div>
+        <div class="pc-actions">
+          <button class="btn-copy-prompt" onclick="copiar(${p.id})">📋 Copiar prompt</button>
+          <button class="btn-expand" onclick="expandir(${p.id}, this)">Ver tudo</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function formatPrompt(text) {
+  return text
+    .replace(/\[([^\]]+)\]/g, '<span class="highlight">[$1]</span>')
+    .replace(/&/g, '&amp;')
+    .split('\n').join('\n');
+}
+
+function copiar(id) {
+  const p = PROMPTS.find(x => x.id === id);
+  navigator.clipboard.writeText(p.text).then(() => {
+    const btns = document.querySelectorAll('.btn-copy-prompt');
+    const btn = [...btns].find(b => b.getAttribute('onclick') === `copiar(${id})`);
+    if (btn) {
+      btn.textContent = '✅ Copiado!';
+      setTimeout(() => btn.textContent = '📋 Copiar prompt', 2000);
+    }
+  });
+}
+
+function expandir(id, btn) {
+  const el = document.getElementById('pt-' + id);
+  const expanded = el.classList.toggle('expanded');
+  btn.textContent = expanded ? 'Ver menos' : 'Ver tudo';
+}
+
+renderGrid();
+</script>
+</body>
+</html>

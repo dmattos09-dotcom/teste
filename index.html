@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AV Pro Tools — Ferramentas para Audiovisual</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080810;
+      --card: #12121e;
+      --card2: #1a1a2e;
+      --border: #2a2a3e;
+      --accent: #ff6b35;
+      --accent2: #ffd166;
+      --text: #f0f0f5;
+      --muted: #8888aa;
+      --radius: 16px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif;
+      min-height: 100vh;
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      padding: 80px 24px 64px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,107,53,.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255,107,53,.15);
+      border: 1px solid rgba(255,107,53,.35);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 6vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -.03em;
+      margin-bottom: 20px;
+    }
+
+    h1 span { color: var(--accent); }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto 48px;
+      line-height: 1.7;
+    }
+
+    /* TOOLS GRID */
+    .tools {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: transform .2s, border-color .2s, box-shadow .2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity .2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+      box-shadow: 0 16px 48px rgba(255,107,53,.12);
+    }
+
+    .card:hover::before { opacity: 1; }
+
+    .card-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+    .card-icon.orange { background: rgba(255,107,53,.15); }
+    .card-icon.gold   { background: rgba(255,209,102,.15); }
+    .card-icon.purple { background: rgba(138,99,255,.15); }
+
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
+    .card-desc {
+      font-size: .9rem;
+      color: var(--muted);
+      line-height: 1.65;
+      flex: 1;
+    }
+
+    .card-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: .85rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-top: 4px;
+    }
+
+    .card-cta svg { transition: transform .2s; }
+    .card:hover .card-cta svg { transform: translateX(4px); }
+
+    /* DIVIDER */
+    .divider {
+      max-width: 960px;
+      margin: 0 auto 56px;
+      padding: 0 24px;
+    }
+
+    .divider h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .divider p {
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    /* PROMPTS SECTION */
+    .prompts-section {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    .prompts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+
+    .prompt-card {
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .prompt-card .tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 10px;
+    }
+
+    .prompt-card p {
+      font-size: .88rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: .85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="badge">Kit Profissional Audiovisual</div>
+    <h1>Ferramentas para<br><span>quem filma de verdade</span></h1>
+    <p class="hero-sub">Calculadora de precificação, checklist de equipamentos e biblioteca de prompts de IA — tudo em um lugar só.</p>
+  </section>
+
+  <div class="divider">
+    <h2>Suas ferramentas</h2>
+    <p>Acesse cada ferramenta abaixo — gratuitas, sem cadastro, funcionam no celular.</p>
+  </div>
+
+  <div class="tools">
+    <a class="card" href="calculadora.html">
+      <div class="card-icon orange">💰</div>
+      <div class="card-title">Calculadora de Precificação</div>
+      <div class="card-desc">Calcule o valor justo para cada projeto: horas de trabalho, equipamentos, locomoção, alimentação e muito mais.</div>
+      <div class="card-cta">
+        Abrir calculadora
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </a>
+
+    <a class="card" href="checklist.html">
+      <div class="card-icon gold">✅</div>
+      <div class="card-title">Checklist de Equipamentos</div>
+      <div class="card-desc">Nunca mais esqueça nada em casa. Checklist completo para eventos, gravações e produção de stories.</div>
+      <div class="card-cta">
+        Abrir checklist
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </a>
+
+    <a class="card" href="prompts.html">
+      <div class="card-icon purple">🤖</div>
+      <div class="card-title">Prompts de IA Prontos</div>
+      <div class="card-desc">Biblioteca de prompts para ChatGPT e Claude: proposta de orçamento, roteiro, caption, contrato e muito mais.</div>
+      <div class="card-cta">
+        Ver prompts
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </a>
+  </div>
+
+  <footer>
+    AV Pro Tools &mdash; Kit Profissional para Audiovisual
+  </footer>
+
+</body>
+</html>

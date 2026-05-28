@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checklist de Equipamentos — AV Pro Tools</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080810;
+      --card: #12121e;
+      --card2: #1a1a2e;
+      --border: #2a2a3e;
+      --accent: #ff6b35;
+      --accent2: #ffd166;
+      --green: #4ade80;
+      --text: #f0f0f5;
+      --muted: #8888aa;
+      --radius: 16px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif;
+      min-height: 100vh;
+      padding-bottom: 60px;
+    }
+
+    header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    header a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .85rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color .2s;
+    }
+    header a:hover { color: var(--text); }
+    header h1 { font-size: 1.1rem; font-weight: 700; }
+
+    .top-bar {
+      max-width: 780px;
+      margin: 28px auto 0;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .progress-wrap { flex: 1; min-width: 200px; }
+
+    .progress-label {
+      font-size: .82rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .progress-bar {
+      height: 6px;
+      background: var(--border);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 999px;
+      transition: width .3s ease;
+    }
+
+    .mode-btns {
+      display: flex;
+      gap: 8px;
+    }
+
+    .mode-btn {
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: .82rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      transition: all .2s;
+    }
+
+    .mode-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+    }
+
+    .reset-btn {
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: .82rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      transition: color .2s;
+    }
+
+    .reset-btn:hover { color: var(--text); }
+
+    /* MAIN */
+    .main {
+      max-width: 780px;
+      margin: 24px auto 0;
+      padding: 0 24px;
+    }
+
+    /* CATEGORY */
+    .category {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+
+    .cat-header {
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color .2s;
+    }
+
+    .cat-header.open {
+      border-bottom-color: var(--border);
+    }
+
+    .cat-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cat-icon { font-size: 20px; }
+
+    .cat-title {
+      font-size: .95rem;
+      font-weight: 700;
+    }
+
+    .cat-count {
+      font-size: .78rem;
+      color: var(--muted);
+    }
+
+    .cat-chevron {
+      color: var(--muted);
+      transition: transform .2s;
+    }
+
+    .cat-header.open .cat-chevron { transform: rotate(180deg); }
+
+    .cat-items {
+      display: none;
+    }
+
+    .cat-items.open { display: block; }
+
+    /* ITEM */
+    .item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 13px 20px;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      transition: background .15s;
+    }
+
+    .item:last-child { border-bottom: none; }
+    .item:hover { background: rgba(255,255,255,.02); }
+
+    .item.checked { opacity: .55; }
+
+    .checkbox {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      border: 2px solid var(--border);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .15s;
+    }
+
+    .item.checked .checkbox {
+      background: var(--green);
+      border-color: var(--green);
+    }
+
+    .checkmark {
+      display: none;
+      color: #0a0a10;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .item.checked .checkmark { display: block; }
+
+    .item-text {
+      flex: 1;
+    }
+
+    .item-name {
+      font-size: .92rem;
+      font-weight: 500;
+    }
+
+    .item.checked .item-name {
+      text-decoration: line-through;
+      color: var(--muted);
+    }
+
+    .item-note {
+      font-size: .78rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .item-tag {
+      font-size: .72rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 999px;
+      flex-shrink: 0;
+    }
+
+    .tag-essencial { background: rgba(255,107,53,.15); color: var(--accent); }
+    .tag-opcional  { background: rgba(136,136,170,.12); color: var(--muted); }
+    .tag-storymaker { background: rgba(255,209,102,.12); color: var(--accent2); }
+
+    /* SUMMARY BAR */
+    .summary-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--card);
+      border-top: 1px solid var(--border);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .summary-text {
+      font-size: .88rem;
+      color: var(--muted);
+    }
+
+    .summary-text strong { color: var(--text); }
+
+    .btn-copy {
+      padding: 10px 20px;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: .85rem;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity .2s;
+    }
+
+    .btn-copy:hover { opacity: .88; }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Início
+  </a>
+  <h1>✅ Checklist de Equipamentos</h1>
+</header>
+
+<div class="top-bar">
+  <div class="progress-wrap">
+    <div class="progress-label" id="progress-label">0 de 0 itens marcados</div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+  </div>
+  <div class="mode-btns">
+    <button class="mode-btn active" onclick="setMode('todos')" id="btn-todos">Todos</button>
+    <button class="mode-btn" onclick="setMode('evento')" id="btn-evento">Evento</button>
+    <button class="mode-btn" onclick="setMode('social')" id="btn-social">Social</button>
+  </div>
+  <button class="reset-btn" onclick="resetar()">↺ Resetar</button>
+</div>
+
+<div class="main" id="main"></div>
+
+<div class="summary-bar">
+  <div class="summary-text">
+    <strong id="checked-count">0</strong> de <strong id="total-count">0</strong> itens verificados
+  </div>
+  <button class="btn-copy" onclick="copiarChecklist()">📋 Copiar lista</button>
+</div>
+
+<script>
+const DATA = [
+  {
+    id: 'camera',
+    icon: '🎥',
+    title: 'Câmera & Óptica',
+    items: [
+      { id: 'cam-principal', name: 'Câmera principal', note: 'Verifique bateria e configurações', tag: 'essencial', modes: ['todos','evento','social'] },
+      { id: 'cam-backup', name: 'Câmera backup / secondary', note: 'Para gravação B-roll ou segurança', tag: 'opcional', modes: ['todos','evento'] },
+      { id: 'lente-zoom', name: 'Lente 24-70mm (zoom)', tag: 'essencial', modes: ['todos','evento','social'] },
+      { id: 'lente-85', name: 'Lente 85mm (retrato)', tag: 'opcional', modes: ['todos','evento'] },
+      { id: 'lente-wide', name: 'Lente grande angular', tag: 'opcional', modes: ['todos','evento'] },
+      { id: 'filtros-nd', name: 'Filtros ND (2, 4, 8)', note: 'Para externas com muito sol', tag: 'essencial', modes: ['todos','evento','social'] },
+      { id: 'baterias-cam', name: 'Baterias extras (câmera)', note: 'Pelo menos 3 carregadas', tag: 'essencial', modes: ['todos','evento','social'] },
+      { id: 'cartoes', name: 'Cartões de memória', note: 'Mínimo 2 cartões zerados', tag: 'essencial', modes: ['todos','evento','social'] },
+      { id: 'leitor', name: 'Leitor de cartão', tag: 'essencial', modes: ['todos','evento','social'] },
+    ]
+  },
+  {
+    id: 'audio',
+    icon: '🎙️',
+    title: 'Áudio',
+    items: [
+      { id: 'lapela', name: 'Microfone de lapela', note: 'Wireless ou com cabo', tag: 'essencial', modes: ['todos','evento','social'] },
+      { id: 'canhao', name: 'Microfone direcional (canhão)', tag: 'opcional', modes: ['todos','evento'] },
+      { id: 'gravador', name: 'Gravador externo (Zoom, Tascam)', tag: 'opcional', modes: ['todos','evento'] },
+      { id: 'xrl', name: 'Cabos XLR', tag: 'essencial', modes: ['todos','evento'] },
+      { id: 'pilhas', name: 'Pilhas AA / AAA extras', note: 'Para gravadores e laveliers', tag: 'essencial', modes: ['todos','evento','social'] },
+      { id: 'deadcat', name: 'Espuma / windscreen / deadcat', note: 'Para gravações em externas', tag: 'opcional', modes: ['todos','evento'] },
+    ]
+  },
+  {
+    id: 'iluminacao',
+    icon: '💡',
+    title: 'Iluminação',
+    items: [
+      { id: 'led-principal', name: 'Luz LED principal', tag: 'essencial', modes: ['todos','evento','social'] },
+      { id: 'led-fill', name: 'Luz de fill / rim light', tag: 'opcional', modes: ['todos','evento'] },
+      { id: 'rebatedor', name: 'Rebatedor 5 em 1', tag: 'essencial', modes: ['todos','evento','social'] },
+      { id: 'difusor', name: 'Softbox / difusor', tag: 'opcional', modes: ['todos','social'] },
+      { id: 'extensao', name: 'Extensão elétrica (5m+)', tag: 'essencial', modes: ['todos','evento'] },
+      { id: 'bateria-luz', name: 'Bateria portátil para luz', tag: 'opcional', modes: ['todos','evento'] },
+    ]
+  },
+  {
+    id: 'estabilizacao',
+    icon: '🎯',
+    title: 'Estabilização & Suporte',
+    items: [
+      { id: 'gimbal', name: 'Gimbal / Steadicam', note: 'Bateria carregada e calibrado', tag: 'essencial', modes: ['todos','evento'] },
+      { id: 'tripe', name: 'Tripé com cabeça fluida', tag: 'essencial', modes: ['todos','evento','social'] },
+      { id: 'monope', name: 'Monopé', tag: 'opcional', modes: ['todos','evento'] },
+      { id: 'slider', name: 'Slider', tag: 'opcional', modes: ['todos','social'] },
+    ]
+  },
+  {
+    id: 'drone',
+    icon: '🚁',
+    title: 'Drone (se aplicável)',
+    items: [
+      { id: 'drone-body', name: 'Drone + controle', tag: 'opcional', modes: ['todos','evento'] },
+      { id: 'drone-bat', name: 'Baterias extras drone', note: 'Mínimo 3 baterias', tag: 'opcional', modes: ['todos','evento'] },
+      { id: 'drone-nd', name: 'Filtros ND para drone', tag: 'opcional', modes: ['todos','evento'] },
+      { id: 'drone-spare', name: 'Hélices reserva', tag: 'opcional', modes: ['todos','evento'] },
+    ]
+  },
+  {
+    id: 'storymaker',
+    icon: '📱',
+    title: 'Storymaker & Social Media',
+    items: [
+      { id: 'ring-light', name: 'Ring light portátil', tag: 'storymaker', modes: ['todos','evento','social'] },
+      { id: 'suporte-cel', name: 'Suporte de celular para tripé', tag: 'storymaker', modes: ['todos','evento','social'] },
+      { id: 'powerbank', name: 'Bateria externa / power bank', note: 'Para celular durante o evento', tag: 'storymaker', modes: ['todos','evento','social'] },
+      { id: 'cel-carregado', name: 'Celular com bateria 100% + armazenamento livre', tag: 'storymaker', modes: ['todos','evento','social'] },
+      { id: 'cabo-dados', name: 'Cabo USB (transferência + carga)', tag: 'storymaker', modes: ['todos','evento','social'] },
+      { id: 'preset-cel', name: 'Presets instalados no celular', note: 'Lightroom mobile', tag: 'storymaker', modes: ['todos','evento','social'] },
+    ]
+  },
+  {
+    id: 'informatica',
+    icon: '💻',
+    title: 'Informática & Backup',
+    items: [
+      { id: 'notebook', name: 'Notebook + carregador', tag: 'essencial', modes: ['todos','evento','social'] },
+      { id: 'hd-externo', name: 'HD externo (backup no local)', note: 'Faça backup logo após o evento', tag: 'essencial', modes: ['todos','evento'] },
+      { id: 'hd2', name: '2º HD (backup redundante)', tag: 'opcional', modes: ['todos','evento'] },
+      { id: 'hdmi', name: 'Cabo HDMI / adaptadores', tag: 'opcional', modes: ['todos','evento'] },
+      { id: 'usb-hub', name: 'Hub USB-C', tag: 'opcional', modes: ['todos','social'] },
+    ]
+  },
+  {
+    id: 'geral',
+    icon: '🎒',
+    title: 'Geral & Organização',
+    items: [
+      { id: 'mochila', name: 'Mochila / case de câmera', tag: 'essencial', modes: ['todos','evento','social'] },
+      { id: 'contrato', name: 'Contrato assinado / NF', tag: 'essencial', modes: ['todos','evento','social'] },
+      { id: 'identidade', name: 'Documento de identidade', tag: 'essencial', modes: ['todos','evento'] },
+      { id: 'credencial', name: 'Credencial do evento (se houver)', tag: 'opcional', modes: ['todos','evento'] },
+      { id: 'agua-snack', name: 'Água + lanche', tag: 'opcional', modes: ['todos','evento'] },
+      { id: 'carregadores', name: 'Carregadores de bateria', note: 'Verifique com 24h de antecedência', tag: 'essencial', modes: ['todos','evento','social'] },
+      { id: 'fone', name: 'Fone de ouvido (monitoramento)', tag: 'essencial', modes: ['todos','evento'] },
+    ]
+  },
+];
+
+let currentMode = 'todos';
+let checked = {};
+
+function setMode(mode) {
+  currentMode = mode;
+  ['todos','evento','social'].forEach(m => {
+    document.getElementById('btn-' + m).classList.toggle('active', m === mode);
+  });
+  render();
+}
+
+function render() {
+  const container = document.getElementById('main');
+  container.innerHTML = '';
+
+  DATA.forEach(cat => {
+    const visibleItems = cat.items.filter(i => i.modes.includes(currentMode));
+    if (visibleItems.length === 0) return;
+
+    const checkedInCat = visibleItems.filter(i => checked[i.id]).length;
+    const catDiv = document.createElement('div');
+    catDiv.className = 'category';
+
+    const isOpen = !catDiv._closed;
+
+    catDiv.innerHTML = `
+      <div class="cat-header open" onclick="toggleCat(this)">
+        <div class="cat-left">
+          <span class="cat-icon">${cat.icon}</span>
+          <span class="cat-title">${cat.title}</span>
+          <span class="cat-count">${checkedInCat}/${visibleItems.length}</span>
+        </div>
+        <span class="cat-chevron">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+      <div class="cat-items open">
+        ${visibleItems.map(item => `
+          <div class="item ${checked[item.id] ? 'checked' : ''}" onclick="toggle('${item.id}')">
+            <div class="checkbox"><span class="checkmark">✓</span></div>
+            <div class="item-text">
+              <div class="item-name">${item.name}</div>
+              ${item.note ? `<div class="item-note">${item.note}</div>` : ''}
+            </div>
+            <span class="item-tag tag-${item.tag}">${item.tag}</span>
+          </div>
+        `).join('')}
+      </div>
+    `;
+
+    container.appendChild(catDiv);
+  });
+
+  updateProgress();
+}
+
+function toggleCat(header) {
+  header.classList.toggle('open');
+  const items = header.nextElementSibling;
+  items.classList.toggle('open');
+}
+
+function toggle(id) {
+  checked[id] = !checked[id];
+  save();
+  render();
+}
+
+function resetar() {
+  if (confirm('Resetar todos os itens marcados?')) {
+    checked = {};
+    save();
+    render();
+  }
+}
+
+function updateProgress() {
+  const allVisible = DATA.flatMap(c => c.items.filter(i => i.modes.includes(currentMode)));
+  const total = allVisible.length;
+  const done = allVisible.filter(i => checked[i.id]).length;
+  const pct = total ? (done / total) * 100 : 0;
+
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-label').textContent = `${done} de ${total} itens marcados`;
+  document.getElementById('checked-count').textContent = done;
+  document.getElementById('total-count').textContent = total;
+}
+
+function save() {
+  try { localStorage.setItem('av-checklist', JSON.stringify(checked)); } catch(e) {}
+}
+
+function load() {
+  try {
+    const s = localStorage.getItem('av-checklist');
+    if (s) checked = JSON.parse(s);
+  } catch(e) {}
+}
+
+function copiarChecklist() {
+  const allVisible = DATA.flatMap(c => {
+    const vis = c.items.filter(i => i.modes.includes(currentMode));
+    if (!vis.length) return [];
+    return [`\n${c.icon} ${c.title}`, ...vis.map(i => `${checked[i.id] ? '✅' : '⬜'} ${i.name}`)];
+  });
+
+  const txt = `CHECKLIST DE EQUIPAMENTOS — AV PRO TOOLS\n${allVisible.join('\n')}\n\nGerado em ${new Date().toLocaleDateString('pt-BR')}`;
+  navigator.clipboard.writeText(txt).then(() => {
+    const btn = document.querySelector('.btn-copy');
+    btn.textContent = '✅ Copiado!';
+    setTimeout(() => btn.textContent = '📋 Copiar lista', 2000);
+  });
+}
+
+load();
+render();
+</script>
+</body>
+</html>
