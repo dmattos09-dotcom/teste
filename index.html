@@ -173,6 +173,41 @@
     .cl-checkbox { width: 15px; height: 15px; border-radius: 4px; border: 1.5px solid var(--border); flex-shrink: 0; }
     .panel-cta { display: flex; justify-content: center; margin-top: 28px; }
 
+    .panel-access-note {
+      margin-top: 20px; padding: 13px 18px;
+      background: rgba(196,112,58,.07); border: 1px solid rgba(196,112,58,.2);
+      border-radius: 10px; font-size: .82rem; color: var(--muted); text-align: center; line-height: 1.5;
+    }
+
+    /* MÓDULOS */
+    #modulos { padding-top: 0; }
+    .modulos-grid { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 48px; }
+    .modulo-card {
+      background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 24px 28px; display: grid; grid-template-columns: auto 1fr; gap: 20px; align-items: start;
+      transition: border-color .2s;
+    }
+    .modulo-card:hover { border-color: rgba(196,112,58,.3); }
+    .modulo-num {
+      font-size: 2.2rem; font-weight: 900; font-family: 'Playfair Display', Georgia, serif;
+      color: var(--border); line-height: 1; letter-spacing: -.04em; min-width: 44px;
+      transition: color .2s;
+    }
+    .modulo-card:hover .modulo-num { color: rgba(196,112,58,.4); }
+    .modulo-body {}
+    .modulo-label { font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--accent); margin-bottom: 5px; }
+    .modulo-title { font-size: 1rem; font-weight: 800; color: var(--cream); margin-bottom: 6px; }
+    .modulo-desc { font-size: .83rem; color: var(--muted); line-height: 1.6; margin-bottom: 12px; }
+    .modulo-tools { display: flex; gap: 6px; flex-wrap: wrap; }
+    .modulo-tool {
+      font-size: .7rem; font-weight: 700; padding: 3px 10px; border-radius: 999px;
+      background: rgba(196,112,58,.1); border: 1px solid rgba(196,112,58,.2); color: var(--accent);
+    }
+    @media (max-width: 500px) {
+      .modulo-card { grid-template-columns: 1fr; gap: 8px; }
+      .modulo-num { font-size: 1.4rem; }
+    }
+
     /* CTA SECTION */
     #cta { text-align: center; }
     .price-card { max-width: 460px; margin: 48px auto 0; background: var(--bg2); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; position: relative; }
@@ -229,11 +264,11 @@
     <li><a href="#problema">Para quem</a></li>
     <li><a href="#faq">FAQ</a></li>
   </ul>
-  <a href="#cta" class="nav-cta">Quero o Kit →</a>
+  <a href="https://checkout.ticto.app/O2A19E78C" class="nav-cta" target="_blank" rel="noopener">Quero o Kit →</a>
 </nav>
 
 <div class="sticky-cta" id="stickyCta">
-  <a href="#cta">Quero o Kit →</a>
+  <a href="https://checkout.ticto.app/O2A19E78C" target="_blank" rel="noopener">Quero o Kit →</a>
 </div>
 
 <!-- HERO -->
@@ -242,7 +277,7 @@
   <h1>Pare de cobrar<br>barato e perder<br><em>tempo demais.</em></h1>
   <p class="hero-sub">GPTs de IA prontos para usar, calculadora de precificação, checklist de equipamentos — tudo que você precisa para trabalhar como profissional.</p>
   <div class="hero-actions">
-    <a href="#cta" class="btn-primary">Quero o Kit completo →</a>
+    <a href="https://checkout.ticto.app/O2A19E78C" class="btn-primary" target="_blank" rel="noopener">Quero o Kit completo →</a>
     <a href="#kit" class="btn-ghost">Ver o que tem dentro</a>
   </div>
   <div class="hero-stats">
@@ -307,47 +342,51 @@
     </div>
   </div>
 
-  <!-- GPTs PANEL — LOCKED -->
+  <!-- GPTs PANEL -->
   <div class="tool-panel active" id="panel-gpts">
-    <div class="locked-wrap">
-      <div style="filter: blur(3px); pointer-events: none; user-select: none;">
-        <div class="gpts-grid">
-          <div class="gpt-mini-card"><div class="gpt-mini-avatar">📋</div><div><div class="gpt-mini-name">BriefBot</div><div class="gpt-mini-desc">Conduz uma conversa com seu cliente e gera um briefing completo e formatado no final.</div></div></div>
-          <div class="gpt-mini-card"><div class="gpt-mini-avatar">🎬</div><div><div class="gpt-mini-name">RoteiroAV</div><div class="gpt-mini-desc">Cria roteiros profissionais para qualquer tipo de vídeo com estrutura em cenas e timecode.</div></div></div>
-          <div class="gpt-mini-card"><div class="gpt-mini-avatar">📝</div><div><div class="gpt-mini-name">ContratoAV</div><div class="gpt-mini-desc">Formula contratos do zero e revisa contratos existentes apontando riscos e sugestões.</div></div></div>
-          <div class="gpt-mini-card"><div class="gpt-mini-avatar">💼</div><div><div class="gpt-mini-name">PropostaAV</div><div class="gpt-mini-desc">Transforma dados do projeto em propostas persuasivas — versão e-mail e WhatsApp.</div></div></div>
-          <div class="gpt-mini-card"><div class="gpt-mini-avatar">📱</div><div><div class="gpt-mini-name">PostAV</div><div class="gpt-mini-desc">Legendas, scripts de Reels, planos de conteúdo e bios para Instagram e TikTok.</div></div></div>
-          <div class="gpt-mini-card"><div class="gpt-mini-avatar">💬</div><div><div class="gpt-mini-name">DirectAV</div><div class="gpt-mini-desc">Respostas estratégicas para leads, follow-up, pedido de desconto e cliente difícil.</div></div></div>
-          <div class="gpt-mini-card"><div class="gpt-mini-avatar">🎞️</div><div><div class="gpt-mini-name">NarrativaAV</div><div class="gpt-mini-desc">Estrutura o arco emocional e a timeline de edição de qualquer vídeo.</div></div></div>
-          <div class="gpt-mini-card"><div class="gpt-mini-avatar">💰</div><div><div class="gpt-mini-name">PreçoJusto</div><div class="gpt-mini-desc">Ajuda a precificar, defender seu valor e negociar sem se desvalorizar.</div></div></div>
-        </div>
-      </div>
-      <div class="locked-overlay">
-        <span class="locked-badge">🔒 Exclusivo para compradores</span>
-        <h3>8 prompts de IA prontos para usar</h3>
-        <p>Cole direto no ChatGPT ou Claude — sem criar GPT, sem configuração, funciona na hora.</p>
-        <a href="#cta" class="btn-primary">Desbloquear o Kit →</a>
-      </div>
+    <div class="gpts-grid">
+      <div class="gpt-mini-card reveal"><div class="gpt-mini-avatar">📋</div><div><div class="gpt-mini-name">BriefBot</div><div class="gpt-mini-desc">Conduz uma conversa com seu cliente e gera um briefing completo e formatado no final.</div></div></div>
+      <div class="gpt-mini-card reveal"><div class="gpt-mini-avatar">🎬</div><div><div class="gpt-mini-name">RoteiroAV</div><div class="gpt-mini-desc">Cria roteiros profissionais para qualquer tipo de vídeo com estrutura em cenas e timecode.</div></div></div>
+      <div class="gpt-mini-card reveal"><div class="gpt-mini-avatar">📝</div><div><div class="gpt-mini-name">ContratoAV</div><div class="gpt-mini-desc">Formula contratos do zero e revisa contratos existentes apontando riscos e sugestões.</div></div></div>
+      <div class="gpt-mini-card reveal"><div class="gpt-mini-avatar">💼</div><div><div class="gpt-mini-name">PropostaAV</div><div class="gpt-mini-desc">Transforma dados do projeto em propostas persuasivas — versão e-mail e WhatsApp.</div></div></div>
+      <div class="gpt-mini-card reveal"><div class="gpt-mini-avatar">📱</div><div><div class="gpt-mini-name">PostAV</div><div class="gpt-mini-desc">Legendas, scripts de Reels, planos de conteúdo e bios para Instagram e TikTok.</div></div></div>
+      <div class="gpt-mini-card reveal"><div class="gpt-mini-avatar">💬</div><div><div class="gpt-mini-name">DirectAV</div><div class="gpt-mini-desc">Respostas estratégicas para leads, follow-up, pedido de desconto e cliente difícil.</div></div></div>
+      <div class="gpt-mini-card reveal"><div class="gpt-mini-avatar">🎞️</div><div><div class="gpt-mini-name">NarrativaAV</div><div class="gpt-mini-desc">Estrutura o arco emocional e a timeline de edição de qualquer vídeo.</div></div></div>
+      <div class="gpt-mini-card reveal"><div class="gpt-mini-avatar">💰</div><div><div class="gpt-mini-name">PreçoJusto</div><div class="gpt-mini-desc">Ajuda a precificar, defender seu valor e negociar sem se desvalorizar.</div></div></div>
     </div>
+    <div class="panel-access-note">🔒 Prompts completos liberados após a compra — cole direto no ChatGPT ou Claude, sem configuração</div>
   </div>
 
-  <!-- CALC PANEL — LOCKED -->
+  <!-- CALC PANEL -->
   <div class="tool-panel" id="panel-calc">
-    <div class="locked-wrap">
-      <div style="filter: blur(3px); pointer-events: none; user-select: none;">
-        <div class="calc-preview">
-          <div class="calc-group"><h3>⏱ Horas de trabalho</h3><div class="fake-field"><span>Captação (4h × R$150)</span><span>R$ 600</span></div><div class="fake-field"><span>Edição (8h × R$100)</span><span>R$ 800</span></div><div class="fake-field"><span>Storymaker (3h × R$120)</span><span>R$ 360</span></div></div>
-          <div class="calc-group"><h3>🚗 Custos extras</h3><div class="fake-field"><span>Locomoção (60km)</span><span>R$ 42</span></div><div class="fake-field"><span>Alimentação</span><span>R$ 50</span></div><div class="fake-field"><span>Margem de lucro (30%)</span><span>R$ 546</span></div></div>
-          <div class="calc-result-box"><div style="font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Valor final sugerido</div><div class="calc-result-value">R$ 2.398</div></div>
-        </div>
+    <div class="calc-preview">
+      <div class="calc-group reveal">
+        <h3>⏱ Horas de trabalho</h3>
+        <div class="fake-field"><span>Captação (horas × valor/hora)</span><span>R$ —</span></div>
+        <div class="fake-field"><span>Edição (horas × valor/hora)</span><span>R$ —</span></div>
+        <div class="fake-field"><span>Storymaker (horas × valor/hora)</span><span>R$ —</span></div>
+        <div class="fake-field"><span>Reunião / briefing</span><span>R$ —</span></div>
       </div>
-      <div class="locked-overlay">
-        <span class="locked-badge">🔒 Exclusivo para compradores</span>
-        <h3>Calculadora de precificação completa</h3>
-        <p>Calcule horas, equipamentos, locomoção, margem e impostos em tempo real.</p>
-        <a href="#cta" class="btn-primary">Desbloquear o Kit →</a>
+      <div class="calc-group reveal">
+        <h3>🚗 Custos diretos</h3>
+        <div class="fake-field"><span>Locomoção (km × R$/km)</span><span>R$ —</span></div>
+        <div class="fake-field"><span>Alimentação</span><span>R$ —</span></div>
+        <div class="fake-field"><span>Aluguel de equipamento</span><span>R$ —</span></div>
+        <div class="fake-field"><span>Assistente</span><span>R$ —</span></div>
+      </div>
+      <div class="calc-group reveal">
+        <h3>⚙️ Margem & impostos</h3>
+        <div class="fake-field"><span>Margem de lucro (%)</span><span>30%</span></div>
+        <div class="fake-field"><span>Regime tributário</span><span>MEI 5%</span></div>
+        <div class="fake-field"><span>Desconto</span><span>R$ —</span></div>
+      </div>
+      <div class="calc-result-box reveal">
+        <div style="font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Valor final sugerido · em tempo real</div>
+        <div class="calc-result-value">R$ ——</div>
+        <div style="font-size:.78rem;color:var(--muted);margin-top:8px">≈ R$ — por hora trabalhada</div>
       </div>
     </div>
+    <div class="panel-access-note">🔒 Calculadora interativa completa liberada após a compra — funciona no celular, gera resumo para copiar</div>
   </div>
 
   <!-- CHECKLIST PANEL — FREE PREVIEW -->
@@ -361,6 +400,74 @@
   </div>
 </section>
 
+<!-- MÓDULOS -->
+<section id="modulos">
+  <span class="section-label reveal">O que você vai aprender</span>
+  <h2 class="section-title reveal">5 módulos em vídeo<br>com as <em>ferramentas integradas</em></h2>
+  <p class="section-sub reveal">Cada módulo conecta diretamente com as ferramentas do kit — você aprende e já aplica.</p>
+
+  <div class="modulos-grid">
+    <div class="modulo-card reveal">
+      <div class="modulo-num">01</div>
+      <div class="modulo-body">
+        <div class="modulo-label">Mentalidade</div>
+        <div class="modulo-title">A virada de chave</div>
+        <div class="modulo-desc">Como o cliente decide contratar. Por que preço baixo afasta cliente bom. Como construir autoridade antes mesmo de mandar a proposta.</div>
+      </div>
+    </div>
+    <div class="modulo-card reveal">
+      <div class="modulo-num">02</div>
+      <div class="modulo-body">
+        <div class="modulo-label">Precificação — a dor nº 1</div>
+        <div class="modulo-title">Cobrar de verdade e defender o valor</div>
+        <div class="modulo-desc">Como calcular o preço certo, estruturar pacotes que convertem e responder quando o cliente achar caro — sem ceder na primeira objeção.</div>
+        <div class="modulo-tools">
+          <span class="modulo-tool">💰 PreçoJusto</span>
+          <span class="modulo-tool">🧮 Calculadora</span>
+          <span class="modulo-tool">💼 PropostaAV</span>
+        </div>
+      </div>
+    </div>
+    <div class="modulo-card reveal">
+      <div class="modulo-num">03</div>
+      <div class="modulo-body">
+        <div class="modulo-label">Processo</div>
+        <div class="modulo-title">Do primeiro contato à entrega</div>
+        <div class="modulo-desc">Como conduzir o atendimento do briefing ao contrato, sem improvisar. Comunicação que gera confiança e elimina revisões desnecessárias.</div>
+        <div class="modulo-tools">
+          <span class="modulo-tool">📋 BriefBot</span>
+          <span class="modulo-tool">📝 ContratoAV</span>
+          <span class="modulo-tool">💬 DirectAV</span>
+        </div>
+      </div>
+    </div>
+    <div class="modulo-card reveal">
+      <div class="modulo-num">04</div>
+      <div class="modulo-body">
+        <div class="modulo-label">Produção</div>
+        <div class="modulo-title">Pensar a história antes de gravar</div>
+        <div class="modulo-desc">Pré-produção que evita retrabalho na edição. Como estruturar a narrativa, chegar no evento preparado e editar com propósito.</div>
+        <div class="modulo-tools">
+          <span class="modulo-tool">🎬 RoteiroAV</span>
+          <span class="modulo-tool">🎞️ NarrativaAV</span>
+          <span class="modulo-tool">✅ Checklist</span>
+        </div>
+      </div>
+    </div>
+    <div class="modulo-card reveal">
+      <div class="modulo-num">05</div>
+      <div class="modulo-body">
+        <div class="modulo-label">Crescimento</div>
+        <div class="modulo-title">Usar IA sem perder sua voz</div>
+        <div class="modulo-desc">Como usar IA para produzir conteúdo com consistência, posicionamento nas redes e atrair o cliente certo — mantendo a identidade do seu trabalho.</div>
+        <div class="modulo-tools">
+          <span class="modulo-tool">📱 PostAV</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CTA -->
 <section id="cta" style="background: linear-gradient(180deg, transparent, rgba(196,112,58,.05));">
   <span class="section-label reveal" style="text-align:center;display:block">Pronto para começar?</span>
@@ -371,10 +478,11 @@
     <div class="price-card-head"><h3>AV Pro Kit — Completo</h3><p>Acesso vitalício a todas as ferramentas</p></div>
     <div class="price-card-body">
       <ul class="price-includes">
+        <li><span class="check-icon">✓</span><span>5 módulos em vídeo — mentalidade, precificação, processo, produção e crescimento</span></li>
         <li><span class="check-icon">✓</span><span>8 prompts de IA prontos (BriefBot, RoteiroAV, ContratoAV e mais)</span></li>
         <li><span class="check-icon">✓</span><span>Calculadora de precificação com margem, impostos e custo/hora</span></li>
         <li><span class="check-icon">✓</span><span>Checklist interativo com 70+ itens e filtros por tipo de trabalho</span></li>
-        <li><span class="check-icon">✓</span><span>Biblioteca de 18 prompts avulsos prontos para usar</span></li>
+        <li><span class="check-icon">✓</span><span>18 prompts avulsos prontos para copiar e usar</span></li>
         <li><span class="check-icon">✓</span><span>Acesso vitalício — pagamento único, sem mensalidade</span></li>
       </ul>
       <div class="price-value">
@@ -382,8 +490,7 @@
         <div class="price-por"><span>R$</span> 97</div>
         <div class="price-desc">pagamento único · acesso imediato</div>
       </div>
-      <!-- TROQUE o href abaixo pelo link do Hotmart ou Ticto após criar o produto lá -->
-      <a href="#" class="btn-buy" id="btn-comprar">Quero o Kit agora →</a>
+      <a href="https://checkout.ticto.app/O2A19E78C" class="btn-buy" target="_blank" rel="noopener">Quero o Kit agora →</a>
       <p class="price-note">🔒 Pagamento seguro · Acesso imediato após confirmação</p>
     </div>
   </div>
