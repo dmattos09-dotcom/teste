@@ -10,248 +10,85 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:      #2C1A0E;
-      --bg2:     #3a2212;
-      --bg3:     #4a2e18;
-      --border:  #5e3820;
-      --accent:  #C4703A;
-      --gold:    #D4A96A;
-      --olive:   #4A6741;
-      --cream:   #F2EAD8;
-      --muted:   #9a7a5a;
-      --radius:  14px;
+      --bg:     #0e0e0e;
+      --bg2:    #161210;
+      --bg3:    #1e1814;
+      --border: #2c2018;
+      --accent: #C4703A;
+      --gold:   #D4A96A;
+      --olive:  #4A6741;
+      --cream:  #F2EAD8;
+      --muted:  #7a6a5a;
+      --radius: 14px;
     }
 
     html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--cream); font-family: 'Inter', system-ui, sans-serif; overflow-x: hidden; }
 
-    body {
-      background: var(--bg);
-      color: var(--cream);
-      font-family: 'Inter', system-ui, sans-serif;
-      overflow-x: hidden;
-    }
-
-    /* ─── NAV ─── */
+    /* NAV */
     nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       padding: 18px 32px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(44,26,14,.85);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(196,112,58,.15);
-      transition: all .3s;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(14,14,14,.88); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
     }
-
-    .nav-logo {
-      font-size: 1.1rem;
-      font-weight: 800;
-      color: var(--gold);
-      letter-spacing: -.02em;
-      text-decoration: none;
-    }
-
+    .nav-logo { font-size: 1.05rem; font-weight: 800; color: var(--gold); letter-spacing: -.02em; text-decoration: none; }
     .nav-logo span { color: var(--accent); }
-
-    .nav-links {
-      display: flex;
-      gap: 28px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: .85rem;
-      font-weight: 500;
-      transition: color .2s;
-    }
-
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: .85rem; font-weight: 500; transition: color .2s; }
     .nav-links a:hover { color: var(--cream); }
-
-    .nav-cta {
-      background: var(--accent);
-      color: white;
-      border: none;
-      padding: 10px 22px;
-      border-radius: 999px;
-      font-size: .85rem;
-      font-weight: 700;
-      font-family: inherit;
-      cursor: pointer;
-      text-decoration: none;
-      transition: transform .2s, opacity .2s;
-    }
-
+    .nav-cta { background: var(--accent); color: white; border: none; padding: 10px 22px; border-radius: 999px; font-size: .85rem; font-weight: 700; font-family: inherit; cursor: pointer; text-decoration: none; transition: transform .2s, opacity .2s; }
     .nav-cta:hover { opacity: .88; transform: translateY(-1px); }
+    @media (max-width: 640px) { .nav-links { display: none; } }
 
-    @media (max-width: 640px) {
-      .nav-links { display: none; }
-    }
-
-    /* ─── HERO ─── */
+    /* HERO */
     .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 120px 24px 80px;
-      position: relative;
-      overflow: hidden;
+      min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 120px 24px 80px; position: relative; overflow: hidden;
     }
-
     .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 70% 50% at 50% 0%, rgba(196,112,58,.22) 0%, transparent 65%),
-        radial-gradient(ellipse 40% 40% at 80% 80%, rgba(74,103,65,.15) 0%, transparent 60%);
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(196,112,58,.16) 0%, transparent 65%),
+                  radial-gradient(ellipse 35% 35% at 80% 80%, rgba(74,103,65,.1) 0%, transparent 60%);
       pointer-events: none;
     }
-
     .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(196,112,58,.12);
-      border: 1px solid rgba(196,112,58,.3);
-      color: var(--accent);
-      font-size: .75rem;
-      font-weight: 700;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      padding: 7px 16px;
-      border-radius: 999px;
-      margin-bottom: 28px;
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(196,112,58,.1); border: 1px solid rgba(196,112,58,.28);
+      color: var(--accent); font-size: .72rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; padding: 7px 16px; border-radius: 999px; margin-bottom: 28px;
     }
+    .hero-badge .dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.4)} }
 
-    .hero-badge .dot {
-      width: 6px; height: 6px;
-      background: var(--accent);
-      border-radius: 50%;
-      animation: pulse 2s infinite;
-    }
+    h1 { font-size: clamp(2.6rem, 7vw, 5.2rem); font-weight: 900; line-height: 1.05; letter-spacing: -.04em; margin-bottom: 24px; max-width: 820px; }
+    h1 em { font-style: italic; font-family: 'Playfair Display', Georgia, serif; color: var(--gold); }
+    .hero-sub { font-size: clamp(.95rem, 2.5vw, 1.1rem); color: var(--muted); max-width: 500px; line-height: 1.75; margin-bottom: 44px; }
 
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: .5; transform: scale(1.4); }
-    }
-
-    .hero h1 {
-      font-size: clamp(2.6rem, 7vw, 5.5rem);
-      font-weight: 900;
-      line-height: 1.05;
-      letter-spacing: -.04em;
-      margin-bottom: 24px;
-      max-width: 820px;
-    }
-
-    .hero h1 em {
-      font-style: italic;
-      font-family: 'Playfair Display', Georgia, serif;
-      color: var(--gold);
-    }
-
-    .hero-sub {
-      font-size: clamp(.95rem, 2.5vw, 1.15rem);
-      color: var(--muted);
-      max-width: 520px;
-      line-height: 1.75;
-      margin-bottom: 44px;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 14px;
-      align-items: center;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-bottom: 60px;
-    }
+    .hero-actions { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; justify-content: center; margin-bottom: 60px; }
 
     .btn-primary {
-      background: var(--accent);
-      color: white;
-      border: none;
-      padding: 16px 36px;
-      border-radius: 999px;
-      font-size: 1rem;
-      font-weight: 700;
-      font-family: inherit;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: transform .2s, box-shadow .2s;
-      box-shadow: 0 8px 32px rgba(196,112,58,.3);
+      background: var(--accent); color: white; border: none; padding: 16px 36px; border-radius: 999px;
+      font-size: 1rem; font-weight: 700; font-family: inherit; cursor: pointer; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px;
+      transition: transform .2s, box-shadow .2s; box-shadow: 0 8px 32px rgba(196,112,58,.25);
     }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 40px rgba(196,112,58,.4);
-    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(196,112,58,.38); }
 
     .btn-ghost {
-      color: var(--muted);
-      border: 1px solid var(--border);
-      background: transparent;
-      padding: 16px 28px;
-      border-radius: 999px;
-      font-size: .9rem;
-      font-weight: 600;
-      font-family: inherit;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: color .2s, border-color .2s;
+      color: var(--muted); border: 1px solid var(--border); background: transparent; padding: 16px 28px;
+      border-radius: 999px; font-size: .9rem; font-weight: 600; font-family: inherit; cursor: pointer;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: color .2s, border-color .2s;
     }
-
     .btn-ghost:hover { color: var(--cream); border-color: var(--muted); }
 
     /* STATS */
-    .hero-stats {
-      display: flex;
-      gap: 0;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      background: var(--bg2);
-    }
-
-    .stat {
-      padding: 18px 28px;
-      text-align: center;
-      border-right: 1px solid var(--border);
-    }
-
+    .hero-stats { display: flex; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: var(--bg2); }
+    .stat { padding: 18px 28px; text-align: center; border-right: 1px solid var(--border); }
     .stat:last-child { border-right: none; }
-
-    .stat-num {
-      font-size: 1.6rem;
-      font-weight: 900;
-      color: var(--gold);
-      letter-spacing: -.03em;
-      display: block;
-    }
-
-    .stat-label {
-      font-size: .72rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: .07em;
-      font-weight: 600;
-      margin-top: 2px;
-    }
-
+    .stat-num { font-size: 1.6rem; font-weight: 900; color: var(--gold); letter-spacing: -.03em; display: block; }
+    .stat-label { font-size: .7rem; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; font-weight: 600; margin-top: 2px; }
     @media (max-width: 520px) {
       .hero-stats { display: grid; grid-template-columns: 1fr 1fr; }
       .stat:nth-child(2) { border-right: none; }
@@ -259,592 +96,133 @@
       .stat:nth-child(4) { border-top: 1px solid var(--border); }
     }
 
-    /* ─── TICKER ─── */
-    .ticker-wrap {
-      overflow: hidden;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 14px 0;
-      background: var(--bg2);
-    }
+    /* TICKER */
+    .ticker-wrap { overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 13px 0; background: var(--bg2); }
+    .ticker { display: flex; gap: 48px; animation: ticker 26s linear infinite; white-space: nowrap; }
+    .ticker-item { display: flex; align-items: center; gap: 10px; font-size: .78rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; flex-shrink: 0; }
+    .ticker-item .sep { color: var(--accent); }
+    @keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
 
-    .ticker {
-      display: flex;
-      gap: 48px;
-      animation: ticker 24s linear infinite;
-      white-space: nowrap;
-    }
+    /* SECTIONS */
+    section { max-width: 1100px; margin: 0 auto; padding: 100px 24px; }
+    .section-label { font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; display: block; }
+    .section-title { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; line-height: 1.15; letter-spacing: -.03em; margin-bottom: 16px; }
+    .section-title em { font-style: italic; font-family: 'Playfair Display', Georgia, serif; color: var(--gold); }
+    .section-sub { color: var(--muted); font-size: .92rem; line-height: 1.75; max-width: 520px; }
 
-    .ticker-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: .82rem;
-      font-weight: 600;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      flex-shrink: 0;
-    }
-
-    .ticker-item .dot { color: var(--accent); font-size: 1.2em; }
-
-    @keyframes ticker {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    /* ─── SECTIONS ─── */
-    section {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 100px 24px;
-    }
-
-    .section-label {
-      font-size: .72rem;
-      font-weight: 700;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 14px;
-      display: block;
-    }
-
-    .section-title {
-      font-size: clamp(1.8rem, 4vw, 3rem);
-      font-weight: 800;
-      line-height: 1.15;
-      letter-spacing: -.03em;
-      margin-bottom: 16px;
-    }
-
-    .section-title em {
-      font-style: italic;
-      font-family: 'Playfair Display', Georgia, serif;
-      color: var(--gold);
-    }
-
-    .section-sub {
-      color: var(--muted);
-      font-size: .95rem;
-      line-height: 1.75;
-      max-width: 520px;
-    }
-
-    /* ─── PROBLEMA ─── */
+    /* PROBLEMA */
     #problema { padding-top: 80px; }
-
-    .problema-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 16px;
-      margin-top: 48px;
-    }
-
-    .problema-card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 24px;
-      position: relative;
-      overflow: hidden;
-      transition: border-color .2s;
-    }
-
-    .problema-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: var(--accent);
-      transform: scaleX(0);
-      transition: transform .3s;
-      transform-origin: left;
-    }
-
-    .problema-card:hover { border-color: rgba(196,112,58,.4); }
+    .problema-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; margin-top: 48px; }
+    .problema-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; position: relative; overflow: hidden; transition: border-color .2s; }
+    .problema-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--accent); transform: scaleX(0); transition: transform .3s; transform-origin: left; }
+    .problema-card:hover { border-color: rgba(196,112,58,.35); }
     .problema-card:hover::before { transform: scaleX(1); }
+    .problema-icon { font-size: 22px; margin-bottom: 12px; }
+    .problema-card h3 { font-size: .92rem; font-weight: 700; color: var(--cream); margin-bottom: 8px; }
+    .problema-card p { font-size: .82rem; color: var(--muted); line-height: 1.65; }
 
-    .problema-icon { font-size: 24px; margin-bottom: 12px; }
-
-    .problema-card h3 {
-      font-size: .95rem;
-      font-weight: 700;
-      color: var(--cream);
-      margin-bottom: 8px;
-    }
-
-    .problema-card p {
-      font-size: .83rem;
-      color: var(--muted);
-      line-height: 1.65;
-    }
-
-    /* ─── KIT ─── */
-    #kit { background: none; }
-
-    .kit-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      margin-bottom: 48px;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-
-    .tools-tabs {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .tool-tab {
-      padding: 9px 18px;
-      border-radius: 999px;
-      font-size: .82rem;
-      font-weight: 600;
-      font-family: inherit;
-      cursor: pointer;
-      border: 1px solid var(--border);
-      background: transparent;
-      color: var(--muted);
-      transition: all .2s;
-    }
-
-    .tool-tab.active {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: white;
-    }
-
+    /* KIT */
+    .kit-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; flex-wrap: wrap; gap: 20px; }
+    .tools-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+    .tool-tab { padding: 9px 18px; border-radius: 999px; font-size: .82rem; font-weight: 600; font-family: inherit; cursor: pointer; border: 1px solid var(--border); background: transparent; color: var(--muted); transition: all .2s; }
+    .tool-tab.active { background: var(--accent); border-color: var(--accent); color: white; }
     .tool-panel { display: none; animation: fadeUp .3s ease; }
     .tool-panel.active { display: block; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(12px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* GPT PANEL */
-    .gpts-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 14px;
-    }
-
-    .gpt-mini-card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
+    /* LOCKED OVERLAY */
+    .locked-wrap { position: relative; }
+    .locked-overlay {
+      position: absolute; inset: 0; z-index: 10;
+      background: linear-gradient(to bottom, rgba(14,14,14,.1) 0%, rgba(14,14,14,.7) 40%, rgba(14,14,14,.97) 75%);
       border-radius: var(--radius);
-      padding: 20px;
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
-      transition: border-color .2s, transform .2s;
-      cursor: default;
-    }
-
-    .gpt-mini-card:hover {
-      border-color: rgba(196,112,58,.4);
-      transform: translateY(-2px);
-    }
-
-    .gpt-mini-avatar {
-      width: 42px;
-      height: 42px;
-      border-radius: 10px;
-      background: rgba(196,112,58,.12);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      flex-shrink: 0;
-    }
-
-    .gpt-mini-name {
-      font-size: .95rem;
-      font-weight: 700;
-      color: var(--gold);
-      margin-bottom: 4px;
-    }
-
-    .gpt-mini-desc {
-      font-size: .8rem;
-      color: var(--muted);
-      line-height: 1.55;
-    }
-
-    .panel-cta {
-      display: flex;
-      justify-content: center;
-      margin-top: 32px;
-    }
-
-    /* CALC PANEL */
-    .calc-preview {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    @media (max-width: 640px) { .calc-preview { grid-template-columns: 1fr; } }
-
-    .calc-group {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 22px;
-    }
-
-    .calc-group h3 {
-      font-size: .8rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      color: var(--accent);
-      margin-bottom: 16px;
-    }
-
-    .fake-field {
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 10px 14px;
-      margin-bottom: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .fake-field span:first-child {
-      font-size: .82rem;
-      color: var(--muted);
-    }
-
-    .fake-field span:last-child {
-      font-size: .82rem;
-      font-weight: 600;
-      color: var(--cream);
-    }
-
-    .calc-result-box {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 28px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      grid-column: span 2;
-    }
-
-    @media (max-width: 640px) { .calc-result-box { grid-column: span 1; } }
-
-    .calc-result-label {
-      font-size: .75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .1em;
-      color: var(--muted);
-      margin-bottom: 8px;
-    }
-
-    .calc-result-value {
-      font-size: 2.8rem;
-      font-weight: 900;
-      color: var(--olive);
-      letter-spacing: -.04em;
-    }
-
-    /* CHECKLIST PANEL */
-    .checklist-preview {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 12px;
-    }
-
-    .cl-cat {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 18px 20px;
-    }
-
-    .cl-cat-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-
-    .cl-cat-header .icon { font-size: 18px; }
-
-    .cl-cat-header h3 {
-      font-size: .9rem;
-      font-weight: 700;
-    }
-
-    .cl-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 7px 0;
-      border-bottom: 1px solid rgba(94,56,32,.5);
-      font-size: .83rem;
-      color: var(--muted);
-    }
-
-    .cl-item:last-child { border-bottom: none; }
-
-    .cl-checkbox {
-      width: 16px;
-      height: 16px;
-      border-radius: 4px;
-      border: 1.5px solid var(--border);
-      flex-shrink: 0;
-    }
-
-    /* ─── CTA SECTION ─── */
-    #cta {
-      text-align: center;
-    }
-
-    .price-card {
-      max-width: 480px;
-      margin: 48px auto 0;
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .price-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--accent), var(--gold));
-    }
-
-    .price-card-head {
-      padding: 32px 36px 24px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .price-card-head h3 {
-      font-size: 1.3rem;
-      font-weight: 800;
-      color: var(--gold);
-      margin-bottom: 6px;
-    }
-
-    .price-card-head p {
-      font-size: .85rem;
-      color: var(--muted);
-    }
-
-    .price-card-body {
-      padding: 24px 36px;
-    }
-
-    .price-includes {
-      list-style: none;
-      margin-bottom: 24px;
-    }
-
-    .price-includes li {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-size: .88rem;
-      color: var(--cream);
-      padding: 8px 0;
-      border-bottom: 1px solid rgba(94,56,32,.4);
-      line-height: 1.5;
-    }
-
-    .price-includes li:last-child { border-bottom: none; }
-
-    .check-icon { color: var(--olive); font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
-
-    .price-value {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .price-de {
-      font-size: .85rem;
-      color: var(--muted);
-      text-decoration: line-through;
-    }
-
-    .price-por {
-      font-size: 3rem;
-      font-weight: 900;
-      color: var(--accent);
-      letter-spacing: -.04em;
-      line-height: 1;
-      margin: 4px 0;
-    }
-
-    .price-por span { font-size: 1.4rem; vertical-align: top; margin-top: 8px; display: inline-block; }
-
-    .price-desc {
-      font-size: .78rem;
-      color: var(--muted);
-    }
-
-    .btn-buy {
-      width: 100%;
-      padding: 17px;
-      background: var(--accent);
-      color: white;
-      border: none;
-      border-radius: 12px;
-      font-size: 1rem;
-      font-weight: 800;
-      font-family: inherit;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      transition: transform .2s, box-shadow .2s;
-      box-shadow: 0 8px 24px rgba(196,112,58,.3);
-      text-decoration: none;
-    }
-
-    .btn-buy:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 32px rgba(196,112,58,.45);
-    }
-
-    .price-note {
-      font-size: .75rem;
-      color: var(--muted);
-      text-align: center;
-      margin-top: 12px;
-    }
-
-    /* ─── FAQ ─── */
-    #faq { padding-top: 0; }
-
-    .faq-list {
-      margin-top: 40px;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .faq-item {
-      border-bottom: 1px solid var(--border);
-    }
-
-    .faq-question {
-      width: 100%;
-      padding: 20px 0;
-      background: none;
-      border: none;
-      font-family: inherit;
-      font-size: .95rem;
-      font-weight: 600;
-      color: var(--cream);
-      text-align: left;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      transition: color .2s;
-    }
-
-    .faq-question:hover { color: var(--gold); }
-
-    .faq-chevron {
-      flex-shrink: 0;
-      color: var(--accent);
-      transition: transform .25s;
-    }
-
-    .faq-item.open .faq-chevron { transform: rotate(180deg); }
-
-    .faq-answer {
-      display: none;
-      padding: 0 0 20px;
-      font-size: .88rem;
-      color: var(--muted);
-      line-height: 1.75;
-    }
-
-    .faq-item.open .faq-answer { display: block; }
-
-    /* ─── FOOTER ─── */
-    footer {
-      border-top: 1px solid var(--border);
+      display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
       padding: 40px 24px;
       text-align: center;
-      color: var(--muted);
-      font-size: .82rem;
     }
+    .locked-badge { background: rgba(196,112,58,.12); border: 1px solid rgba(196,112,58,.3); color: var(--accent); font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 6px 14px; border-radius: 999px; margin-bottom: 14px; display: inline-flex; align-items: center; gap: 6px; }
+    .locked-overlay h3 { font-size: 1.2rem; font-weight: 800; color: var(--cream); margin-bottom: 8px; }
+    .locked-overlay p { font-size: .85rem; color: var(--muted); margin-bottom: 20px; max-width: 360px; }
 
+    /* GPT MINI CARDS */
+    .gpts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+    .gpt-mini-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; display: flex; gap: 12px; align-items: flex-start; }
+    .gpt-mini-avatar { width: 40px; height: 40px; border-radius: 10px; background: rgba(196,112,58,.1); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .gpt-mini-name { font-size: .9rem; font-weight: 700; color: var(--gold); margin-bottom: 3px; }
+    .gpt-mini-desc { font-size: .78rem; color: var(--muted); line-height: 1.5; }
+
+    /* CALC PREVIEW */
+    .calc-preview { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 640px) { .calc-preview { grid-template-columns: 1fr; } }
+    .calc-group { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+    .calc-group h3 { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--accent); margin-bottom: 14px; }
+    .fake-field { background: var(--bg3); border: 1px solid var(--border); border-radius: 7px; padding: 9px 12px; margin-bottom: 8px; display: flex; justify-content: space-between; }
+    .fake-field span:first-child { font-size: .8rem; color: var(--muted); }
+    .fake-field span:last-child { font-size: .8rem; font-weight: 600; color: var(--cream); }
+    .calc-result-box { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; grid-column: span 2; }
+    @media (max-width: 640px) { .calc-result-box { grid-column: span 1; } }
+    .calc-result-value { font-size: 2.8rem; font-weight: 900; color: var(--olive); letter-spacing: -.04em; }
+
+    /* CHECKLIST PANEL */
+    .checklist-preview { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+    .cl-cat { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; }
+    .cl-cat-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .cl-cat-header h3 { font-size: .88rem; font-weight: 700; }
+    .cl-item { display: flex; align-items: center; gap: 10px; padding: 6px 0; border-bottom: 1px solid rgba(44,32,24,.6); font-size: .82rem; color: var(--muted); }
+    .cl-item:last-child { border-bottom: none; }
+    .cl-checkbox { width: 15px; height: 15px; border-radius: 4px; border: 1.5px solid var(--border); flex-shrink: 0; }
+    .panel-cta { display: flex; justify-content: center; margin-top: 28px; }
+
+    /* CTA SECTION */
+    #cta { text-align: center; }
+    .price-card { max-width: 460px; margin: 48px auto 0; background: var(--bg2); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; position: relative; }
+    .price-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--gold)); }
+    .price-card-head { padding: 28px 32px 20px; border-bottom: 1px solid var(--border); }
+    .price-card-head h3 { font-size: 1.2rem; font-weight: 800; color: var(--gold); margin-bottom: 4px; }
+    .price-card-head p { font-size: .83rem; color: var(--muted); }
+    .price-card-body { padding: 22px 32px; }
+    .price-includes { list-style: none; margin-bottom: 22px; }
+    .price-includes li { display: flex; align-items: flex-start; gap: 10px; font-size: .86rem; color: var(--cream); padding: 8px 0; border-bottom: 1px solid rgba(44,32,24,.5); line-height: 1.5; }
+    .price-includes li:last-child { border-bottom: none; }
+    .check-icon { color: var(--olive); flex-shrink: 0; margin-top: 1px; }
+    .price-value { text-align: center; margin-bottom: 18px; }
+    .price-de { font-size: .83rem; color: var(--muted); text-decoration: line-through; }
+    .price-por { font-size: 2.8rem; font-weight: 900; color: var(--accent); letter-spacing: -.04em; line-height: 1; margin: 4px 0; }
+    .price-por span { font-size: 1.3rem; vertical-align: top; margin-top: 7px; display: inline-block; }
+    .price-desc { font-size: .76rem; color: var(--muted); }
+    .btn-buy { width: 100%; padding: 16px; background: var(--accent); color: white; border: none; border-radius: 11px; font-size: .98rem; font-weight: 800; font-family: inherit; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: transform .2s, box-shadow .2s; box-shadow: 0 8px 24px rgba(196,112,58,.28); text-decoration: none; }
+    .btn-buy:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(196,112,58,.42); }
+    .price-note { font-size: .73rem; color: var(--muted); text-align: center; margin-top: 10px; }
+
+    /* FAQ */
+    .faq-list { margin-top: 40px; max-width: 680px; margin-left: auto; margin-right: auto; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-question { width: 100%; padding: 20px 0; background: none; border: none; font-family: inherit; font-size: .93rem; font-weight: 600; color: var(--cream); text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; transition: color .2s; }
+    .faq-question:hover { color: var(--gold); }
+    .faq-chevron { flex-shrink: 0; color: var(--accent); transition: transform .25s; }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); }
+    .faq-answer { display: none; padding: 0 0 20px; font-size: .86rem; color: var(--muted); line-height: 1.75; }
+    .faq-item.open .faq-answer { display: block; }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 36px 24px; text-align: center; color: var(--muted); font-size: .8rem; }
     footer strong { color: var(--gold); }
+    footer a { color: var(--muted); text-decoration: none; margin: 0 10px; transition: color .2s; }
+    footer a:hover { color: var(--cream); }
 
-    /* ─── SCROLL REVEAL ─── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity .6s ease, transform .6s ease;
-    }
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .55s ease, transform .55s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ─── STICKY CTA ─── */
-    .sticky-cta {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      z-index: 50;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity .3s, transform .3s;
-      pointer-events: none;
-    }
-
-    .sticky-cta.show {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-
-    .sticky-cta a {
-      background: var(--accent);
-      color: white;
-      padding: 14px 24px;
-      border-radius: 999px;
-      font-size: .88rem;
-      font-weight: 700;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: 0 8px 32px rgba(196,112,58,.4);
-      transition: transform .2s;
-    }
-
-    .sticky-cta a:hover { transform: translateY(-2px); }
+    /* STICKY CTA */
+    .sticky-cta { position: fixed; bottom: 24px; right: 24px; z-index: 50; opacity: 0; transform: translateY(20px); transition: opacity .3s, transform .3s; pointer-events: none; }
+    .sticky-cta.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .sticky-cta a { background: var(--accent); color: white; padding: 13px 22px; border-radius: 999px; font-size: .85rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 7px; box-shadow: 0 6px 28px rgba(196,112,58,.38); }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav id="nav">
+<nav>
   <a href="#" class="nav-logo">AV <span>Pro</span> Kit</a>
   <ul class="nav-links">
     <li><a href="#kit">O Kit</a></li>
@@ -854,64 +232,50 @@
   <a href="#cta" class="nav-cta">Quero o Kit →</a>
 </nav>
 
-<!-- STICKY CTA -->
 <div class="sticky-cta" id="stickyCta">
   <a href="#cta">Quero o Kit →</a>
 </div>
 
 <!-- HERO -->
-<div class="hero" id="hero">
+<div class="hero">
   <div class="hero-badge"><span class="dot"></span>Kit Profissional Audiovisual</div>
   <h1>Pare de cobrar<br>barato e perder<br><em>tempo demais.</em></h1>
-  <p class="hero-sub">GPTs de IA personalizados, calculadora de precificação, checklist de equipamentos — tudo que você precisa para trabalhar como profissional.</p>
+  <p class="hero-sub">GPTs de IA prontos para usar, calculadora de precificação, checklist de equipamentos — tudo que você precisa para trabalhar como profissional.</p>
   <div class="hero-actions">
     <a href="#cta" class="btn-primary">Quero o Kit completo →</a>
     <a href="#kit" class="btn-ghost">Ver o que tem dentro</a>
   </div>
   <div class="hero-stats">
-    <div class="stat">
-      <span class="stat-num" data-count="8">0</span>
-      <span class="stat-label">GPTs de IA</span>
-    </div>
-    <div class="stat">
-      <span class="stat-num" data-count="60">0</span>
-      <span class="stat-label">Itens no Checklist</span>
-    </div>
-    <div class="stat">
-      <span class="stat-num" data-count="18">0</span>
-      <span class="stat-label">Prompts prontos</span>
-    </div>
-    <div class="stat">
-      <span class="stat-num">R$0</span>
-      <span class="stat-label">Custo por uso</span>
-    </div>
+    <div class="stat"><span class="stat-num" data-count="8">0</span><span class="stat-label">GPTs de IA</span></div>
+    <div class="stat"><span class="stat-num" data-count="70">0</span><span class="stat-label">Itens checklist</span></div>
+    <div class="stat"><span class="stat-num" data-count="18">0</span><span class="stat-label">Prompts prontos</span></div>
+    <div class="stat"><span class="stat-num">R$0</span><span class="stat-label">Custo por uso</span></div>
   </div>
 </div>
 
 <!-- TICKER -->
 <div class="ticker-wrap">
   <div class="ticker">
-    <!-- duplicate for seamless loop -->
-    <span class="ticker-item"><span class="dot">✦</span> BriefBot</span>
-    <span class="ticker-item"><span class="dot">✦</span> RoteiroAV</span>
-    <span class="ticker-item"><span class="dot">✦</span> ContratoAV</span>
-    <span class="ticker-item"><span class="dot">✦</span> PropostaAV</span>
-    <span class="ticker-item"><span class="dot">✦</span> PostAV</span>
-    <span class="ticker-item"><span class="dot">✦</span> DirectAV</span>
-    <span class="ticker-item"><span class="dot">✦</span> NarrativaAV</span>
-    <span class="ticker-item"><span class="dot">✦</span> PreçoJusto</span>
-    <span class="ticker-item"><span class="dot">✦</span> Calculadora</span>
-    <span class="ticker-item"><span class="dot">✦</span> Checklist</span>
-    <span class="ticker-item"><span class="dot">✦</span> BriefBot</span>
-    <span class="ticker-item"><span class="dot">✦</span> RoteiroAV</span>
-    <span class="ticker-item"><span class="dot">✦</span> ContratoAV</span>
-    <span class="ticker-item"><span class="dot">✦</span> PropostaAV</span>
-    <span class="ticker-item"><span class="dot">✦</span> PostAV</span>
-    <span class="ticker-item"><span class="dot">✦</span> DirectAV</span>
-    <span class="ticker-item"><span class="dot">✦</span> NarrativaAV</span>
-    <span class="ticker-item"><span class="dot">✦</span> PreçoJusto</span>
-    <span class="ticker-item"><span class="dot">✦</span> Calculadora</span>
-    <span class="ticker-item"><span class="dot">✦</span> Checklist</span>
+    <span class="ticker-item"><span class="sep">✦</span> BriefBot</span>
+    <span class="ticker-item"><span class="sep">✦</span> RoteiroAV</span>
+    <span class="ticker-item"><span class="sep">✦</span> ContratoAV</span>
+    <span class="ticker-item"><span class="sep">✦</span> PropostaAV</span>
+    <span class="ticker-item"><span class="sep">✦</span> PostAV</span>
+    <span class="ticker-item"><span class="sep">✦</span> DirectAV</span>
+    <span class="ticker-item"><span class="sep">✦</span> NarrativaAV</span>
+    <span class="ticker-item"><span class="sep">✦</span> PreçoJusto</span>
+    <span class="ticker-item"><span class="sep">✦</span> Calculadora</span>
+    <span class="ticker-item"><span class="sep">✦</span> Checklist</span>
+    <span class="ticker-item"><span class="sep">✦</span> BriefBot</span>
+    <span class="ticker-item"><span class="sep">✦</span> RoteiroAV</span>
+    <span class="ticker-item"><span class="sep">✦</span> ContratoAV</span>
+    <span class="ticker-item"><span class="sep">✦</span> PropostaAV</span>
+    <span class="ticker-item"><span class="sep">✦</span> PostAV</span>
+    <span class="ticker-item"><span class="sep">✦</span> DirectAV</span>
+    <span class="ticker-item"><span class="sep">✦</span> NarrativaAV</span>
+    <span class="ticker-item"><span class="sep">✦</span> PreçoJusto</span>
+    <span class="ticker-item"><span class="sep">✦</span> Calculadora</span>
+    <span class="ticker-item"><span class="sep">✦</span> Checklist</span>
   </div>
 </div>
 
@@ -920,36 +284,12 @@
   <span class="section-label reveal">Para quem é esse kit</span>
   <h2 class="section-title reveal">Se você se reconhece<br>em algum desses casos<em>…</em></h2>
   <div class="problema-grid">
-    <div class="problema-card reveal">
-      <div class="problema-icon">😬</div>
-      <h3>Fica sem saber quanto cobrar</h3>
-      <p>Chuta um número na hora, fica com dúvida se foi caro ou barato, e às vezes descobre que trabalhou no prejuízo.</p>
-    </div>
-    <div class="problema-card reveal">
-      <div class="problema-icon">📋</div>
-      <h3>Esquece equipamento em casa</h3>
-      <p>Chega no evento e lembra que a bateria extra ficou na tomada, o cartão está cheio ou o microfone ficou na bolsa errada.</p>
-    </div>
-    <div class="problema-card reveal">
-      <div class="problema-icon">🕐</div>
-      <h3>Perde tempo respondendo sempre as mesmas mensagens</h3>
-      <p>Proposta, contrato, follow-up, resposta de orçamento — tudo do zero toda vez, para cada cliente novo.</p>
-    </div>
-    <div class="problema-card reveal">
-      <div class="problema-icon">🎬</div>
-      <h3>Trava na hora de estruturar o vídeo</h3>
-      <p>O material gravado está lá, mas na hora de montar, falta clareza sobre qual ordem contar a história.</p>
-    </div>
-    <div class="problema-card reveal">
-      <div class="problema-icon">💸</div>
-      <h3>Cliente pede desconto e você cede</h3>
-      <p>Na hora da negociação, falta argumento. Você baixa o preço sem saber defender por que o valor é justo.</p>
-    </div>
-    <div class="problema-card reveal">
-      <div class="problema-icon">📱</div>
-      <h3>Não tem consistência no conteúdo</h3>
-      <p>A semana passa, não postou nada. Quando posta, não sabe o que escrever na legenda e acaba com algo genérico.</p>
-    </div>
+    <div class="problema-card reveal"><div class="problema-icon">😬</div><h3>Fica sem saber quanto cobrar</h3><p>Chuta um número na hora, fica com dúvida se foi caro ou barato, e às vezes descobre que trabalhou no prejuízo.</p></div>
+    <div class="problema-card reveal"><div class="problema-icon">📋</div><h3>Esquece equipamento em casa</h3><p>Chega no evento e lembra que a bateria extra ficou na tomada, o cartão está cheio ou o microfone ficou na bolsa errada.</p></div>
+    <div class="problema-card reveal"><div class="problema-icon">🕐</div><h3>Perde tempo nas mesmas mensagens</h3><p>Proposta, contrato, follow-up, resposta de orçamento — tudo do zero toda vez, para cada cliente novo.</p></div>
+    <div class="problema-card reveal"><div class="problema-icon">🎬</div><h3>Trava na hora de montar o vídeo</h3><p>O material gravado está lá, mas falta clareza sobre qual ordem contar a história — e a edição emperra.</p></div>
+    <div class="problema-card reveal"><div class="problema-icon">💸</div><h3>Cliente pede desconto e você cede</h3><p>Na hora da negociação, falta argumento para defender que o valor é justo — e você termina trabalhando por menos.</p></div>
+    <div class="problema-card reveal"><div class="problema-icon">📱</div><h3>Não tem consistência no conteúdo</h3><p>A semana passa, não postou nada. Quando posta, não sabe o que escrever na legenda.</p></div>
   </div>
 </section>
 
@@ -967,222 +307,114 @@
     </div>
   </div>
 
-  <!-- GPTs PANEL -->
+  <!-- GPTs PANEL — LOCKED -->
   <div class="tool-panel active" id="panel-gpts">
-    <div class="gpts-grid">
-      <div class="gpt-mini-card reveal">
-        <div class="gpt-mini-avatar">📋</div>
-        <div>
-          <div class="gpt-mini-name">BriefBot</div>
-          <div class="gpt-mini-desc">Conduz uma conversa com seu cliente e gera um briefing completo e formatado no final.</div>
+    <div class="locked-wrap">
+      <div style="filter: blur(3px); pointer-events: none; user-select: none;">
+        <div class="gpts-grid">
+          <div class="gpt-mini-card"><div class="gpt-mini-avatar">📋</div><div><div class="gpt-mini-name">BriefBot</div><div class="gpt-mini-desc">Conduz uma conversa com seu cliente e gera um briefing completo e formatado no final.</div></div></div>
+          <div class="gpt-mini-card"><div class="gpt-mini-avatar">🎬</div><div><div class="gpt-mini-name">RoteiroAV</div><div class="gpt-mini-desc">Cria roteiros profissionais para qualquer tipo de vídeo com estrutura em cenas e timecode.</div></div></div>
+          <div class="gpt-mini-card"><div class="gpt-mini-avatar">📝</div><div><div class="gpt-mini-name">ContratoAV</div><div class="gpt-mini-desc">Formula contratos do zero e revisa contratos existentes apontando riscos e sugestões.</div></div></div>
+          <div class="gpt-mini-card"><div class="gpt-mini-avatar">💼</div><div><div class="gpt-mini-name">PropostaAV</div><div class="gpt-mini-desc">Transforma dados do projeto em propostas persuasivas — versão e-mail e WhatsApp.</div></div></div>
+          <div class="gpt-mini-card"><div class="gpt-mini-avatar">📱</div><div><div class="gpt-mini-name">PostAV</div><div class="gpt-mini-desc">Legendas, scripts de Reels, planos de conteúdo e bios para Instagram e TikTok.</div></div></div>
+          <div class="gpt-mini-card"><div class="gpt-mini-avatar">💬</div><div><div class="gpt-mini-name">DirectAV</div><div class="gpt-mini-desc">Respostas estratégicas para leads, follow-up, pedido de desconto e cliente difícil.</div></div></div>
+          <div class="gpt-mini-card"><div class="gpt-mini-avatar">🎞️</div><div><div class="gpt-mini-name">NarrativaAV</div><div class="gpt-mini-desc">Estrutura o arco emocional e a timeline de edição de qualquer vídeo.</div></div></div>
+          <div class="gpt-mini-card"><div class="gpt-mini-avatar">💰</div><div><div class="gpt-mini-name">PreçoJusto</div><div class="gpt-mini-desc">Ajuda a precificar, defender seu valor e negociar sem se desvalorizar.</div></div></div>
         </div>
       </div>
-      <div class="gpt-mini-card reveal">
-        <div class="gpt-mini-avatar">🎬</div>
-        <div>
-          <div class="gpt-mini-name">RoteiroAV</div>
-          <div class="gpt-mini-desc">Cria roteiros profissionais para qualquer tipo de vídeo com estrutura em cenas e timecode.</div>
-        </div>
+      <div class="locked-overlay">
+        <span class="locked-badge">🔒 Exclusivo para compradores</span>
+        <h3>8 prompts de IA prontos para usar</h3>
+        <p>Cole direto no ChatGPT ou Claude — sem criar GPT, sem configuração, funciona na hora.</p>
+        <a href="#cta" class="btn-primary">Desbloquear o Kit →</a>
       </div>
-      <div class="gpt-mini-card reveal">
-        <div class="gpt-mini-avatar">📝</div>
-        <div>
-          <div class="gpt-mini-name">ContratoAV</div>
-          <div class="gpt-mini-desc">Formula contratos do zero e revisa contratos existentes apontando riscos e sugestões.</div>
-        </div>
-      </div>
-      <div class="gpt-mini-card reveal">
-        <div class="gpt-mini-avatar">💼</div>
-        <div>
-          <div class="gpt-mini-name">PropostaAV</div>
-          <div class="gpt-mini-desc">Transforma dados do projeto em propostas persuasivas — versão e-mail e WhatsApp.</div>
-        </div>
-      </div>
-      <div class="gpt-mini-card reveal">
-        <div class="gpt-mini-avatar">📱</div>
-        <div>
-          <div class="gpt-mini-name">PostAV</div>
-          <div class="gpt-mini-desc">Legendas, scripts de Reels, planos de conteúdo e bios otimizadas para Instagram e TikTok.</div>
-        </div>
-      </div>
-      <div class="gpt-mini-card reveal">
-        <div class="gpt-mini-avatar">💬</div>
-        <div>
-          <div class="gpt-mini-name">DirectAV</div>
-          <div class="gpt-mini-desc">Respostas estratégicas para leads no direct, follow-up, pedido de desconto e cliente difícil.</div>
-        </div>
-      </div>
-      <div class="gpt-mini-card reveal">
-        <div class="gpt-mini-avatar">🎞️</div>
-        <div>
-          <div class="gpt-mini-name">NarrativaAV</div>
-          <div class="gpt-mini-desc">Estrutura o arco emocional e a timeline de edição de qualquer vídeo.</div>
-        </div>
-      </div>
-      <div class="gpt-mini-card reveal">
-        <div class="gpt-mini-avatar">💰</div>
-        <div>
-          <div class="gpt-mini-name">PreçoJusto</div>
-          <div class="gpt-mini-desc">Ajuda a precificar, defender seu valor e negociar sem se desvalorizar.</div>
-        </div>
-      </div>
-    </div>
-    <div class="panel-cta">
-      <a href="gpts.html" class="btn-primary">Ver todos os GPTs →</a>
     </div>
   </div>
 
-  <!-- CALC PANEL -->
+  <!-- CALC PANEL — LOCKED -->
   <div class="tool-panel" id="panel-calc">
-    <div class="calc-preview">
-      <div class="calc-group reveal">
-        <h3>⏱ Horas de trabalho</h3>
-        <div class="fake-field"><span>Captação (4h × R$150)</span><span>R$ 600</span></div>
-        <div class="fake-field"><span>Edição (8h × R$100)</span><span>R$ 800</span></div>
-        <div class="fake-field"><span>Storymaker (3h × R$120)</span><span>R$ 360</span></div>
+    <div class="locked-wrap">
+      <div style="filter: blur(3px); pointer-events: none; user-select: none;">
+        <div class="calc-preview">
+          <div class="calc-group"><h3>⏱ Horas de trabalho</h3><div class="fake-field"><span>Captação (4h × R$150)</span><span>R$ 600</span></div><div class="fake-field"><span>Edição (8h × R$100)</span><span>R$ 800</span></div><div class="fake-field"><span>Storymaker (3h × R$120)</span><span>R$ 360</span></div></div>
+          <div class="calc-group"><h3>🚗 Custos extras</h3><div class="fake-field"><span>Locomoção (60km)</span><span>R$ 42</span></div><div class="fake-field"><span>Alimentação</span><span>R$ 50</span></div><div class="fake-field"><span>Margem de lucro (30%)</span><span>R$ 546</span></div></div>
+          <div class="calc-result-box"><div style="font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Valor final sugerido</div><div class="calc-result-value">R$ 2.398</div></div>
+        </div>
       </div>
-      <div class="calc-group reveal">
-        <h3>🚗 Custos extras</h3>
-        <div class="fake-field"><span>Locomoção (60km)</span><span>R$ 42</span></div>
-        <div class="fake-field"><span>Alimentação</span><span>R$ 50</span></div>
-        <div class="fake-field"><span>Margem de lucro (30%)</span><span>R$ 546</span></div>
+      <div class="locked-overlay">
+        <span class="locked-badge">🔒 Exclusivo para compradores</span>
+        <h3>Calculadora de precificação completa</h3>
+        <p>Calcule horas, equipamentos, locomoção, margem e impostos em tempo real.</p>
+        <a href="#cta" class="btn-primary">Desbloquear o Kit →</a>
       </div>
-      <div class="calc-result-box reveal">
-        <div class="calc-result-label">Valor final sugerido</div>
-        <div class="calc-result-value">R$ 2.398</div>
-        <p style="color:var(--muted);font-size:.8rem;margin-top:8px">≈ R$158/hora · Calculado em tempo real</p>
-      </div>
-    </div>
-    <div class="panel-cta">
-      <a href="calculadora.html" class="btn-primary">Abrir calculadora →</a>
     </div>
   </div>
 
-  <!-- CHECKLIST PANEL -->
+  <!-- CHECKLIST PANEL — FREE PREVIEW -->
   <div class="tool-panel" id="panel-check">
     <div class="checklist-preview">
-      <div class="cl-cat reveal">
-        <div class="cl-cat-header"><span class="icon">🎥</span><h3>Câmera & Óptica</h3></div>
-        <div class="cl-item"><div class="cl-checkbox"></div>Câmera principal</div>
-        <div class="cl-item"><div class="cl-checkbox"></div>Lente 24-70mm</div>
-        <div class="cl-item"><div class="cl-checkbox"></div>Filtros ND</div>
-        <div class="cl-item"><div class="cl-checkbox"></div>Baterias extras</div>
-        <div class="cl-item"><div class="cl-checkbox"></div>Cartões de memória</div>
-      </div>
-      <div class="cl-cat reveal">
-        <div class="cl-cat-header"><span class="icon">🎙️</span><h3>Áudio</h3></div>
-        <div class="cl-item"><div class="cl-checkbox"></div>Microfone de lapela</div>
-        <div class="cl-item"><div class="cl-checkbox"></div>Cabos XLR</div>
-        <div class="cl-item"><div class="cl-checkbox"></div>Pilhas extras</div>
-        <div class="cl-item"><div class="cl-checkbox"></div>Deadcat / windscreen</div>
-      </div>
-      <div class="cl-cat reveal">
-        <div class="cl-cat-header"><span class="icon">📱</span><h3>Storymaker</h3></div>
-        <div class="cl-item"><div class="cl-checkbox"></div>Ring light portátil</div>
-        <div class="cl-item"><div class="cl-checkbox"></div>Power bank</div>
-        <div class="cl-item"><div class="cl-checkbox"></div>Suporte de celular</div>
-        <div class="cl-item"><div class="cl-checkbox"></div>Presets no Lightroom</div>
-      </div>
+      <div class="cl-cat reveal"><div class="cl-cat-header"><span>🎥</span><h3>Câmera & Óptica</h3></div><div class="cl-item"><div class="cl-checkbox"></div>Câmera principal</div><div class="cl-item"><div class="cl-checkbox"></div>Lente 24-70mm</div><div class="cl-item"><div class="cl-checkbox"></div>Lente 50mm f/1.8</div><div class="cl-item"><div class="cl-checkbox"></div>Filtros ND</div><div class="cl-item"><div class="cl-checkbox"></div>Baterias extras</div></div>
+      <div class="cl-cat reveal"><div class="cl-cat-header"><span>🎙️</span><h3>Áudio</h3></div><div class="cl-item"><div class="cl-checkbox"></div>Microfone de lapela</div><div class="cl-item"><div class="cl-checkbox"></div>Cabos XLR</div><div class="cl-item"><div class="cl-checkbox"></div>Pilhas extras</div><div class="cl-item"><div class="cl-checkbox"></div>Deadcat / windscreen</div></div>
+      <div class="cl-cat reveal"><div class="cl-cat-header"><span>📱</span><h3>Storymaker</h3></div><div class="cl-item"><div class="cl-checkbox"></div>Ring light portátil</div><div class="cl-item"><div class="cl-checkbox"></div>Power bank</div><div class="cl-item"><div class="cl-checkbox"></div>Suporte de celular</div><div class="cl-item"><div class="cl-checkbox"></div>Presets no Lightroom</div></div>
     </div>
-    <div class="panel-cta">
-      <a href="checklist.html" class="btn-primary">Abrir checklist interativo →</a>
-    </div>
+    <div class="panel-cta"><a href="checklist.html" class="btn-primary">Abrir checklist completo →</a></div>
   </div>
 </section>
 
 <!-- CTA -->
-<section id="cta" style="background: linear-gradient(180deg, transparent, rgba(196,112,58,.06));">
+<section id="cta" style="background: linear-gradient(180deg, transparent, rgba(196,112,58,.05));">
   <span class="section-label reveal" style="text-align:center;display:block">Pronto para começar?</span>
   <h2 class="section-title reveal" style="text-align:center">Leve o Kit e<br>comece a usar <em>hoje.</em></h2>
-  <p class="section-sub reveal" style="margin:0 auto;text-align:center">Acesso imediato a todos os GPTs, calculadora, checklist e biblioteca de prompts.</p>
+  <p class="section-sub reveal" style="margin:0 auto;text-align:center">Acesso imediato após a confirmação. Sem mensalidade.</p>
 
   <div class="price-card reveal">
-    <div class="price-card-head">
-      <h3>AV Pro Kit — Completo</h3>
-      <p>Acesso vitalício a todas as ferramentas</p>
-    </div>
+    <div class="price-card-head"><h3>AV Pro Kit — Completo</h3><p>Acesso vitalício a todas as ferramentas</p></div>
     <div class="price-card-body">
       <ul class="price-includes">
-        <li><span class="check-icon">✓</span><span>8 GPTs configurados para audiovisual (BriefBot, RoteiroAV, ContratoAV e mais)</span></li>
+        <li><span class="check-icon">✓</span><span>8 prompts de IA prontos (BriefBot, RoteiroAV, ContratoAV e mais)</span></li>
         <li><span class="check-icon">✓</span><span>Calculadora de precificação com margem, impostos e custo/hora</span></li>
-        <li><span class="check-icon">✓</span><span>Checklist interativo com 60+ itens e filtros por tipo de trabalho</span></li>
+        <li><span class="check-icon">✓</span><span>Checklist interativo com 70+ itens e filtros por tipo de trabalho</span></li>
         <li><span class="check-icon">✓</span><span>Biblioteca de 18 prompts avulsos prontos para usar</span></li>
-        <li><span class="check-icon">✓</span><span>Acesso vitalício — sem mensalidade</span></li>
+        <li><span class="check-icon">✓</span><span>Acesso vitalício — pagamento único, sem mensalidade</span></li>
       </ul>
       <div class="price-value">
         <div class="price-de">De R$ 197</div>
         <div class="price-por"><span>R$</span> 97</div>
         <div class="price-desc">pagamento único · acesso imediato</div>
       </div>
-      <a href="#" class="btn-buy">Quero o Kit agora →</a>
+      <!-- TROQUE o href abaixo pelo link do Hotmart ou Ticto após criar o produto lá -->
+      <a href="#" class="btn-buy" id="btn-comprar">Quero o Kit agora →</a>
       <p class="price-note">🔒 Pagamento seguro · Acesso imediato após confirmação</p>
     </div>
   </div>
 </section>
 
 <!-- FAQ -->
-<section id="faq">
+<section id="faq" style="padding-top:0">
   <span class="section-label reveal" style="text-align:center;display:block">Dúvidas frequentes</span>
-  <h2 class="section-title reveal" style="text-align:center;max-width:500px;margin:0 auto 0">Perguntas <em>comuns</em></h2>
-
+  <h2 class="section-title reveal" style="text-align:center;max-width:460px;margin:0 auto">Perguntas <em>comuns</em></h2>
   <div class="faq-list">
-    <div class="faq-item">
-      <button class="faq-question" onclick="toggleFaq(this)">
-        Preciso ter ChatGPT pago para usar os GPTs?
-        <svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
-      <div class="faq-answer">Não. Uma conta gratuita no ChatGPT já é suficiente para acessar os GPTs compartilhados. Apenas quem cria os GPTs precisa do ChatGPT Plus — e nesse caso sou eu que configuro tudo para você.</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-question" onclick="toggleFaq(this)">
-        A calculadora e o checklist funcionam no celular?
-        <svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
-      <div class="faq-answer">Sim, as ferramentas foram desenvolvidas para funcionar perfeitamente no celular. O checklist inclusive salva o progresso automaticamente no seu dispositivo — você pode conferir os itens no próprio evento.</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-question" onclick="toggleFaq(this)">
-        Como vou receber o acesso após a compra?
-        <svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
-      <div class="faq-answer">Imediatamente após a confirmação do pagamento, você recebe um e-mail com os links de acesso a todas as ferramentas, incluindo os links de cada GPT no ChatGPT e o link do site com calculadora e checklist.</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-question" onclick="toggleFaq(this)">
-        Os GPTs funcionam só para casamento ou servem para outros tipos de trabalho?
-        <svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
-      <div class="faq-answer">Servem para qualquer tipo de trabalho audiovisual: casamento, eventos corporativos, social media, storymaker, vídeos institucionais, documentários curtos e muito mais. Cada GPT foi construído para se adaptar ao contexto que você descreve.</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-question" onclick="toggleFaq(this)">
-        O acesso é vitalício? Tem mensalidade?
-        <svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
-      <div class="faq-answer">Sim, é pagamento único e acesso vitalício. Você paga uma vez e usa para sempre, sem mensalidade. Eventuais atualizações e novos GPTs também serão incluídos sem custo adicional.</div>
-    </div>
+    <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">Preciso ter ChatGPT pago para usar os prompts?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="faq-answer">Não. Uma conta gratuita no ChatGPT ou Claude já é suficiente. Os prompts são textos que você cola direto na conversa — sem instalar nada, sem configurar nada.</div></div>
+    <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">A calculadora e o checklist funcionam no celular?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="faq-answer">Sim, ambas foram desenvolvidas para o celular. O checklist salva o progresso automaticamente — você pode conferir os itens no próprio evento.</div></div>
+    <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">Como vou receber o acesso após a compra?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="faq-answer">Imediatamente após a confirmação do pagamento, você recebe um e-mail com os links de acesso a todas as ferramentas.</div></div>
+    <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">Os prompts funcionam só para casamento ou para outros tipos de trabalho também?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="faq-answer">Para qualquer tipo: casamento, eventos corporativos, social media, storymaker, vídeos institucionais e muito mais. Cada prompt se adapta ao contexto que você descreve.</div></div>
+    <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">O acesso tem mensalidade?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="faq-answer">Não. É pagamento único e acesso vitalício. Você paga uma vez e usa para sempre.</div></div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
-  <strong>AV Pro Kit</strong> &mdash; Ferramentas para audiovisual profissional<br>
+  <strong>AV Pro Kit</strong> — Ferramentas para audiovisual profissional<br>
   <span style="margin-top:8px;display:block">
-    <a href="calculadora.html" style="color:var(--muted);text-decoration:none;margin:0 10px">Calculadora</a>
-    <a href="checklist.html" style="color:var(--muted);text-decoration:none;margin:0 10px">Checklist</a>
-    <a href="gpts.html" style="color:var(--muted);text-decoration:none;margin:0 10px">GPTs</a>
-    <a href="prompts.html" style="color:var(--muted);text-decoration:none;margin:0 10px">Prompts</a>
+    <a href="checklist.html">Checklist</a>
+    <a href="prompts.html">Prompts</a>
   </span>
 </footer>
 
 <script>
-  // Sticky CTA
-  const stickyCta = document.getElementById('stickyCta');
   window.addEventListener('scroll', () => {
-    stickyCta.classList.toggle('show', window.scrollY > 600);
+    document.getElementById('stickyCta').classList.toggle('show', window.scrollY > 600);
   });
 
-  // Tab switching
   function switchTab(name, btn) {
     document.querySelectorAll('.tool-tab').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.tool-panel').forEach(p => p.classList.remove('active'));
@@ -1190,7 +422,6 @@
     document.getElementById('panel-' + name).classList.add('active');
   }
 
-  // FAQ accordion
   function toggleFaq(btn) {
     const item = btn.parentElement;
     const wasOpen = item.classList.contains('open');
@@ -1198,35 +429,32 @@
     if (!wasOpen) item.classList.add('open');
   }
 
-  // Scroll reveal
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.12 });
+  }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  // Counter animation
   function animateCount(el) {
     const target = +el.dataset.count;
-    const duration = 1200;
     const start = performance.now();
     const update = (now) => {
-      const progress = Math.min((now - start) / duration, 1);
-      const ease = 1 - Math.pow(1 - progress, 3);
-      el.textContent = Math.round(ease * target) + (el.dataset.suffix || '');
-      if (progress < 1) requestAnimationFrame(update);
+      const p = Math.min((now - start) / 1100, 1);
+      const e = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(e * target);
+      if (p < 1) requestAnimationFrame(update);
     };
     requestAnimationFrame(update);
   }
 
-  const counterObserver = new IntersectionObserver(entries => {
+  const cObs = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
         e.target.querySelectorAll('[data-count]').forEach(animateCount);
-        counterObserver.unobserve(e.target);
+        cObs.unobserve(e.target);
       }
     });
   }, { threshold: 0.5 });
-  counterObserver.observe(document.querySelector('.hero-stats'));
+  cObs.observe(document.querySelector('.hero-stats'));
 </script>
 </body>
 </html>

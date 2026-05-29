@@ -10,10 +10,10 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #2C1A0E;
-      --card: #3a2212;
-      --card2: #4a2e18;
-      --border: #5e3820;
+      --bg: #0e0e0e;
+      --card: #161210;
+      --card2: #1e1814;
+      --border: #2c2018;
       --accent: #C4703A;
       --accent2: #D4A96A;
       --purple: #C4703A;
@@ -21,7 +21,7 @@
       --blue: #D4A96A;
       --pink: #C4703A;
       --text: #F2EAD8;
-      --muted: #9a7a5a;
+      --muted: #7a6a5a;
       --radius: 16px;
     }
 
@@ -333,21 +333,21 @@
 </header>
 
 <div class="hero">
-  <h2>8 assistentes de IA para<br><span>audiovisual profissional</span></h2>
-  <p>Copie a instrução de cada GPT, cole no <strong style="color:var(--text)">ChatGPT → Explorar GPTs → Criar</strong> e configure o seu assistente personalizado.</p>
+  <h2>8 prompts de IA prontos<br><span>para usar</span></h2>
+  <p>Cole no ChatGPT ou Claude e comece a usar na hora — sem criar GPT, sem configurar nada. Os campos em <strong>colchetes</strong> são para você preencher com os dados do seu projeto.</p>
 </div>
 
 <div class="how-to">
   <div class="how-to-box">
     <div class="how-to-icon">📌</div>
     <div class="how-to-text">
-      <h3>Como criar seu GPT no ChatGPT</h3>
+      <h3>Como usar estes prompts</h3>
       <ol>
-        <li>Acesse <strong style="color:var(--text)">chatgpt.com</strong> com conta ChatGPT Plus</li>
-        <li>Clique em <strong style="color:var(--text)">Explorar GPTs → Criar</strong> (canto superior)</li>
-        <li>Vá em <strong style="color:var(--text)">"Configurar"</strong> (aba ao lado de "Criar")</li>
-        <li>Cole o nome, descrição e a instrução abaixo no campo <strong style="color:var(--text)">"Instruções"</strong></li>
-        <li>Salve e compartilhe o link — qualquer pessoa com conta gratuita consegue usar</li>
+        <li>Acesse <strong style="color:var(--text)">chatgpt.com</strong> (conta gratuita) ou <strong style="color:var(--text)">claude.ai</strong></li>
+        <li>Inicie uma nova conversa</li>
+        <li>Cole o prompt completo abaixo no campo de mensagem</li>
+        <li>Preencha os campos em <strong style="color:var(--text)">[COLCHETES]</strong> com os dados do seu projeto</li>
+        <li>Envie e use o assistente como quiser — peça revisões, ajustes, variações</li>
       </ol>
     </div>
   </div>
@@ -787,12 +787,12 @@ function render() {
         </div>
 
         <div class="gpt-prompt-wrap">
-          <div class="prompt-label">Instrução para colar no GPT Builder</div>
+          <div class="prompt-label">Prompt completo — cole no ChatGPT ou Claude</div>
           <div class="prompt-box" id="pb-${g.id}">${escapeHtml(g.prompt)}</div>
         </div>
 
         <div class="gpt-actions">
-          <button class="btn-copy-gpt" onclick="copiar('${g.id}')">📋 Copiar instrução</button>
+          <button class="btn-copy-gpt" onclick="copiar('${g.id}')">📋 Copiar prompt</button>
           <button class="btn-toggle" onclick="toggle('${g.id}', this)">Ver tudo</button>
         </div>
 
@@ -817,7 +817,7 @@ function copiar(id) {
   navigator.clipboard.writeText(gpt.prompt).then(() => {
     const btn = document.querySelector(`[onclick="copiar('${id}')"]`);
     btn.textContent = '✅ Copiado!';
-    setTimeout(() => btn.textContent = '📋 Copiar instrução', 2000);
+    setTimeout(() => btn.textContent = '📋 Copiar prompt', 2000);
   });
 }
 

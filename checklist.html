@@ -10,15 +10,15 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #2C1A0E;
-      --card: #3a2212;
-      --card2: #4a2e18;
-      --border: #5e3820;
+      --bg: #0e0e0e;
+      --card: #161210;
+      --card2: #1e1814;
+      --border: #2c2018;
       --accent: #C4703A;
       --accent2: #D4A96A;
       --green: #4A6741;
       --text: #F2EAD8;
-      --muted: #9a7a5a;
+      --muted: #7a6a5a;
       --radius: 16px;
     }
 
@@ -80,7 +80,7 @@
 
     .progress-fill {
       height: 100%;
-      background: linear-gradient(90deg, var(--accent), var(--gold, #D4A96A));
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
       border-radius: 999px;
       transition: width .3s ease;
     }
@@ -328,7 +328,7 @@
   <div class="summary-text">
     <strong id="checked-count">0</strong> de <strong id="total-count">0</strong> itens verificados
   </div>
-  <button class="btn-copy" onclick="copiarChecklist()">📋 Copiar lista</button>
+  <button class="btn-copy" onclick="copiarChecklist()">📋 Copiar selecionados</button>
 </div>
 
 <script>
@@ -339,14 +339,20 @@ const DATA = [
     title: 'Câmera & Óptica',
     items: [
       { id: 'cam-principal', name: 'Câmera principal', note: 'Verifique bateria e configurações', tag: 'essencial', modes: ['todos','evento','social'] },
-      { id: 'cam-backup', name: 'Câmera backup / secondary', note: 'Para gravação B-roll ou segurança', tag: 'opcional', modes: ['todos','evento'] },
+      { id: 'cam-backup', name: 'Câmera backup / secondary', note: 'Para B-roll ou segurança', tag: 'opcional', modes: ['todos','evento'] },
       { id: 'lente-zoom', name: 'Lente 24-70mm (zoom)', tag: 'essencial', modes: ['todos','evento','social'] },
-      { id: 'lente-85', name: 'Lente 85mm (retrato)', tag: 'opcional', modes: ['todos','evento'] },
-      { id: 'lente-wide', name: 'Lente grande angular', tag: 'opcional', modes: ['todos','evento'] },
+      { id: 'lente-50', name: 'Lente 50mm f/1.8 (nifty fifty)', note: 'Ótima para pouca luz', tag: 'essencial', modes: ['todos','evento','social'] },
+      { id: 'lente-85', name: 'Lente 85mm f/1.8 (retrato)', tag: 'opcional', modes: ['todos','evento'] },
+      { id: 'lente-35', name: 'Lente 35mm f/1.8', tag: 'opcional', modes: ['todos','evento','social'] },
+      { id: 'lente-wide', name: 'Lente grande angular 16-35mm', tag: 'opcional', modes: ['todos','evento'] },
+      { id: 'lente-tele', name: 'Lente telefoto 70-200mm', note: 'Para cerimônias e palcos', tag: 'opcional', modes: ['todos','evento'] },
+      { id: 'lente-macro', name: 'Lente macro', note: 'Detalhes e anéis', tag: 'opcional', modes: ['todos','evento'] },
       { id: 'filtros-nd', name: 'Filtros ND (2, 4, 8)', note: 'Para externas com muito sol', tag: 'essencial', modes: ['todos','evento','social'] },
+      { id: 'filtro-pola', name: 'Filtro polarizador CPL', note: 'Reduz reflexo em vidros e água', tag: 'opcional', modes: ['todos','evento'] },
       { id: 'baterias-cam', name: 'Baterias extras (câmera)', note: 'Pelo menos 3 carregadas', tag: 'essencial', modes: ['todos','evento','social'] },
       { id: 'cartoes', name: 'Cartões de memória', note: 'Mínimo 2 cartões zerados', tag: 'essencial', modes: ['todos','evento','social'] },
       { id: 'leitor', name: 'Leitor de cartão', tag: 'essencial', modes: ['todos','evento','social'] },
+      { id: 'body-cap', name: 'Tampa body / tampas de lente', note: 'Para proteção no transporte', tag: 'opcional', modes: ['todos','evento'] },
     ]
   },
   {
@@ -384,6 +390,9 @@ const DATA = [
       { id: 'tripe', name: 'Tripé com cabeça fluida', tag: 'essencial', modes: ['todos','evento','social'] },
       { id: 'monope', name: 'Monopé', tag: 'opcional', modes: ['todos','evento'] },
       { id: 'slider', name: 'Slider', tag: 'opcional', modes: ['todos','social'] },
+      { id: 'shoulder-rig', name: 'Shoulder rig / suporte de ombro', note: 'Para gravações longas', tag: 'opcional', modes: ['todos','evento'] },
+      { id: 'tripe-led', name: 'Tripé para iluminação', tag: 'essencial', modes: ['todos','evento','social'] },
+      { id: 'cstand', name: 'C-Stand', tag: 'opcional', modes: ['todos','evento'] },
     ]
   },
   {
@@ -538,17 +547,25 @@ function load() {
 }
 
 function copiarChecklist() {
-  const allVisible = DATA.flatMap(c => {
-    const vis = c.items.filter(i => i.modes.includes(currentMode));
+  const checkedItems = DATA.flatMap(c => {
+    const vis = c.items.filter(i => i.modes.includes(currentMode) && checked[i.id]);
     if (!vis.length) return [];
-    return [`\n${c.icon} ${c.title}`, ...vis.map(i => `${checked[i.id] ? '✅' : '⬜'} ${i.name}`)];
+    return [`\n${c.icon} ${c.title}`, ...vis.map(i => `✅ ${i.name}`)];
   });
 
-  const txt = `CHECKLIST DE EQUIPAMENTOS — AV PRO TOOLS\n${allVisible.join('\n')}\n\nGerado em ${new Date().toLocaleDateString('pt-BR')}`;
+  if (checkedItems.length === 0) {
+    const btn = document.querySelector('.btn-copy');
+    btn.textContent = '⚠️ Nenhum item marcado';
+    setTimeout(() => btn.textContent = '📋 Copiar selecionados', 2000);
+    return;
+  }
+
+  const total = DATA.flatMap(c => c.items.filter(i => i.modes.includes(currentMode) && checked[i.id])).length;
+  const txt = `CHECKLIST DE EQUIPAMENTOS (${total} itens) — AV Pro Kit\n${checkedItems.join('\n')}\n\nGerado em ${new Date().toLocaleDateString('pt-BR')}`;
   navigator.clipboard.writeText(txt).then(() => {
     const btn = document.querySelector('.btn-copy');
     btn.textContent = '✅ Copiado!';
-    setTimeout(() => btn.textContent = '📋 Copiar lista', 2000);
+    setTimeout(() => btn.textContent = '📋 Copiar selecionados', 2000);
   });
 }
 
