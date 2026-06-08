@@ -476,6 +476,12 @@
       gap: 28px;
       margin-top: 56px;
     }
+    .speakers__grid--2 {
+      grid-template-columns: repeat(2, 1fr);
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
     .speaker-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -1131,29 +1137,16 @@
       <span class="divider"></span>
       <h2>Conheça quem vai<br />estar no palco com você</h2>
 
-      <div class="speakers__grid">
+      <div class="speakers__grid speakers__grid--2">
 
-        <!-- Dra. Roberta -->
+        <!-- Roberta -->
         <div class="speaker-card">
-          <img src="assets/dra-roberta.jpg" alt="Dra. Roberta Dias" class="speaker-card__photo" />
+          <img src="assets/dra-roberta.jpg" alt="Roberta Dias" class="speaker-card__photo" />
           <div class="speaker-card__body">
             <div class="speaker-card__role">Especialista em Resultado de Cura · Conceito Vida</div>
             <div class="speaker-card__name">Roberta Dias</div>
             <p class="speaker-card__bio">
               Com mais de 15 anos de experiência, Roberta Dias é especialista em Resultado de Cura e fundadora da Clínica Conceito Vida. Sua abordagem une ciência e visão sistêmica para conduzir pessoas além do diagnóstico — em direção à transformação real do corpo e da saúde.
-            </p>
-          </div>
-        </div>
-
-        <!-- Raphael -->
-        <div class="speaker-card">
-          <div class="speaker-card__photo--placeholder">🧑‍⚕️</div>
-          <div class="speaker-card__body">
-            <div class="speaker-card__role">Co-fundador · Conceito Vida</div>
-            <div class="speaker-card__name">Raphael Oliveira</div>
-            <p class="speaker-card__bio">
-              <!-- TODO: Inserir bio completa do Raphael Oliveira -->
-              Profissional com vasta experiência em saúde integrativa, Raphael Oliveira é cofundador da Conceito Vida e especialista em [área de atuação]. Sua visão complementa a abordagem da clínica com [diferencial]. <em style="color:var(--muted); font-size:0.82rem;">[FOTO PENDENTE]</em>
             </p>
           </div>
         </div>
