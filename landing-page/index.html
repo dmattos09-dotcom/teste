@@ -297,6 +297,36 @@
       text-transform: uppercase;
     }
 
+    /* mobile photo overlay */
+    .hero__image-overlay {
+      display: none;
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(10,24,16,0.96) 0%, rgba(10,24,16,0.55) 55%, transparent 100%);
+      padding: 64px 24px 28px;
+      z-index: 3;
+      text-align: center;
+    }
+    .hero__image-overlay-event {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+    .hero__image-overlay-name {
+      display: block;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.82rem;
+      color: var(--cream);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
     /* ===========================
        COUNTDOWN
     =========================== */
@@ -896,15 +926,14 @@
     =========================== */
     @media (max-width: 900px) {
       .hero__grid { grid-template-columns: 1fr; gap: 40px; }
-      /* text first, photo below on mobile */
-      .hero__image-wrap { order: 1; }
-      .hero__image-frame img { height: 340px; }
-      .hero__image-badge {
-        bottom: -12px; left: 12px;
-        padding: 10px 14px;
-      }
-      .hero__image-badge .value { font-size: 1.2rem; }
-      .hero__image-badge .desc { font-size: 0.68rem; }
+      /* photo first on mobile with overlay */
+      .hero__image-wrap { order: -1; }
+      .hero__image-frame img { height: 460px; }
+      /* show overlay, hide floating badge */
+      .hero__image-overlay { display: block; }
+      .hero__image-badge { display: none; }
+      /* hide desktop name/speaker duplicate (shown in overlay) */
+      .hero__desktop-only { display: none; }
       .stats { grid-template-columns: repeat(2, 1fr); }
       .problem__grid { grid-template-columns: 1fr; gap: 40px; }
       .for-whom__grid { grid-template-columns: repeat(2, 1fr); }
@@ -958,11 +987,11 @@
         <div>
           <div class="hero__badge">Evento Presencial · 27 de Junho de 2026</div>
 
-          <div style="margin-bottom: 12px;">
+          <div class="hero__desktop-only" style="margin-bottom: 12px;">
             <span style="font-family:'Cormorant Garamond',serif; font-size:clamp(1rem,2vw,1.25rem); font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold);">Conceito Vida Summit</span>
           </div>
-          <div style="margin-bottom: 24px;">
-            <span style="font-family:'Jost',sans-serif; font-size:0.82rem; font-weight:400; letter-spacing:0.08em; color:var(--muted); text-transform:uppercase;">Com Roberta Dias</span>
+          <div class="hero__desktop-only" style="margin-bottom: 24px;">
+            <span style="font-family:'Jost',sans-serif; font-size:0.82rem; font-weight:400; letter-spacing:0.08em; color:var(--muted); text-transform:uppercase;">Com Dra. Roberta Dias</span>
           </div>
 
           <h1 class="hero__title">
@@ -984,7 +1013,7 @@
             </div>
             <div class="hero__meta-item">
               <div class="hero__meta-icon">👥</div>
-              <span>Mais de 100 profissionais de saúde reunidos</span>
+              <span>Mais de 120 profissionais de saúde reunidos</span>
             </div>
           </div>
 
@@ -1000,6 +1029,10 @@
         <div class="hero__image-wrap">
           <div class="hero__image-frame">
             <img src="assets/dra-roberta.jpg" alt="Dra. Roberta Dias — Conceito Vida Summit" />
+            <div class="hero__image-overlay">
+              <span class="hero__image-overlay-event">Conceito Vida Summit</span>
+              <span class="hero__image-overlay-name">Dra. Roberta Dias</span>
+            </div>
           </div>
           <div class="hero__image-badge">
             <div class="value">15+</div>
@@ -1012,7 +1045,7 @@
       <!-- Stats -->
       <div class="stats">
         <div class="stats__item">
-          <div class="stats__number">80</div>
+          <div class="stats__number">120</div>
           <div class="stats__desc">Vagas limitadas</div>
         </div>
         <div class="stats__item">
@@ -1090,7 +1123,7 @@
             <blockquote>
               "Mais do que um evento de atualização, o Conceito Vida Summit é um ambiente de conexão entre profissionais que compartilham o mesmo propósito."
             </blockquote>
-            <cite>— Roberta Dias, Conceito Vida</cite>
+            <cite>— Dra. Roberta Dias, Conceito Vida</cite>
           </div>
 
           <p style="margin-top:28px; color:var(--muted); font-size:0.95rem; line-height:1.75;">
@@ -1233,12 +1266,12 @@
 
         <!-- Roberta -->
         <div class="speaker-card">
-          <img src="assets/dra-roberta.jpg" alt="Roberta Dias" class="speaker-card__photo" />
+          <img src="assets/dra-roberta.jpg" alt="Dra. Roberta Dias" class="speaker-card__photo" />
           <div class="speaker-card__body">
             <div class="speaker-card__role">Especialista em Resultado de Cura · Conceito Vida</div>
-            <div class="speaker-card__name">Roberta Dias</div>
+            <div class="speaker-card__name">Dra. Roberta Dias</div>
             <p class="speaker-card__bio">
-              Com mais de 15 anos de experiência, Roberta Dias é especialista em Resultado de Cura e fundadora da Clínica Conceito Vida. Sua abordagem une ciência e visão sistêmica para conduzir pessoas além do diagnóstico — em direção à transformação real do corpo e da saúde.
+              Com mais de 15 anos de experiência, Dra. Roberta Dias é especialista em Resultado de Cura e fundadora da Clínica Conceito Vida. Sua abordagem une ciência e visão sistêmica para conduzir pessoas além do diagnóstico — em direção à transformação real do corpo e da saúde.
             </p>
           </div>
         </div>
@@ -1340,7 +1373,7 @@
               <li>Coffee break incluído</li>
               <li>Material didático exclusivo</li>
               <li>Kit de brindes do evento</li>
-              <li>Networking com mais de 100 profissionais de saúde</li>
+              <li>Networking com mais de 120 profissionais de saúde</li>
             </ul>
 
             <!-- ⚠️ SUBSTITUIR PELO LINK DO PRODUTO KIWIFY -->
@@ -1419,7 +1452,7 @@
         Seu próximo passo começa em<br /><em>27 de junho de 2026</em>
       </h2>
       <p class="subtitle" style="max-width:520px; margin:0 auto 40px;">
-        Uma data, mais de 100 profissionais, um novo conceito de saúde. Você vai estar lá?
+        Uma data, mais de 120 profissionais, um novo conceito de saúde. Você vai estar lá?
       </p>
       <a href="https://pay.kiwify.com.br/Zo3nPjr" class="btn btn--gold btn--lg">
         Garantir minha vaga — R$ 197 &nbsp;→
