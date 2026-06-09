@@ -888,27 +888,46 @@
       color: var(--muted);
     }
 
+    /* Topics grid — 4 cols desktop */
+    .topics__grid { grid-template-columns: repeat(4, 1fr) !important; }
+
     /* ===========================
        RESPONSIVE
     =========================== */
     @media (max-width: 900px) {
-      .hero__grid { grid-template-columns: 1fr; gap: 48px; }
-      .hero__image-wrap { order: -1; }
-      .hero__image-frame img { height: 360px; }
-      .hero__image-badge { bottom: -16px; left: -10px; }
+      .hero__grid { grid-template-columns: 1fr; gap: 40px; }
+      /* text first, photo below on mobile */
+      .hero__image-wrap { order: 1; }
+      .hero__image-frame img { height: 340px; }
+      .hero__image-badge {
+        bottom: -12px; left: 12px;
+        padding: 10px 14px;
+      }
+      .hero__image-badge .value { font-size: 1.2rem; }
+      .hero__image-badge .desc { font-size: 0.68rem; }
       .stats { grid-template-columns: repeat(2, 1fr); }
       .problem__grid { grid-template-columns: 1fr; gap: 40px; }
       .for-whom__grid { grid-template-columns: repeat(2, 1fr); }
+      .topics__grid { grid-template-columns: repeat(2, 1fr) !important; }
       .speakers__grid { grid-template-columns: 1fr; }
       .included__grid { grid-template-columns: 1fr; }
       .footer__inner { grid-template-columns: 1fr; gap: 28px; }
     }
     @media (max-width: 600px) {
-      .section { padding: 64px 0; }
-      .for-whom__grid { grid-template-columns: 1fr; }
+      .section { padding: 56px 0; }
+      .for-whom__grid { grid-template-columns: repeat(2, 1fr); }
+      .topics__grid { grid-template-columns: repeat(2, 1fr) !important; }
       .footer__legal { flex-direction: column; text-align: center; }
-      .hero__badge { font-size: 0.72rem; }
+      .hero__badge { font-size: 0.7rem; padding: 6px 14px; }
       .schedule__item { grid-template-columns: 70px 1fr; }
+      /* navbar button compact */
+      .navbar__cta {
+        padding: 9px 14px !important;
+        font-size: 0.72rem !important;
+        white-space: nowrap;
+        letter-spacing: 0.04em !important;
+      }
+      .navbar__logo { height: 28px; }
     }
   </style>
 </head>
@@ -921,7 +940,7 @@
     <div class="container">
       <div class="navbar__inner">
         <img src="assets/logo-horizontal-branco.png" alt="Conceito Vida" class="navbar__logo" />
-        <a href="#ingresso" class="btn btn--gold" style="padding:12px 28px; font-size:0.8rem;">
+        <a href="#ingresso" class="btn btn--gold navbar__cta" style="padding:12px 28px; font-size:0.8rem;">
           Garantir minha vaga
         </a>
       </div>
@@ -1095,7 +1114,7 @@
         Um dia completo com perspectivas que vão expandir sua visão clínica e sua atuação profissional.
       </p>
 
-      <div class="for-whom__grid" style="margin-top:48px; grid-template-columns: repeat(4,1fr);">
+      <div class="for-whom__grid topics__grid" style="margin-top:48px;">
         <div class="for-whom__card">
           <span class="for-whom__icon">🔬</span>
           <h4>Saúde Integrativa</h4>
