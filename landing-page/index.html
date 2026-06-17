@@ -921,6 +921,74 @@
       color: var(--muted);
     }
 
+    /* ===========================
+       SPEAKERS AUTO GRID
+    =========================== */
+    .speakers__grid--auto {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 340px));
+      justify-content: center;
+      gap: 28px;
+      margin-top: 56px;
+    }
+    .speaker-card__placeholder {
+      width: 100%;
+      height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--bg-3) 0%, rgba(61,122,82,0.18) 100%);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.8rem;
+      font-weight: 600;
+      color: rgba(196,160,74,0.35);
+      letter-spacing: 0.05em;
+    }
+
+    /* ===========================
+       SPONSORS
+    =========================== */
+    .sponsors__grid {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 20px 36px;
+      margin-top: 48px;
+    }
+    .sponsors__item {
+      height: 72px;
+      min-width: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 24px;
+      background: rgba(240,237,229,0.05);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .sponsors__item:hover {
+      border-color: var(--gold);
+      background: rgba(196,160,74,0.06);
+    }
+    .sponsors__item img {
+      max-height: 48px;
+      width: auto;
+      max-width: 160px;
+      filter: brightness(0) invert(1);
+      opacity: 0.75;
+      transition: opacity 0.2s;
+    }
+    .sponsors__item:hover img { opacity: 1; }
+    .sponsors__name {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
     /* Topics grid — 4 cols desktop */
     .topics__grid { grid-template-columns: repeat(4, 1fr) !important; }
 
@@ -1002,8 +1070,9 @@
           </h1>
 
           <p class="hero__desc">
-            O <strong>Conceito Vida Summit</strong> reúne profissionais de saúde que desejam ampliar seu olhar clínico, conhecer novas perspectivas sobre o corpo humano e explorar abordagens que geram resultados cada vez mais personalizados e integrativos.
-          </p>
+  Se você deseja compreender melhor o seu organismo, cuidar da sua saúde de forma mais consciente, já atua na área da saúde ou sonha em construir uma carreira nesse universo — este evento foi feito para você.<br /><br />
+  Um dia para expandir sua visão sobre saúde, propósito e futuro profissional.
+</p>
 
           <div class="hero__meta">
             <div class="hero__meta-item">
@@ -1016,7 +1085,7 @@
             </div>
             <div class="hero__meta-item">
               <div class="hero__meta-icon">👥</div>
-              <span>Mais de 120 profissionais de saúde reunidos</span>
+              <span>Mais de 120 pessoas reunidas</span>
             </div>
           </div>
 
@@ -1056,8 +1125,8 @@
           <div class="stats__desc">De imersão presencial</div>
         </div>
         <div class="stats__item">
-          <div class="stats__number">5+</div>
-          <div class="stats__desc">Especialistas no palco</div>
+          <div class="stats__number">7</div>
+          <div class="stats__desc">Palestrantes confirmados</div>
         </div>
         <div class="stats__item">
           <div class="stats__number">1</div>
@@ -1107,30 +1176,30 @@
         <div>
           <span class="label">Por que este evento existe</span>
           <span class="divider divider--left"></span>
-          <h2>Vivemos a era da informação.<br />Mas muitos profissionais ainda se sentem limitados.</h2>
+          <h2>Existe algo além do que normalmente nos ensinam sobre saúde.</h2>
 
           <p style="margin-top:24px; color:var(--muted); font-size:0.97rem; line-height:1.8;">
-            O acesso à informação nunca foi tão grande — e ainda assim, muitos profissionais se sentem limitados na hora de compreender as <strong style="color:var(--cream);">verdadeiras causas do adoecimento</strong> e promover transformações consistentes na vida dos seus pacientes.
+            Você já sentiu que o corpo humano é mais complexo, inteligente e integrado do que imaginamos? Que existem fatores que influenciam profundamente o bem-estar, mas raramente são discutidos de forma prática?
           </p>
 
           <ul class="problem__list" style="margin-top:24px;">
-            <li>Você aplicou seu conhecimento, mas os resultados dos pacientes ficaram aquém</li>
-            <li>A formação tradicional deixou lacunas importantes sobre o funcionamento real do corpo</li>
-            <li>Quer conhecer abordagens além do sintoma — biofísica, epigenética, terreno biológico</li>
-            <li>Busca conexão com profissionais que compartilham o mesmo propósito de impacto</li>
+            <li>Você quer cuidar melhor de você e da sua família, mas sente que falta algo</li>
+            <li>A medicina tradicional nem sempre responde às causas reais do adoecimento</li>
+            <li>É profissional da saúde e busca uma visão mais ampla para transformar resultados</li>
+            <li>Sonha em iniciar uma jornada na área da saúde integrativa</li>
           </ul>
         </div>
 
         <div>
           <div class="problem__quote">
             <blockquote>
-              "Mais do que um evento de atualização, o Conceito Vida Summit é um ambiente de conexão entre profissionais que compartilham o mesmo propósito."
+              "Mais do que um evento, o Conceito Vida Summit é um encontro entre pessoas que acreditam que conhecimento, propósito e ação podem transformar vidas."
             </blockquote>
             <cite>— Dra. Roberta Dias, Conceito Vida</cite>
           </div>
 
           <p style="margin-top:28px; color:var(--muted); font-size:0.95rem; line-height:1.75;">
-            Durante um dia completo de imersão, você terá acesso a conteúdos sobre saúde integrativa, biofísica, epigenética, terreno biológico, nutrição, odontologia biológica, medicina tradicional chinesa, tecnologias em saúde, casos clínicos reais e estratégias de posicionamento profissional.
+            Durante um dia inteiro de imersão, você terá acesso a palestras, experiências e conteúdos sobre saúde integrativa, biofísica, epigenética, nutrição, medicina tradicional chinesa, odontologia integrativa, estilo de vida, posicionamento profissional e muito mais.
           </p>
         </div>
 
@@ -1208,49 +1277,33 @@
   ===================== -->
   <section class="section" id="para-quem">
     <div class="container text-center">
-      <span class="label">Público do Evento</span>
+      <span class="label">Este evento é para você</span>
       <span class="divider"></span>
-      <h2>Este evento foi feito<br /><em style="font-style:italic; color:var(--gold);">para você</em> se você é...</h2>
-      <p class="subtitle" style="margin-top:16px; max-width:560px; margin-left:auto; margin-right:auto;">
-        O Conceito Vida Summit reúne profissionais de saúde que querem expandir sua visão e seus resultados clínicos.
+      <h2>Para quem foi<br /><em style="font-style:italic; color:var(--gold);">criado este evento</em></h2>
+      <p class="subtitle" style="margin-top:16px; max-width:600px; margin-left:auto; margin-right:auto;">
+        O Conceito Vida Summit reúne pessoas que buscam expandir sua visão sobre saúde, propósito e desenvolvimento profissional.
       </p>
 
-      <div class="for-whom__grid">
+      <div class="for-whom__grid" style="grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); margin-top:48px;">
         <div class="for-whom__card">
-          <span class="for-whom__icon">🩺</span>
-          <h4>Médico(a)</h4>
-        </div>
-        <div class="for-whom__card">
-          <span class="for-whom__icon">💊</span>
-          <h4>Farmacêutico(a)</h4>
-        </div>
-        <div class="for-whom__card">
-          <span class="for-whom__icon">🥗</span>
-          <h4>Nutricionista</h4>
+          <span class="for-whom__icon">🧬</span>
+          <h4>Quem busca compreender melhor a própria saúde e a da família</h4>
         </div>
         <div class="for-whom__card">
           <span class="for-whom__icon">🌿</span>
-          <h4>Terapeuta</h4>
+          <h4>Quem deseja conhecer abordagens integrativas e ampliar sua visão</h4>
         </div>
         <div class="for-whom__card">
-          <span class="for-whom__icon">🦷</span>
-          <h4>Dentista</h4>
+          <span class="for-whom__icon">🩺</span>
+          <h4>Profissional da saúde que quer expandir conhecimentos e resultados</h4>
         </div>
         <div class="for-whom__card">
-          <span class="for-whom__icon">🔬</span>
-          <h4>Biomédico(a)</h4>
+          <span class="for-whom__icon">🌱</span>
+          <h4>Quem sonha em atuar como terapeuta integrativo ou iniciar nova carreira</h4>
         </div>
         <div class="for-whom__card">
-          <span class="for-whom__icon">🏃</span>
-          <h4>Fisioterapeuta</h4>
-        </div>
-        <div class="for-whom__card">
-          <span class="for-whom__icon">🧠</span>
-          <h4>Psicólogo(a)</h4>
-        </div>
-        <div class="for-whom__card">
-          <span class="for-whom__icon">✨</span>
-          <h4>Outros profissionais de saúde</h4>
+          <span class="for-whom__icon">🚀</span>
+          <h4>Quem deseja construir autoridade, comunicar conhecimento e crescer</h4>
         </div>
       </div>
     </div>
@@ -1265,31 +1318,121 @@
       <span class="divider"></span>
       <h2>Conheça quem vai<br />estar no palco com você</h2>
 
-      <div class="speakers__grid speakers__grid--2">
+      <div class="speakers__grid--auto">
 
-        <!-- Roberta -->
+        <!-- Dra. Roberta Dias -->
         <div class="speaker-card">
           <img src="assets/dra-roberta.jpg" alt="Dra. Roberta Dias" class="speaker-card__photo" />
           <div class="speaker-card__body">
-            <div class="speaker-card__role">Especialista em Resultado de Cura · Conceito Vida</div>
+            <div class="speaker-card__role">Naturopata · Fundadora Conceito Vida®</div>
             <div class="speaker-card__name">Dra. Roberta Dias</div>
             <p class="speaker-card__bio">
-              Com mais de 15 anos de experiência, Dra. Roberta Dias é especialista em Resultado de Cura e fundadora da Clínica Conceito Vida. Sua abordagem une ciência e visão sistêmica para conduzir pessoas além do diagnóstico — em direção à transformação real do corpo e da saúde.
+              Naturopata, empresária e autora do livro <em>Diagnóstico Não é Destino</em>. Há mais de 15 anos dedica sua trajetória ao estudo da saúde integrativa, com formação em biofísica, MTC, medicina funcional e ozonioterapia. Idealizadora do Conceito Vida Summit.
             </p>
           </div>
         </div>
 
-        <!-- TBA -->
-        <div class="speaker-card speaker-card--tba">
-          <span class="tba-icon">+</span>
-          <div class="speaker-card__name" style="font-size:1.2rem;">Convidado(s)<br />Especiais</div>
-          <p>Palestrantes em confirmação.<br />Acompanhe as novidades nas redes sociais da Conceito Vida.</p>
-          <a href="https://www.instagram.com/conceito.vida" target="_blank" rel="noopener" class="btn btn--outline" style="padding:10px 22px; font-size:0.8rem; margin-top:8px;">
-            @conceito.vida
-          </a>
+        <!-- Yana Reis -->
+        <div class="speaker-card">
+          <div class="speaker-card__placeholder">YR</div>
+          <div class="speaker-card__body">
+            <div class="speaker-card__role">Posicionamento & Identidade Estratégica</div>
+            <div class="speaker-card__name">Yana Reis</div>
+            <p class="speaker-card__bio">
+              Especialista em posicionamento, identidade e comunicação estratégica. Atuou em grandes empresas como Avon, Santander, Petrobras e Grupo Atento. Hoje ajuda profissionais a transformarem conhecimento e reputação em autoridade e valor de mercado.
+            </p>
+          </div>
+        </div>
+
+        <!-- Dr. Raphael Oliveira -->
+        <div class="speaker-card">
+          <div class="speaker-card__placeholder">RO</div>
+          <div class="speaker-card__body">
+            <div class="speaker-card__role">Pesquisador · Saúde & Biofísica</div>
+            <div class="speaker-card__name">Dr. Raphael Oliveira</div>
+            <p class="speaker-card__bio">
+              Pesquisador, empreendedor e profissional da saúde. Autor do livro <em>Diagnóstico Não é Destino</em>. Integra ciência, tecnologia, biofísica e saúde integrativa por meio de projetos em bioressonância, frequências biológicas e análise funcional.
+            </p>
+          </div>
+        </div>
+
+        <!-- Cleusa Uenaka -->
+        <div class="speaker-card">
+          <div class="speaker-card__placeholder">CU</div>
+          <div class="speaker-card__body">
+            <div class="speaker-card__role">Atleta · Exemplo de Longevidade Ativa</div>
+            <div class="speaker-card__name">Cleusa Uenaka</div>
+            <p class="speaker-card__bio">
+              Iniciou sua jornada na corrida aos 70 anos e mantém o hábito de correr diariamente. Sua história inspira pessoas que acreditam que nunca é tarde para começar — a idade não é definida pelo RG, mas pela mentalidade.
+            </p>
+          </div>
+        </div>
+
+        <!-- Dr. Rodrigo Venticinque -->
+        <div class="speaker-card">
+          <div class="speaker-card__placeholder">RV</div>
+          <div class="speaker-card__body">
+            <div class="speaker-card__role">Odontologia Biointegrativa · Presidente IBSI</div>
+            <div class="speaker-card__name">Dr. Rodrigo Venticinque</div>
+            <p class="speaker-card__bio">
+              Cirurgião-dentista e referência em Odontologia Biointegrativa. Presidente do Instituto Brasileiro de Saúde Integrativa (IBSI) e primeiro dentista certificado no protocolo RECODE no Brasil. Professor de pós-graduação e palestrante internacional.
+            </p>
+          </div>
+        </div>
+
+        <!-- Sérgio Bertoluci -->
+        <div class="speaker-card">
+          <div class="speaker-card__placeholder">SB</div>
+          <div class="speaker-card__body">
+            <div class="speaker-card__role">Alta Performance · Equity Body</div>
+            <div class="speaker-card__name">Sérgio Bertoluci</div>
+            <p class="speaker-card__bio">
+              Treinador físico comportamental, mentor e criador do conceito <em>Equity Body</em>. Há mais de duas décadas treinando pessoas, já impactou centenas de milhares de profissionais, empresários e líderes que entenderam que o corpo sustenta a mente e os negócios.
+            </p>
+          </div>
+        </div>
+
+        <!-- Dominik Bertoluci -->
+        <div class="speaker-card">
+          <div class="speaker-card__placeholder">DB</div>
+          <div class="speaker-card__body">
+            <div class="speaker-card__role">Mentora · Performance Club</div>
+            <div class="speaker-card__name">Dominik Bertoluci</div>
+            <p class="speaker-card__bio">
+              Empresária, mentora e fundadora do Performance Club. Criadora da metodologia Performance Integral 5D, dedica-se a desenvolver líderes e empresários que desejam crescer com clareza, influência e resultados sustentáveis.
+            </p>
+          </div>
         </div>
 
       </div>
+    </div>
+  </section>
+
+  <!-- =====================
+       PATROCINADORES
+  ===================== -->
+  <section class="section" id="patrocinadores">
+    <div class="container text-center">
+      <span class="label">Patrocinadores</span>
+      <span class="divider"></span>
+      <h2>Quem torna este<br /><em style="font-style:italic; color:var(--gold);">evento possível</em></h2>
+
+      <div class="sponsors__grid">
+        <div class="sponsors__item">
+          <span class="sponsors__name">tonysaude!</span>
+        </div>
+        <div class="sponsors__item">
+          <span class="sponsors__name">Frutas Maromba</span>
+        </div>
+        <div class="sponsors__item">
+          <span class="sponsors__name">nutri quantum</span>
+        </div>
+        <div class="sponsors__item">
+          <span class="sponsors__name">Quantum Technologies</span>
+        </div>
+      </div>
+
+      <p style="margin-top:28px; font-size:0.8rem; color:var(--muted);">Quer patrocinar o Conceito Vida Summit? Entre em contato pelo WhatsApp.</p>
     </div>
   </section>
 
@@ -1328,7 +1471,7 @@
           <div class="included__icon">🤝</div>
           <div class="included__text">
             <h4>Networking Qualificado</h4>
-            <p>120 profissionais de saúde no mesmo espaço — uma oportunidade única de conexão e colaboração.</p>
+            <p>120 pessoas no mesmo espaço — uma oportunidade única de conexão e colaboração.</p>
           </div>
         </div>
         <div class="included__item">
