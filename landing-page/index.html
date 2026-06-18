@@ -54,7 +54,7 @@
       font-weight: 600;
       line-height: 1.15;
     }
-    h1 { font-size: clamp(2.4rem, 5.5vw, 4.2rem); }
+    h1 { font-size: clamp(2.8rem, 6vw, 5rem); }
     h2 { font-size: clamp(1.9rem, 4vw, 3rem); }
     h3 { font-size: clamp(1.35rem, 2.5vw, 1.9rem); }
     h4 { font-size: 1.15rem; }
@@ -105,7 +105,7 @@
       justify-content: center;
       gap: 10px;
       padding: 17px 40px;
-      border-radius: 4px;
+      border-radius: 50px;
       font-family: 'Jost', sans-serif;
       font-size: 0.95rem;
       font-weight: 600;
@@ -175,7 +175,7 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 70% 60% at 60% 50%, rgba(61,122,82,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 70% 60% at 60% 50%, rgba(61,122,82,0.25) 0%, transparent 70%),
         radial-gradient(ellipse 40% 50% at 85% 80%, rgba(196,160,74,0.08) 0%, transparent 60%);
       pointer-events: none;
     }
@@ -358,7 +358,7 @@
     }
     .countdown__number {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 2.4rem;
+      font-size: 3rem;
       font-weight: 700;
       color: var(--gold);
       line-height: 1;
@@ -386,7 +386,7 @@
       gap: 1px;
       background: var(--border);
       border: 1px solid var(--border);
-      border-radius: 4px;
+      border-radius: 14px;
       overflow: hidden;
       margin-top: 64px;
     }
@@ -446,7 +446,7 @@
       background: var(--bg-card);
       border-left: 3px solid var(--gold);
       padding: 32px;
-      border-radius: 0 4px 4px 0;
+      border-radius: 0 14px 14px 0;
     }
     .problem__quote blockquote {
       font-family: 'Cormorant Garamond', serif;
@@ -476,12 +476,13 @@
     .for-whom__card {
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 4px;
+      border-radius: 14px;
       padding: 28px 24px;
-      transition: border-color 0.2s, transform 0.2s;
+      transition: border-color 0.2s, transform 0.2s, border-left 0.2s;
     }
     .for-whom__card:hover {
       border-color: var(--gold);
+      border-left: 3px solid var(--gold);
       transform: translateY(-4px);
     }
     .for-whom__icon {
@@ -513,51 +514,53 @@
       margin-right: auto;
     }
     .speaker-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 4px;
+      position: relative;
+      border-radius: 16px;
       overflow: hidden;
-      transition: transform 0.25s, border-color 0.25s;
+      background: var(--bg-card);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: default;
     }
     .speaker-card:hover {
-      transform: translateY(-6px);
-      border-color: var(--gold);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(196,160,74,0.3);
+    }
+    .speaker-card__photo-wrap {
+      position: relative;
+      padding-top: 130%;
+      overflow: hidden;
     }
     .speaker-card__photo {
+      position: absolute;
+      inset: 0;
       width: 100%;
-      height: 300px;
+      height: 100%;
       object-fit: cover;
       object-position: top center;
+      transition: transform 0.4s ease;
     }
-    .speaker-card__photo--placeholder {
-      width: 100%;
-      height: 300px;
-      background: var(--bg-3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--muted);
-      font-size: 3rem;
+    .speaker-card:hover .speaker-card__photo {
+      transform: scale(1.05);
     }
-    .speaker-card__body { padding: 24px; }
+    .speaker-card__overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(6,14,9,0.97) 0%, rgba(10,24,16,0.85) 45%, transparent 100%);
+      padding: 60px 20px 22px;
+    }
     .speaker-card__role {
-      font-size: 0.72rem;
+      font-size: 0.68rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: 6px;
+      margin-bottom: 5px;
     }
     .speaker-card__name {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       font-weight: 600;
       color: var(--cream);
-      margin-bottom: 10px;
-    }
-    .speaker-card__bio {
-      font-size: 0.88rem;
-      color: var(--muted);
-      line-height: 1.65;
+      line-height: 1.2;
     }
     .speaker-card--tba {
       display: flex;
@@ -657,7 +660,7 @@
       gap: 16px;
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 4px;
+      border-radius: 14px;
       padding: 24px;
     }
     .included__icon {
@@ -926,9 +929,9 @@
     =========================== */
     .speakers__grid--auto {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 340px));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 280px));
       justify-content: center;
-      gap: 28px;
+      gap: 20px;
       margin-top: 56px;
     }
     .speaker-card__placeholder {
@@ -957,27 +960,23 @@
       margin-top: 48px;
     }
     .sponsors__item {
-      height: 72px;
+      height: 100px;
       min-width: 140px;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 10px 24px;
-      background: rgba(240,237,229,0.05);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      transition: border-color 0.2s, background 0.2s;
+      background: transparent;
+      transition: background 0.2s;
     }
     .sponsors__item:hover {
-      border-color: var(--gold);
       background: rgba(196,160,74,0.06);
     }
     .sponsors__item img {
-      max-height: 48px;
+      max-height: 72px;
       width: auto;
       max-width: 160px;
-      filter: brightness(0) invert(1);
-      opacity: 0.75;
+      opacity: 0.85;
       transition: opacity 0.2s;
     }
     .sponsors__item:hover img { opacity: 1; }
@@ -991,6 +990,23 @@
 
     /* Topics grid — 4 cols desktop */
     .topics__grid { grid-template-columns: repeat(4, 1fr) !important; }
+
+    /* ===========================
+       DIAGONAL DIVIDERS
+    =========================== */
+    .section--diagonal-down {
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 60px), 0 100%);
+      padding-bottom: calc(96px + 60px);
+      margin-bottom: -30px;
+      position: relative;
+      z-index: 1;
+    }
+    .section--diagonal-up {
+      clip-path: polygon(0 60px, 100% 0, 100% 100%, 0 100%);
+      padding-top: calc(96px + 60px);
+      margin-top: -30px;
+      position: relative;
+    }
 
     /* ===========================
        RESPONSIVE
@@ -1169,7 +1185,7 @@
   <!-- =====================
        PROBLEMA
   ===================== -->
-  <section class="section section--alt" id="sobre">
+  <section class="section section--alt section--diagonal-down" id="sobre">
     <div class="container">
       <div class="problem__grid">
 
@@ -1210,7 +1226,7 @@
   <!-- =====================
        TEMAS DO EVENTO
   ===================== -->
-  <section class="section section--dark" id="temas">
+  <section class="section section--dark section--diagonal-up" id="temas">
     <div class="container text-center">
       <span class="label">Conteúdo do Evento</span>
       <span class="divider"></span>
@@ -1322,61 +1338,56 @@
 
         <!-- Dra. Roberta Dias -->
         <div class="speaker-card">
-          <img src="assets/dra-roberta.jpg" alt="Dra. Roberta Dias" class="speaker-card__photo" />
-          <div class="speaker-card__body">
-            <div class="speaker-card__role">Naturopata · Fundadora Conceito Vida®</div>
-            <div class="speaker-card__name">Dra. Roberta Dias</div>
-            <p class="speaker-card__bio">
-              Naturopata, empresária e autora do livro <em>Diagnóstico Não é Destino</em>. Há mais de 15 anos dedica sua trajetória ao estudo da saúde integrativa, com formação em biofísica, MTC, medicina funcional e ozonioterapia. Idealizadora do Conceito Vida Summit.
-            </p>
+          <div class="speaker-card__photo-wrap">
+            <img src="assets/dra-roberta.jpg" alt="Dra. Roberta Dias" class="speaker-card__photo" />
+            <div class="speaker-card__overlay">
+              <div class="speaker-card__role">Naturopata · Fundadora Conceito Vida®</div>
+              <div class="speaker-card__name">Dra. Roberta Dias</div>
+            </div>
           </div>
         </div>
 
         <!-- Yana Reis -->
         <div class="speaker-card">
-          <img src="assets/speakers/yana.jpg" alt="Yana Reis" class="speaker-card__photo" />
-          <div class="speaker-card__body">
-            <div class="speaker-card__role">Posicionamento & Identidade Estratégica</div>
-            <div class="speaker-card__name">Yana Reis</div>
-            <p class="speaker-card__bio">
-              Especialista em posicionamento, identidade e comunicação estratégica. Atuou em grandes empresas como Avon, Santander, Petrobras e Grupo Atento. Hoje ajuda profissionais a transformarem conhecimento e reputação em autoridade e valor de mercado.
-            </p>
+          <div class="speaker-card__photo-wrap">
+            <img src="assets/speakers/yana.jpg" alt="Yana Reis" class="speaker-card__photo" />
+            <div class="speaker-card__overlay">
+              <div class="speaker-card__role">Posicionamento & Identidade Estratégica</div>
+              <div class="speaker-card__name">Yana Reis</div>
+            </div>
           </div>
         </div>
 
         <!-- Dr. Raphael Oliveira -->
         <div class="speaker-card">
-          <img src="assets/speakers/raphael.jpg" alt="Dr. Raphael Oliveira" class="speaker-card__photo" />
-          <div class="speaker-card__body">
-            <div class="speaker-card__role">Pesquisador · Saúde & Biofísica</div>
-            <div class="speaker-card__name">Dr. Raphael Oliveira</div>
-            <p class="speaker-card__bio">
-              Pesquisador, empreendedor e profissional da saúde. Autor do livro <em>Diagnóstico Não é Destino</em>. Integra ciência, tecnologia, biofísica e saúde integrativa por meio de projetos em bioressonância, frequências biológicas e análise funcional.
-            </p>
+          <div class="speaker-card__photo-wrap">
+            <img src="assets/speakers/raphael.jpg" alt="Dr. Raphael Oliveira" class="speaker-card__photo" />
+            <div class="speaker-card__overlay">
+              <div class="speaker-card__role">Pesquisador · Saúde & Biofísica</div>
+              <div class="speaker-card__name">Dr. Raphael Oliveira</div>
+            </div>
           </div>
         </div>
 
         <!-- Cleusa Uenaka -->
         <div class="speaker-card">
-          <img src="assets/speakers/cleusa.jpg" alt="Cleusa Uenaka" class="speaker-card__photo" />
-          <div class="speaker-card__body">
-            <div class="speaker-card__role">Atleta · Exemplo de Longevidade Ativa</div>
-            <div class="speaker-card__name">Cleusa Uenaka</div>
-            <p class="speaker-card__bio">
-              Iniciou sua jornada na corrida aos 70 anos e mantém o hábito de correr diariamente. Sua história inspira pessoas que acreditam que nunca é tarde para começar — a idade não é definida pelo RG, mas pela mentalidade.
-            </p>
+          <div class="speaker-card__photo-wrap">
+            <img src="assets/speakers/cleusa.jpg" alt="Cleusa Uenaka" class="speaker-card__photo" />
+            <div class="speaker-card__overlay">
+              <div class="speaker-card__role">Atleta · Exemplo de Longevidade Ativa</div>
+              <div class="speaker-card__name">Cleusa Uenaka</div>
+            </div>
           </div>
         </div>
 
         <!-- Dr. Rodrigo Venticinque -->
         <div class="speaker-card">
-          <img src="assets/speakers/rodrigo.jpg" alt="Dr. Rodrigo Venticinque" class="speaker-card__photo" />
-          <div class="speaker-card__body">
-            <div class="speaker-card__role">Odontologia Biointegrativa · Presidente IBSI</div>
-            <div class="speaker-card__name">Dr. Rodrigo Venticinque</div>
-            <p class="speaker-card__bio">
-              Cirurgião-dentista e referência em Odontologia Biointegrativa. Presidente do Instituto Brasileiro de Saúde Integrativa (IBSI) e primeiro dentista certificado no protocolo RECODE no Brasil. Professor de pós-graduação e palestrante internacional.
-            </p>
+          <div class="speaker-card__photo-wrap">
+            <img src="assets/speakers/rodrigo.jpg" alt="Dr. Rodrigo Venticinque" class="speaker-card__photo" />
+            <div class="speaker-card__overlay">
+              <div class="speaker-card__role">Odontologia Biointegrativa · Presidente IBSI</div>
+              <div class="speaker-card__name">Dr. Rodrigo Venticinque</div>
+            </div>
           </div>
         </div>
 
