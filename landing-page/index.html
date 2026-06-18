@@ -960,23 +960,26 @@
       margin-top: 48px;
     }
     .sponsors__item {
-      height: 100px;
-      min-width: 140px;
+      height: 110px;
+      min-width: 160px;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 10px 24px;
-      background: transparent;
-      transition: background 0.2s;
+      padding: 16px 28px;
+      background: rgba(255,255,255,0.92);
+      border-radius: 12px;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
     }
     .sponsors__item:hover {
-      background: rgba(196,160,74,0.06);
+      background: #ffffff;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.18);
     }
     .sponsors__item img {
       max-height: 72px;
       width: auto;
       max-width: 160px;
-      opacity: 0.85;
+      opacity: 1;
       transition: opacity 0.2s;
     }
     .sponsors__item:hover img { opacity: 1; }
