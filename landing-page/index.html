@@ -1045,6 +1045,115 @@
       }
       .navbar__logo { height: 28px; }
     }
+    /* ===========================
+       SPEAKER MODAL
+    =========================== */
+    .speaker-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(6,14,9,0.88);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .speaker-modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .speaker-modal {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      max-width: 680px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      transform: translateY(20px) scale(0.97);
+      transition: transform 0.3s ease;
+      display: none;
+    }
+    .speaker-modal-overlay.active .speaker-modal {
+      transform: translateY(0) scale(1);
+    }
+    .speaker-modal__close {
+      position: absolute;
+      top: 14px; right: 14px;
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: rgba(240,237,229,0.08);
+      border: 1px solid var(--border);
+      color: var(--cream);
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, border-color 0.2s;
+      z-index: 1;
+    }
+    .speaker-modal__close:hover {
+      background: rgba(196,160,74,0.15);
+      border-color: var(--gold);
+    }
+    .speaker-modal__header {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      border-radius: 20px 20px 0 0;
+      overflow: hidden;
+    }
+    .speaker-modal__photo {
+      width: 160px;
+      height: 200px;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+    .speaker-modal__title {
+      padding: 28px 48px 28px 28px;
+      background: rgba(196,160,74,0.04);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .speaker-modal__role {
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .speaker-modal__name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: var(--cream);
+      line-height: 1.15;
+    }
+    .speaker-modal__body {
+      padding: 24px 28px 28px;
+      border-top: 1px solid var(--border);
+    }
+    .speaker-modal__bio {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.85;
+    }
+    .speaker-card { cursor: pointer; }
+    @media (max-width: 580px) {
+      .speaker-modal__header { grid-template-columns: 1fr; }
+      .speaker-modal__photo { width: 100%; height: 200px; }
+      .speaker-modal__title { padding: 18px 44px 18px 18px; }
+      .speaker-modal__name { font-size: 1.4rem; }
+      .speaker-modal__body { padding: 18px 18px 24px; }
+    }
+
   </style>
 </head>
 <body>
@@ -1337,7 +1446,7 @@
       <div class="speakers__grid--auto">
 
         <!-- Dra. Roberta Dias -->
-        <div class="speaker-card">
+        <div class="speaker-card" onclick="openSpeakerModal('roberta')" role="button" tabindex="0" aria-label="Ver bio de Dra. Roberta Dias">
           <div class="speaker-card__photo-wrap">
             <img src="assets/dra-roberta.jpg" alt="Dra. Roberta Dias" class="speaker-card__photo" />
             <div class="speaker-card__overlay">
@@ -1348,7 +1457,7 @@
         </div>
 
         <!-- Yana Reis -->
-        <div class="speaker-card">
+        <div class="speaker-card" onclick="openSpeakerModal('yana')" role="button" tabindex="0" aria-label="Ver bio de Yana Reis">
           <div class="speaker-card__photo-wrap">
             <img src="assets/speakers/yana.jpg" alt="Yana Reis" class="speaker-card__photo" />
             <div class="speaker-card__overlay">
@@ -1359,7 +1468,7 @@
         </div>
 
         <!-- Dr. Raphael Oliveira -->
-        <div class="speaker-card">
+        <div class="speaker-card" onclick="openSpeakerModal('raphael')" role="button" tabindex="0" aria-label="Ver bio de Dr. Raphael Oliveira">
           <div class="speaker-card__photo-wrap">
             <img src="assets/speakers/raphael.jpg" alt="Dr. Raphael Oliveira" class="speaker-card__photo" />
             <div class="speaker-card__overlay">
@@ -1370,7 +1479,7 @@
         </div>
 
         <!-- Cleusa Uenaka -->
-        <div class="speaker-card">
+        <div class="speaker-card" onclick="openSpeakerModal('cleusa')" role="button" tabindex="0" aria-label="Ver bio de Cleusa Uenaka">
           <div class="speaker-card__photo-wrap">
             <img src="assets/speakers/cleusa.jpg" alt="Cleusa Uenaka" class="speaker-card__photo" />
             <div class="speaker-card__overlay">
@@ -1381,7 +1490,7 @@
         </div>
 
         <!-- Dr. Rodrigo Venticinque -->
-        <div class="speaker-card">
+        <div class="speaker-card" onclick="openSpeakerModal('rodrigo')" role="button" tabindex="0" aria-label="Ver bio de Dr. Rodrigo Venticinque">
           <div class="speaker-card__photo-wrap">
             <img src="assets/speakers/rodrigo.jpg" alt="Dr. Rodrigo Venticinque" class="speaker-card__photo" />
             <div class="speaker-card__overlay">
@@ -1392,7 +1501,7 @@
         </div>
 
         <!-- Sérgio Bertoluci -->
-        <div class="speaker-card">
+        <div class="speaker-card" onclick="openSpeakerModal('sergio')" role="button" tabindex="0" aria-label="Ver bio de Sérgio Bertoluci">
           <div class="speaker-card__photo-wrap">
             <img src="assets/speakers/sergio.jpg" alt="Sérgio Bertoluci" class="speaker-card__photo" />
             <div class="speaker-card__overlay">
@@ -1403,7 +1512,7 @@
         </div>
 
         <!-- Dominik Bertoluci -->
-        <div class="speaker-card">
+        <div class="speaker-card" onclick="openSpeakerModal('dominik')" role="button" tabindex="0" aria-label="Ver bio de Dominik Bertoluci">
           <div class="speaker-card__photo-wrap">
             <img src="assets/speakers/dominik.jpg" alt="Dominik Bertoluci" class="speaker-card__photo" />
             <div class="speaker-card__overlay">
@@ -1412,6 +1521,10 @@
             </div>
           </div>
         </div>
+
+        <p style="margin-top:28px; font-size:0.82rem; color:var(--muted); text-align:center; width:100%;">
+          Clique em um palestrante para ver a bio completa
+        </p>
 
       </div>
     </div>
@@ -1428,19 +1541,19 @@
 
       <div class="sponsors__grid">
         <div class="sponsors__item">
-          <img src="assets/sponsors/logo-s1.jpg" alt="Patrocinador" />
+          <img src="assets/sponsors/logo-s1.png" alt="Patrocinador" />
         </div>
         <div class="sponsors__item">
-          <img src="assets/sponsors/logo-s2.jpg" alt="Patrocinador" />
+          <img src="assets/sponsors/logo-s2.png" alt="Patrocinador" />
         </div>
         <div class="sponsors__item">
-          <img src="assets/sponsors/logo-s3.jpg" alt="Patrocinador" />
+          <img src="assets/sponsors/logo-s3.png" alt="Patrocinador" />
         </div>
         <div class="sponsors__item">
-          <img src="assets/sponsors/logo-s4.jpg" alt="Patrocinador" />
+          <img src="assets/sponsors/logo-s4.png" alt="Patrocinador" />
         </div>
         <div class="sponsors__item">
-          <img src="assets/sponsors/logo-s5.jpg" alt="Patrocinador" />
+          <img src="assets/sponsors/logo-s5.png" alt="Patrocinador" />
         </div>
       </div>
 
@@ -1600,6 +1713,111 @@
   </section>
 
   <!-- =====================
+       SPEAKER MODALS
+  ===================== -->
+  <div class="speaker-modal-overlay" id="modal-overlay" role="dialog" aria-modal="true">
+
+    <div class="speaker-modal" id="modal-roberta">
+      <button class="speaker-modal__close" onclick="closeSpeakerModal()" aria-label="Fechar">✕</button>
+      <div class="speaker-modal__header">
+        <img src="assets/dra-roberta.jpg" alt="Dra. Roberta Dias" class="speaker-modal__photo" />
+        <div class="speaker-modal__title">
+          <div class="speaker-modal__role">Naturopata · Fundadora Conceito Vida®</div>
+          <div class="speaker-modal__name">Dra. Roberta Dias</div>
+        </div>
+      </div>
+      <div class="speaker-modal__body">
+        <p class="speaker-modal__bio">Naturopata, empresária e autora do livro <em>Diagnóstico Não é Destino</em>. Há mais de 15 anos dedica sua trajetória ao estudo da saúde integrativa, com formação em biofísica, medicina tradicional chinesa, medicina funcional e ozonioterapia.<br><br>Idealizadora do Conceito Vida Summit, Roberta acredita que o verdadeiro cuidado com a saúde começa pela compreensão profunda do ser humano em todas as suas dimensões — física, emocional e energética. Sua missão é transformar conhecimento em resultados reais para seus pacientes e alunos.</p>
+      </div>
+    </div>
+
+    <div class="speaker-modal" id="modal-yana">
+      <button class="speaker-modal__close" onclick="closeSpeakerModal()" aria-label="Fechar">✕</button>
+      <div class="speaker-modal__header">
+        <img src="assets/speakers/yana.jpg" alt="Yana Reis" class="speaker-modal__photo" />
+        <div class="speaker-modal__title">
+          <div class="speaker-modal__role">Posicionamento & Identidade Estratégica</div>
+          <div class="speaker-modal__name">Yana Reis</div>
+        </div>
+      </div>
+      <div class="speaker-modal__body">
+        <p class="speaker-modal__bio">Especialista em posicionamento, identidade e comunicação estratégica com trajetória em grandes corporações como Avon, Santander, Petrobras e Grupo Atento.<br><br>Hoje Yana dedica sua atuação a ajudar profissionais de saúde e empreendedores a transformar conhecimento, reputação e propósito em autoridade real e valor de mercado. Sua palestra no Conceito Vida Summit vai mostrar como construir uma presença que atrai, conecta e converte.</p>
+      </div>
+    </div>
+
+    <div class="speaker-modal" id="modal-raphael">
+      <button class="speaker-modal__close" onclick="closeSpeakerModal()" aria-label="Fechar">✕</button>
+      <div class="speaker-modal__header">
+        <img src="assets/speakers/raphael.jpg" alt="Dr. Raphael Oliveira" class="speaker-modal__photo" />
+        <div class="speaker-modal__title">
+          <div class="speaker-modal__role">Pesquisador · Saúde & Biofísica</div>
+          <div class="speaker-modal__name">Dr. Raphael Oliveira</div>
+        </div>
+      </div>
+      <div class="speaker-modal__body">
+        <p class="speaker-modal__bio">Pesquisador, empreendedor e profissional da saúde, coautor do livro <em>Diagnóstico Não é Destino</em>. Integra ciência, tecnologia e saúde integrativa por meio de projetos pioneiros em bioressonância, frequências biológicas e análise funcional do organismo.<br><br>Raphael tem se dedicado a tornar acessíveis conceitos avançados de biofísica aplicada, mostrando como as tecnologias emergentes podem ampliar a capacidade diagnóstica e terapêutica dos profissionais de saúde.</p>
+      </div>
+    </div>
+
+    <div class="speaker-modal" id="modal-cleusa">
+      <button class="speaker-modal__close" onclick="closeSpeakerModal()" aria-label="Fechar">✕</button>
+      <div class="speaker-modal__header">
+        <img src="assets/speakers/cleusa.jpg" alt="Cleusa Uenaka" class="speaker-modal__photo" />
+        <div class="speaker-modal__title">
+          <div class="speaker-modal__role">Atleta · Exemplo de Longevidade Ativa</div>
+          <div class="speaker-modal__name">Cleusa Uenaka</div>
+        </div>
+      </div>
+      <div class="speaker-modal__body">
+        <p class="speaker-modal__bio">Iniciou sua jornada na corrida aos 70 anos e, desde então, mantém o hábito de correr diariamente — desafiando os limites impostos pela idade cronológica e provando que a longevidade ativa é uma escolha.<br><br>A história de Cleusa é um exemplo poderoso de que nunca é tarde para começar. Sua presença no Conceito Vida Summit vai inspirar cada participante a repensar os próprios limites e a enxergar o envelhecimento como uma fase de expansão, e não de retração.</p>
+      </div>
+    </div>
+
+    <div class="speaker-modal" id="modal-rodrigo">
+      <button class="speaker-modal__close" onclick="closeSpeakerModal()" aria-label="Fechar">✕</button>
+      <div class="speaker-modal__header">
+        <img src="assets/speakers/rodrigo.jpg" alt="Dr. Rodrigo Venticinque" class="speaker-modal__photo" />
+        <div class="speaker-modal__title">
+          <div class="speaker-modal__role">Odontologia Biointegrativa · Presidente IBSI</div>
+          <div class="speaker-modal__name">Dr. Rodrigo Venticinque</div>
+        </div>
+      </div>
+      <div class="speaker-modal__body">
+        <p class="speaker-modal__bio">Cirurgião-dentista e maior referência em Odontologia Biointegrativa no Brasil. Presidente do Instituto Brasileiro de Saúde Integrativa (IBSI) e primeiro dentista certificado no protocolo RECODE no país.<br><br>Professor de pós-graduação e palestrante internacional, Dr. Rodrigo conecta a saúde bucal à saúde sistêmica de forma profunda e inovadora, mostrando como a boca é um espelho do organismo — e como tratá-la de forma integrativa pode transformar a vida dos pacientes.</p>
+      </div>
+    </div>
+
+    <div class="speaker-modal" id="modal-sergio">
+      <button class="speaker-modal__close" onclick="closeSpeakerModal()" aria-label="Fechar">✕</button>
+      <div class="speaker-modal__header">
+        <img src="assets/speakers/sergio.jpg" alt="Sérgio Bertoluci" class="speaker-modal__photo" />
+        <div class="speaker-modal__title">
+          <div class="speaker-modal__role">Alta Performance · Equity Body</div>
+          <div class="speaker-modal__name">Sérgio Bertoluci</div>
+        </div>
+      </div>
+      <div class="speaker-modal__body">
+        <p class="speaker-modal__bio">Treinador físico comportamental, mentor e criador do conceito <em>Equity Body</em> — a ideia de que o corpo é o maior ativo de um profissional de alta performance. Há mais de duas décadas trabalhando com líderes, empresários e atletas.<br><br>Sérgio já impactou centenas de milhares de pessoas com sua metodologia, que integra treino físico, mentalidade e comportamento. No Conceito Vida Summit, ele vai mostrar como o corpo sustenta a mente, os negócios e os resultados — e por que cuidar da saúde física é uma decisão estratégica.</p>
+      </div>
+    </div>
+
+    <div class="speaker-modal" id="modal-dominik">
+      <button class="speaker-modal__close" onclick="closeSpeakerModal()" aria-label="Fechar">✕</button>
+      <div class="speaker-modal__header">
+        <img src="assets/speakers/dominik.jpg" alt="Dominik Bertoluci" class="speaker-modal__photo" />
+        <div class="speaker-modal__title">
+          <div class="speaker-modal__role">Mentora · Performance Club</div>
+          <div class="speaker-modal__name">Dominik Bertoluci</div>
+        </div>
+      </div>
+      <div class="speaker-modal__body">
+        <p class="speaker-modal__bio">Empresária, mentora e fundadora do Performance Club. Criadora da metodologia Performance Integral 5D, que integra cinco dimensões do desenvolvimento humano para gerar crescimento sustentável e consistente.<br><br>Dominik dedica-se a desenvolver líderes e empresários que desejam crescer com clareza, influência e resultados reais. No Conceito Vida Summit, ela vai compartilhar como construir uma performance que vai além dos resultados financeiros — tocando propósito, saúde e legado.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- =====================
        FINAL CTA
   ===================== -->
   <section class="final-cta">
@@ -1694,6 +1912,32 @@
         const isOpen = item.classList.contains('open');
         document.querySelectorAll('.faq__item').forEach(i => i.classList.remove('open'));
         if (!isOpen) item.classList.add('open');
+      });
+    });
+
+    // Speaker modals
+    function openSpeakerModal(id) {
+      const overlay = document.getElementById('modal-overlay');
+      document.querySelectorAll('.speaker-modal').forEach(m => m.style.display = 'none');
+      const modal = document.getElementById('modal-' + id);
+      if (!modal) return;
+      modal.style.display = 'block';
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeSpeakerModal() {
+      document.getElementById('modal-overlay').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    document.getElementById('modal-overlay').addEventListener('click', function(e) {
+      if (e.target === this) closeSpeakerModal();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeSpeakerModal();
+    });
+    document.querySelectorAll('.speaker-card').forEach(card => {
+      card.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') this.click();
       });
     });
 
