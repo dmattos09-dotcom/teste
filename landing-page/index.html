@@ -988,6 +988,12 @@
       max-width: 160px;
       object-fit: contain;
     }
+    .sponsors__item--dark {
+      background: #162F1E;
+    }
+    .sponsors__item--dark:hover {
+      background: #1e3d26;
+    }
     @media (max-width: 600px) {
       .sponsors__grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
     }
@@ -1261,7 +1267,7 @@
           <div class="stats__desc">De imersão presencial</div>
         </div>
         <div class="stats__item">
-          <div class="stats__number">7</div>
+          <div class="stats__number">6</div>
           <div class="stats__desc">Palestrantes confirmados</div>
         </div>
         <div class="stats__item">
@@ -1489,16 +1495,7 @@
           </div>
         </div>
 
-        <!-- Cleusa Uenaka -->
-        <div class="speaker-card" onclick="openSpeakerModal('cleusa')" role="button" tabindex="0" aria-label="Ver bio de Cleusa Uenaka">
-          <div class="speaker-card__photo-wrap">
-            <img src="assets/speakers/cleusa.jpg" alt="Cleusa Uenaka" class="speaker-card__photo" />
-            <div class="speaker-card__overlay">
-              <div class="speaker-card__role">Atleta · Exemplo de Longevidade Ativa</div>
-              <div class="speaker-card__name">Cleusa Uenaka</div>
-            </div>
-          </div>
-        </div>
+
 
         <!-- Dr. Rodrigo Venticinque -->
         <div class="speaker-card" onclick="openSpeakerModal('rodrigo')" role="button" tabindex="0" aria-label="Ver bio de Dr. Rodrigo Venticinque">
@@ -1565,6 +1562,9 @@
         </div>
         <div class="sponsors__item">
           <img src="assets/sponsors/logo-s5.png" alt="Patrocinador" />
+        </div>
+        <div class="sponsors__item sponsors__item--dark">
+          <img src="assets/sponsors/logo-s6.png" alt="Patrocinador" />
         </div>
       </div>
 
@@ -1767,20 +1767,6 @@
       </div>
       <div class="speaker-modal__body">
         <p class="speaker-modal__bio">Pesquisador, empreendedor e profissional da saúde, coautor do livro <em>Diagnóstico Não é Destino</em>. Integra ciência, tecnologia e saúde integrativa por meio de projetos pioneiros em bioressonância, frequências biológicas e análise funcional do organismo.<br><br>Raphael tem se dedicado a tornar acessíveis conceitos avançados de biofísica aplicada, mostrando como as tecnologias emergentes podem ampliar a capacidade diagnóstica e terapêutica dos profissionais de saúde.</p>
-      </div>
-    </div>
-
-    <div class="speaker-modal" id="modal-cleusa">
-      <button class="speaker-modal__close" onclick="closeSpeakerModal()" aria-label="Fechar">✕</button>
-      <div class="speaker-modal__header">
-        <img src="assets/speakers/cleusa.jpg" alt="Cleusa Uenaka" class="speaker-modal__photo" />
-        <div class="speaker-modal__title">
-          <div class="speaker-modal__role">Atleta · Exemplo de Longevidade Ativa</div>
-          <div class="speaker-modal__name">Cleusa Uenaka</div>
-        </div>
-      </div>
-      <div class="speaker-modal__body">
-        <p class="speaker-modal__bio">Iniciou sua jornada na corrida aos 70 anos e, desde então, mantém o hábito de correr diariamente — desafiando os limites impostos pela idade cronológica e provando que a longevidade ativa é uma escolha.<br><br>A história de Cleusa é um exemplo poderoso de que nunca é tarde para começar. Sua presença no Conceito Vida Summit vai inspirar cada participante a repensar os próprios limites e a enxergar o envelhecimento como uma fase de expansão, e não de retração.</p>
       </div>
     </div>
 
