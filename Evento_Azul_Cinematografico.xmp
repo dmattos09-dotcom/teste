@@ -1,0 +1,137 @@
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.6-c140 79.160451, 2017/05/06-01:08:21">
+ <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <rdf:Description rdf:about=""
+    xmlns:crs="http://ns.adobe.com/camera-raw-settings/1.0/"
+    crs:PresetType="Normal"
+    crs:ClusterUUID="ED8CA458ED1348C0AC6045467FC89622"
+    crs:UUID="9291E7E0F818426BA56F9A383A8C8C1C"
+    crs:SupportsAmount2="True"
+    crs:SupportsColor="True"
+    crs:SupportsMonochrome="True"
+    crs:SupportsHighDynamicRange="True"
+    crs:SupportsNormalDynamicRange="True"
+    crs:SupportsSceneReferred="True"
+    crs:SupportsOutputReferred="True"
+    crs:CameraModelRestriction=""
+    crs:Copyright=""
+    crs:ContactInfo=""
+    crs:Version="15.0"
+    crs:ProcessVersion="11.0"
+    crs:WhiteBalance="Custom"
+    crs:IncrementalTemperature="-6"
+    crs:IncrementalTint="+3"
+    crs:Exposure2012="+0.10"
+    crs:Contrast2012="+22"
+    crs:Highlights2012="-24"
+    crs:Shadows2012="+14"
+    crs:Whites2012="-8"
+    crs:Blacks2012="-28"
+    crs:Texture="+10"
+    crs:Clarity2012="+10"
+    crs:Dehaze="+9"
+    crs:Vibrance="+10"
+    crs:Saturation="-4"
+    crs:ParametricShadows="+8"
+    crs:ParametricDarks="-6"
+    crs:ParametricLights="+4"
+    crs:ParametricHighlights="-8"
+    crs:ParametricShadowSplit="25"
+    crs:ParametricMidtoneSplit="50"
+    crs:ParametricHighlightSplit="75"
+    crs:HueAdjustmentRed="+4"
+    crs:HueAdjustmentOrange="+6"
+    crs:HueAdjustmentYellow="-12"
+    crs:HueAdjustmentGreen="-20"
+    crs:HueAdjustmentAqua="-8"
+    crs:HueAdjustmentBlue="+6"
+    crs:HueAdjustmentPurple="+4"
+    crs:HueAdjustmentMagenta="0"
+    crs:SaturationAdjustmentRed="+4"
+    crs:SaturationAdjustmentOrange="-10"
+    crs:SaturationAdjustmentYellow="-16"
+    crs:SaturationAdjustmentGreen="-28"
+    crs:SaturationAdjustmentAqua="+12"
+    crs:SaturationAdjustmentBlue="+26"
+    crs:SaturationAdjustmentPurple="+10"
+    crs:SaturationAdjustmentMagenta="0"
+    crs:LuminanceAdjustmentRed="+4"
+    crs:LuminanceAdjustmentOrange="+9"
+    crs:LuminanceAdjustmentYellow="-6"
+    crs:LuminanceAdjustmentGreen="-8"
+    crs:LuminanceAdjustmentAqua="-6"
+    crs:LuminanceAdjustmentBlue="-14"
+    crs:LuminanceAdjustmentPurple="-4"
+    crs:LuminanceAdjustmentMagenta="0"
+    crs:SplitToningShadowHue="220"
+    crs:SplitToningShadowSaturation="16"
+    crs:SplitToningHighlightHue="42"
+    crs:SplitToningHighlightSaturation="10"
+    crs:SplitToningBalance="-10"
+    crs:ColorGradeMidtoneHue="220"
+    crs:ColorGradeMidtoneSat="6"
+    crs:ColorGradeMidtoneLum="0"
+    crs:ColorGradeShadowLum="0"
+    crs:ColorGradeHighlightLum="0"
+    crs:ColorGradeBlending="50"
+    crs:ColorGradeGlobalHue="0"
+    crs:ColorGradeGlobalSat="0"
+    crs:ColorGradeGlobalLum="0"
+    crs:CameraProfile="Adobe Color"
+    crs:ShadowTint="+5"
+    crs:RedHue="+5"
+    crs:RedSaturation="+6"
+    crs:GreenHue="-12"
+    crs:GreenSaturation="+4"
+    crs:BlueHue="+6"
+    crs:BlueSaturation="+18"
+    crs:ConvertToGrayscale="False"
+    crs:HasSettings="True">
+   <crs:Name>
+    <rdf:Alt>
+     <rdf:li xml:lang="x-default">Evento Azul Cinematografico</rdf:li>
+    </rdf:Alt>
+   </crs:Name>
+   <crs:ShortName>
+    <rdf:Alt>
+     <rdf:li xml:lang="x-default">Evento Azul</rdf:li>
+    </rdf:Alt>
+   </crs:ShortName>
+   <crs:Group>
+    <rdf:Alt>
+     <rdf:li xml:lang="x-default">Presets Danny</rdf:li>
+    </rdf:Alt>
+   </crs:Group>
+   <crs:ToneCurvePV2012>
+    <rdf:Seq>
+     <rdf:li>0, 0</rdf:li>
+     <rdf:li>32, 22</rdf:li>
+     <rdf:li>76, 64</rdf:li>
+     <rdf:li>128, 128</rdf:li>
+     <rdf:li>190, 198</rdf:li>
+     <rdf:li>255, 250</rdf:li>
+    </rdf:Seq>
+   </crs:ToneCurvePV2012>
+   <crs:ToneCurvePV2012Red>
+    <rdf:Seq>
+     <rdf:li>0, 6</rdf:li>
+     <rdf:li>128, 128</rdf:li>
+     <rdf:li>255, 250</rdf:li>
+    </rdf:Seq>
+   </crs:ToneCurvePV2012Red>
+   <crs:ToneCurvePV2012Green>
+    <rdf:Seq>
+     <rdf:li>0, 3</rdf:li>
+     <rdf:li>128, 128</rdf:li>
+     <rdf:li>255, 252</rdf:li>
+    </rdf:Seq>
+   </crs:ToneCurvePV2012Green>
+   <crs:ToneCurvePV2012Blue>
+    <rdf:Seq>
+     <rdf:li>0, 14</rdf:li>
+     <rdf:li>128, 130</rdf:li>
+     <rdf:li>255, 244</rdf:li>
+    </rdf:Seq>
+   </crs:ToneCurvePV2012Blue>
+  </rdf:Description>
+ </rdf:RDF>
+</x:xmpmeta>
