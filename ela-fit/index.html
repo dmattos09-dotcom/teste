@@ -313,6 +313,55 @@
   .foot-legal{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:26px;font-size:.82rem;color:#7b8398}
   @media(max-width:760px){.foot-grid{grid-template-columns:1fr 1fr}.foot-brand{grid-column:1/-1}}
 
+  /* NUTRITION */
+  .nutri{background:var(--paper)}
+  .nutri-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:52px;align-items:center;margin-top:8px}
+  .nutri-photo{position:relative}
+  .nutri-photo .frame{border-radius:22px;overflow:hidden;box-shadow:var(--shadow);aspect-ratio:4/4.6}
+  .nutri-photo .frame img{width:100%;height:100%;object-fit:cover;object-position:center 22%}
+  .nutri-photo .tag{position:absolute;left:-14px;bottom:26px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 18px;box-shadow:var(--shadow-sm)}
+  .nutri-photo .tag b{font-family:'Fraunces',serif;color:var(--navy);font-size:1.02rem;display:block}
+  .nutri-photo .tag span{font-size:.78rem;color:var(--muted)}
+  .nutri-copy h2{font-size:clamp(1.9rem,3.4vw,2.5rem);margin:16px 0 14px}
+  .nutri-copy .lead-p{color:var(--muted);font-size:1.08rem;margin-bottom:24px}
+  .nutri-copy .name{font-family:'Fraunces',serif;color:var(--navy);font-weight:600}
+  .nutri-list{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .nutri-list .n-item{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .nutri-list .n-item svg{flex:none;margin-top:2px}
+  .nutri-list .n-item span{font-size:.95rem;font-weight:500;color:var(--navy)}
+  @media(max-width:820px){.nutri-grid{grid-template-columns:1fr;gap:40px}.nutri-photo{max-width:420px}.nutri-list{grid-template-columns:1fr}}
+
+  /* MARQUEE (auto-slide carousels) */
+  .marquee{position:relative;overflow:hidden;margin-top:48px;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+    mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);}
+  .marquee-track{display:flex;gap:24px;width:max-content;will-change:transform}
+  .marquee:hover .marquee-track{animation-play-state:paused}
+  .m-slow{animation:scrollx 70s linear infinite}
+  .m-fast{animation:scrollx 52s linear infinite}
+  @keyframes scrollx{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @media(prefers-reduced-motion:reduce){.marquee-track{animation:none!important}.marquee{overflow-x:auto}}
+
+  /* BEFORE / AFTER */
+  .results{background:#fff}
+  .ba-card{
+    flex:none;height:440px;border-radius:16px;overflow:hidden;position:relative;
+    background:var(--mist);box-shadow:var(--shadow-sm);border:1px solid var(--line);
+  }
+  .ba-card img{height:100%;width:auto;display:block;object-fit:cover}
+  .ba-card .cap{
+    position:absolute;left:0;right:0;bottom:0;display:flex;align-items:center;gap:8px;
+    padding:26px 16px 12px;color:#fff;font-size:.82rem;font-weight:600;
+    background:linear-gradient(0deg,rgba(15,23,41,.82),transparent);
+  }
+  .ba-card .cap::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--gold);flex:none}
+  .ba-badge{position:absolute;top:12px;left:12px;background:rgba(25,37,66,.9);color:#fff;font-size:.68rem;font-weight:700;letter-spacing:.08em;padding:5px 11px;border-radius:999px}
+  @media(max-width:700px){.ba-card{height:320px}}
+
+  /* Testimonial marquee cards */
+  .marquee .test-card{flex:none;width:360px}
+  @media(max-width:700px){.marquee .test-card{width:290px}}
+
   /* Reveal animation */
   .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
   .reveal.in{opacity:1;transform:none}
@@ -330,7 +379,8 @@
   <ul class="nav-links">
     <li><a href="#programa">O programa</a></li>
     <li><a href="#niveis">Níveis</a></li>
-    <li><a href="#conduz">Quem conduz</a></li>
+    <li><a href="#nutricao">Nutrição</a></li>
+    <li><a href="#resultados">Resultados</a></li>
     <li><a href="#planos">Planos</a></li>
     <li><a href="#faq">FAQ</a></li>
   </ul>
@@ -451,6 +501,8 @@
       <div class="inc-item reveal"><span class="inc-check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c9a86a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Comunidade ativa de alunas</span></div>
       <div class="inc-item reveal"><span class="inc-check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c9a86a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Live quinzenal “Pergunte ao Lucas”</span></div>
       <div class="inc-item reveal"><span class="inc-check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c9a86a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Foco em glúteos, pernas e postura</span></div>
+      <div class="inc-item reveal"><span class="inc-check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c9a86a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Acompanhamento nutricional com a nutri Gabriela Louro</span></div>
+      <div class="inc-item reveal"><span class="inc-check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c9a86a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Planejamentos alimentares + ebook de receitas</span></div>
       <div class="inc-item reveal"><span class="inc-check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c9a86a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Suporte pela comunidade</span></div>
       <div class="inc-item reveal"><span class="inc-check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c9a86a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Cancelamento livre no plano mensal</span></div>
     </div>
@@ -482,44 +534,108 @@
   </div>
 </section>
 
+<!-- 6b. NUTRIÇÃO -->
+<section class="pad nutri" id="nutricao">
+  <div class="wrap">
+    <div class="nutri-grid">
+      <div class="nutri-photo reveal">
+        <div class="frame"><img src="assets/gabriela.webp" alt="Gabriela Louro, nutricionista do Método Ela Fit" width="925" height="1100"></div>
+        <div class="tag">
+          <b>Gabriela Louro</b>
+          <span>Nutricionista · Ela Fit</span>
+        </div>
+      </div>
+      <div class="nutri-copy reveal">
+        <span class="eyebrow">Treino + nutrição</span>
+        <h2>A nutrição que faltava pra fechar o resultado</h2>
+        <p class="lead-p">Treino sustenta, nutrição acelera. Por isso a Ela Fit tem <span class="name">Gabriela Louro</span> conduzindo a parte alimentar — pra você não ficar perdida entre dietas de internet e finalmente comer de um jeito que combina com o seu objetivo.</p>
+        <div class="nutri-list">
+          <div class="n-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a86a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Indicação de marcas</span></div>
+          <div class="n-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a86a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Planejamento alimentar para emagrecimento</span></div>
+          <div class="n-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a86a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Planejamento alimentar para hipertrofia</span></div>
+          <div class="n-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a86a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Planejamento alimentar de recomposição</span></div>
+          <div class="n-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a86a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Ebook de receitas de legumes e verduras</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- 7. DEPOIMENTOS -->
 <section class="pad test">
   <div class="wrap">
     <div class="sec-head center reveal">
       <span class="eyebrow">Prova social</span>
       <h2>Quem já treina com a gente</h2>
-      <p class="sub">Histórias reais de alunas Ela Fit. <em>Espaço reservado para preencher com depoimentos e fotos.</em></p>
+      <p class="sub">Histórias reais de alunas Ela Fit. <em>Espaço reservado para preencher com depoimentos.</em></p>
     </div>
-    <div class="test-grid">
-      <article class="test-card reveal">
+  </div>
+  <div class="marquee reveal">
+    <div class="marquee-track m-fast">
+      <article class="test-card">
         <div class="test-quote">&ldquo;</div>
         <p class="test-body">[ Depoimento em 3 a 5 linhas. Conte a história dela: como chegou, o que mudou e o que sente hoje treinando com o Método Ela Fit. ]</p>
         <span class="test-result">✦ Voltou a treinar depois de 8 anos</span>
-        <div class="test-person">
-          <div class="test-avatar">M</div>
-          <div><b>Manoela</b><span>— anos · há X meses na Ela Fit</span></div>
-        </div>
+        <div class="test-person"><div class="test-avatar">M</div><div><b>Manoela</b><span>— anos · há X meses na Ela Fit</span></div></div>
       </article>
-      <article class="test-card reveal">
+      <article class="test-card">
         <div class="test-quote">&ldquo;</div>
         <p class="test-body">[ Depoimento em 3 a 5 linhas. Foco no vínculo e na consistência ao longo do tempo com o programa. ]</p>
         <span class="test-result">✦ Constância que ela nunca teve</span>
-        <div class="test-person">
-          <div class="test-avatar">C</div>
-          <div><b>Carla</b><span>— anos · há X meses na Ela Fit</span></div>
-        </div>
+        <div class="test-person"><div class="test-avatar">C</div><div><b>Carla</b><span>— anos · há X meses na Ela Fit</span></div></div>
       </article>
-      <article class="test-card reveal">
+      <article class="test-card">
         <div class="test-quote">&ldquo;</div>
         <p class="test-body">[ Depoimento em 3 a 5 linhas. Mostre que idade não é limite e o quanto ela evoluiu com progressão respeitosa. ]</p>
         <span class="test-result">✦ Ganhou 4 kg de massa magra em 1 ano</span>
-        <div class="test-person">
-          <div class="test-avatar">L</div>
-          <div><b>Luciene</b><span>— anos · há X meses na Ela Fit</span></div>
-        </div>
+        <div class="test-person"><div class="test-avatar">L</div><div><b>Luciene</b><span>— anos · há X meses na Ela Fit</span></div></div>
+      </article>
+      <article class="test-card">
+        <div class="test-quote">&ldquo;</div>
+        <p class="test-body">[ Depoimento em 3 a 5 linhas. Espaço livre para mais uma aluna Ela Fit. ]</p>
+        <span class="test-result">✦ Mais firme, mais forte, mais confiante</span>
+        <div class="test-person"><div class="test-avatar">A</div><div><b>Aluna Ela Fit</b><span>— anos · há X meses na Ela Fit</span></div></div>
+      </article>
+      <!-- duplicado para loop infinito -->
+      <article class="test-card" aria-hidden="true">
+        <div class="test-quote">&ldquo;</div>
+        <p class="test-body">[ Depoimento em 3 a 5 linhas. Conte a história dela: como chegou, o que mudou e o que sente hoje treinando com o Método Ela Fit. ]</p>
+        <span class="test-result">✦ Voltou a treinar depois de 8 anos</span>
+        <div class="test-person"><div class="test-avatar">M</div><div><b>Manoela</b><span>— anos · há X meses na Ela Fit</span></div></div>
+      </article>
+      <article class="test-card" aria-hidden="true">
+        <div class="test-quote">&ldquo;</div>
+        <p class="test-body">[ Depoimento em 3 a 5 linhas. Foco no vínculo e na consistência ao longo do tempo com o programa. ]</p>
+        <span class="test-result">✦ Constância que ela nunca teve</span>
+        <div class="test-person"><div class="test-avatar">C</div><div><b>Carla</b><span>— anos · há X meses na Ela Fit</span></div></div>
+      </article>
+      <article class="test-card" aria-hidden="true">
+        <div class="test-quote">&ldquo;</div>
+        <p class="test-body">[ Depoimento em 3 a 5 linhas. Mostre que idade não é limite e o quanto ela evoluiu com progressão respeitosa. ]</p>
+        <span class="test-result">✦ Ganhou 4 kg de massa magra em 1 ano</span>
+        <div class="test-person"><div class="test-avatar">L</div><div><b>Luciene</b><span>— anos · há X meses na Ela Fit</span></div></div>
+      </article>
+      <article class="test-card" aria-hidden="true">
+        <div class="test-quote">&ldquo;</div>
+        <p class="test-body">[ Depoimento em 3 a 5 linhas. Espaço livre para mais uma aluna Ela Fit. ]</p>
+        <span class="test-result">✦ Mais firme, mais forte, mais confiante</span>
+        <div class="test-person"><div class="test-avatar">A</div><div><b>Aluna Ela Fit</b><span>— anos · há X meses na Ela Fit</span></div></div>
       </article>
     </div>
-    <p class="test-note reveal">Espaço para 3 a 6 depoimentos — adicione foto da aluna, nome + idade, tempo de Ela Fit e um selo com o resultado principal.</p>
+  </div>
+</section>
+
+<!-- 7b. ANTES & DEPOIS -->
+<section class="pad results" id="resultados">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow">Antes &amp; depois</span>
+      <h2>Transformações reais de alunas Ela Fit</h2>
+      <p class="sub">Resultado de método, progressão e consistência — não de milagre de 21 dias.</p>
+    </div>
+  </div>
+  <div class="marquee reveal">
+    <div class="marquee-track m-slow" id="baTrack"></div>
   </div>
 </section>
 
@@ -599,8 +715,8 @@
         <div class="faq-a"><p>Cada nível tem 8 semanas com progressão estruturada. Você avança quando domina a execução, mantém consistência e consegue progredir carga com técnica. As orientações do método (e as lives com o Lucas) te ajudam a reconhecer o momento certo — sem pressa e sem pular fases.</p></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q">Precisa de acompanhamento nutricional?<span class="plus"></span></button>
-        <div class="faq-a"><p>A Ela Fit é uma plataforma de treino de musculação — não substitui um acompanhamento nutricional individual. Para resultados de emagrecimento ou hipertrofia, o ideal é somar o treino a uma orientação nutricional com profissional habilitado. O treino te leva longe; nutrição alinhada acelera.</p></div>
+        <button class="faq-q">Tem acompanhamento nutricional?<span class="plus"></span></button>
+        <div class="faq-a"><p>Tem, sim. A parte nutricional é conduzida pela nutricionista Gabriela Louro e já vem incluída na assinatura: você recebe planejamentos alimentares para emagrecimento, hipertrofia e recomposição, indicação de marcas e um ebook de receitas de legumes e verduras. Treino e nutrição andando juntos é o que faz o resultado aparecer e sustentar.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q">Como funciona o suporte?<span class="plus"></span></button>
@@ -657,12 +773,24 @@
     </div>
     <div class="foot-legal">
       <span>© Ela Fit · Todos os direitos reservados</span>
-      <span>CNPJ 00.000.000/0001-00 · Alphaville, Barueri — SP</span>
+      <span>CNPJ 54.392.228/0001-01 · Alphaville, Barueri — SP</span>
     </div>
   </div>
 </footer>
 
 <script>
+  // Build before/after carousel (duplicated for infinite loop)
+  (function(){
+    const track=document.getElementById('baTrack');
+    if(!track)return;
+    const n=14;
+    let html='';
+    const one=(i,dup)=>`<figure class="ba-card"${dup?' aria-hidden="true"':''}><span class="ba-badge">ANTES · DEPOIS</span><img src="assets/ba-${String(i).padStart(2,'0')}.webp" alt="Transformação de aluna Ela Fit" loading="lazy"><figcaption class="cap">Transformação real · Aluna Ela Fit</figcaption></figure>`;
+    for(let i=1;i<=n;i++)html+=one(i,false);
+    for(let i=1;i<=n;i++)html+=one(i,true);
+    track.innerHTML=html;
+  })();
+
   // Nav shadow on scroll
   const nav=document.getElementById('nav');
   const onScroll=()=>nav.classList.toggle('scrolled',window.scrollY>20);
