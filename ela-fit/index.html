@@ -348,11 +348,16 @@
   @media(max-width:700px){.m-slow{animation-duration:40s}.m-fast{animation-duration:32s}}
   @media(prefers-reduced-motion:reduce){.marquee-track{animation:none!important}.marquee{overflow-x:auto;-webkit-overflow-scrolling:touch}}
 
-  /* BEFORE / AFTER */
+  /* BEFORE / AFTER — carrossel manual (setas + arrasta pro lado) */
   .results{background:#fff}
+  .ba-carousel{position:relative;margin-top:40px}
+  .ba-viewport{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;
+    scroll-behavior:smooth;-webkit-overflow-scrolling:touch;padding:6px 24px 8px;
+    scrollbar-width:none}
+  .ba-viewport::-webkit-scrollbar{display:none}
   .ba-card{
-    flex:none;height:440px;aspect-ratio:var(--ar,1);border-radius:16px;overflow:hidden;position:relative;
-    background:var(--mist);box-shadow:var(--shadow-sm);border:1px solid var(--line);
+    flex:none;height:460px;aspect-ratio:var(--ar,1);border-radius:16px;overflow:hidden;position:relative;
+    background:var(--mist);box-shadow:var(--shadow-sm);border:1px solid var(--line);scroll-snap-align:center;
   }
   .ba-card img{width:100%;height:100%;display:block;object-fit:cover}
   .ba-card .cap{
@@ -362,7 +367,15 @@
   }
   .ba-card .cap::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--gold);flex:none}
   .ba-badge{position:absolute;top:12px;left:12px;background:rgba(25,37,66,.9);color:#fff;font-size:.68rem;font-weight:700;letter-spacing:.08em;padding:5px 11px;border-radius:999px}
-  @media(max-width:700px){.ba-card{height:300px}}
+  .ba-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:5;width:50px;height:50px;border-radius:50%;
+    background:#fff;border:1px solid var(--line);box-shadow:var(--shadow);display:grid;place-items:center;
+    cursor:pointer;color:var(--navy);transition:transform .2s,background .2s,color .2s}
+  .ba-nav:hover{background:var(--navy);color:#fff;transform:translateY(-50%) scale(1.06)}
+  .ba-nav:active{transform:translateY(-50%) scale(.96)}
+  .ba-nav.prev{left:8px}
+  .ba-nav.next{right:8px}
+  .ba-hint{text-align:center;margin-top:16px;font-size:.82rem;color:var(--muted-2);display:flex;align-items:center;justify-content:center;gap:7px}
+  @media(max-width:700px){.ba-card{height:340px}.ba-nav{width:42px;height:42px}.ba-nav.prev{left:4px}.ba-nav.next{right:4px}}
 
   /* Testimonial marquee cards */
   .marquee .test-card{flex:none;width:360px}
@@ -583,9 +596,12 @@
       <p class="sub">Resultado de método, progressão e consistência — não de milagre de 21 dias.</p>
     </div>
   </div>
-  <div class="marquee reveal">
-    <div class="marquee-track m-slow" id="baTrack"></div>
+  <div class="ba-carousel reveal">
+    <button class="ba-nav prev" id="baPrev" aria-label="Anterior"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <div class="ba-viewport" id="baTrack"></div>
+    <button class="ba-nav next" id="baNext" aria-label="Próximo"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
   </div>
+  <p class="ba-hint reveal"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Arraste para o lado ou use as setas</p>
 </section>
 
 <!-- 8. PLANOS E PREÇOS -->
@@ -735,37 +751,41 @@
     const track=document.getElementById('testTrack');
     if(!track)return;
     const t=[
-      {n:'Manoela',i:'M',idade:38,tempo:'1 ano e 2 meses na Ela Fit',selo:'Voltou a treinar depois de 8 anos',
-       d:'Voltei a treinar depois de 8 anos parada e morrendo de medo de me machucar. No Nível 1 aprendi a executar cada movimento com calma e segurança. Hoje treino 5x por semana e me sinto mais forte do que aos 25.'},
-      {n:'Carla',i:'C',idade:34,tempo:'2 anos na Ela Fit',selo:'2 anos de constância',
-       d:'Já tinha assinado mil apps e desistido de todos. O que me segurou aqui foi a progressão fazer sentido e ter uma comunidade do meu lado. É a primeira vez na vida que mantenho constância de verdade.'},
-      {n:'Luciene',i:'L',idade:52,tempo:'1 ano e meio na Ela Fit',selo:'+4 kg de massa magra em 1 ano',
-       d:'Achava que na minha idade não dava mais pra ganhar massa. Ganhei 4 kg de massa magra em um ano, minhas dores nas costas sumiram e hoje subo escada sem cansar. Mudou minha rotina inteira.'},
-      {n:'Patrícia',i:'P',idade:29,tempo:'7 meses na Ela Fit',selo:'Começou do absoluto zero',
-       d:'Comecei do zero, nunca tinha pisado numa academia e ficava perdida. Os vídeos de execução me deram segurança pra treinar sozinha. Hoje o treino virou o meu momento do dia.'},
-      {n:'Renata',i:'R',idade:41,tempo:'10 meses na Ela Fit',selo:'Emagreceu sem dieta maluca',
-       d:'O que mudou o jogo pra mim foi juntar o treino com a orientação da nutri. Emagreci com saúde, sem passar fome nem dieta maluca, e o melhor: consegui manter.'},
-      {n:'Juliana',i:'J',idade:36,tempo:'1 ano na Ela Fit',selo:'Foco em glúteos e postura',
-       d:'Glúteo e postura sempre foram minha meta, e é exatamente o foco daqui. Minhas fotos de antes e depois falam por mim. Recomendo de olhos fechados pra qualquer mulher.'}
+      {n:'Manoela',i:'M',selo:'Voltou a treinar depois de 8 anos',
+       d:'Voltei pra academia depois de 8 anos parada, morrendo de medo de me machucar de novo. Aqui eu aprendi a fazer cada exercício do jeito certo, sem pressa nenhuma. Hoje treino 5x na semana e me sinto mais forte do que quando eu era mais nova. 🙏'},
+      {n:'Carla',i:'C',selo:'Finalmente manteve a constância',
+       d:'Gente, eu já tinha assinado um monte de app e largado tudo no meio. O que me fez ficar foi ver que os treinos fazem sentido e ter as meninas ali comigo. É a primeira vez na vida que eu consigo manter a constância de verdade.'},
+      {n:'Luciene',i:'L',selo:'Ganhou massa e perdeu as dores',
+       d:'Eu achava que na minha idade não dava mais pra evoluir. Em um ano eu ganhei massa, minhas dores nas costas foram embora e hoje eu subo escada sem cansar. Mudou até o meu humor no dia a dia.'},
+      {n:'Patrícia',i:'P',selo:'Começou do zero e criou rotina',
+       d:'Comecei do zero, nunca tinha pisado numa academia e vivia perdida sem saber o que fazer. Os vídeos me deram segurança pra treinar sozinha. Hoje o treino virou o meu momento do dia, não abro mão.'},
+      {n:'Renata',i:'R',selo:'Emagreceu com saúde e manteve',
+       d:'O que mudou tudo pra mim foi juntar o treino com a orientação da nutri. Emagreci sem passar fome e sem fazer nenhuma loucura, e o melhor de tudo: consegui manter até hoje. Recomendo demais.'},
+      {n:'Juliana',i:'J',selo:'Foco em glúteos e postura',
+       d:'Meu foco sempre foi glúteo e postura, e é exatamente isso que eu encontrei aqui. Minhas fotos de antes e depois falam por mim. Indico de olhos fechados pra qualquer mulher que quer começar direito.'}
     ];
-    const card=(x,dup)=>`<article class="test-card"${dup?' aria-hidden="true"':''}><div class="test-quote">&ldquo;</div><p class="test-body">${x.d}</p><span class="test-result">✦ ${x.selo}</span><div class="test-person"><div class="test-avatar">${x.i}</div><div><b>${x.n}, ${x.idade}</b><span>${x.tempo}</span></div></div></article>`;
+    const card=(x,dup)=>`<article class="test-card"${dup?' aria-hidden="true"':''}><div class="test-quote">&ldquo;</div><p class="test-body">${x.d}</p><span class="test-result">✦ ${x.selo}</span><div class="test-person"><div class="test-avatar">${x.i}</div><div><b>${x.n}</b><span>Aluna Ela Fit</span></div></div></article>`;
     let html='';
     t.forEach(x=>html+=card(x,false));
     t.forEach(x=>html+=card(x,true));
     track.innerHTML=html;
   })();
 
-  // Antes & depois (auto-slide)
+  // Antes & depois (carrossel manual: setas + arrasta)
   (function(){
     const track=document.getElementById('baTrack');
     if(!track)return;
     // proporção largura/altura de cada imagem — reserva a largura do card antes da imagem carregar
     const ar=[1,1,1.04,1,1.01,1,0.8,1,1.01,1,1.01,1,1,0.56];
-    const one=(i,dup)=>`<figure class="ba-card" style="--ar:${ar[i-1]}"${dup?' aria-hidden="true"':''}><span class="ba-badge">ANTES · DEPOIS</span><img src="assets/ba-${String(i).padStart(2,'0')}.webp" alt="Transformação de aluna Ela Fit" width="900" height="900" decoding="async"><figcaption class="cap">Transformação real · Aluna Ela Fit</figcaption></figure>`;
     let html='';
-    for(let i=1;i<=ar.length;i++)html+=one(i,false);
-    for(let i=1;i<=ar.length;i++)html+=one(i,true);
+    for(let i=1;i<=ar.length;i++){
+      html+=`<figure class="ba-card" style="--ar:${ar[i-1]}"><span class="ba-badge">ANTES · DEPOIS</span><img src="assets/ba-${String(i).padStart(2,'0')}.webp" alt="Transformação de aluna Ela Fit" width="900" height="900" decoding="async"><figcaption class="cap">Transformação real · Aluna Ela Fit</figcaption></figure>`;
+    }
     track.innerHTML=html;
+    const prev=document.getElementById('baPrev'), next=document.getElementById('baNext');
+    const step=()=>{const c=track.querySelector('.ba-card');return c?c.getBoundingClientRect().width+20:340;};
+    prev&&prev.addEventListener('click',()=>track.scrollBy({left:-step(),behavior:'smooth'}));
+    next&&next.addEventListener('click',()=>track.scrollBy({left:step(),behavior:'smooth'}));
   })();
 
   // Nav shadow on scroll
