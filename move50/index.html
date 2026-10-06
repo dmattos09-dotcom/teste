@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#192542">
+<meta name="description" content="ELA FIT MOVE 50 · 50 dias pra colocar o corpo em movimento e a constância na rotina. Treino + plano alimentar + grupo fechado + lives com o Treinador Lucas Gonçalves.">
+<meta property="og:title" content="ELA FIT · MOVE 50 — Desafio de 50 dias">
+<meta property="og:description" content="50 dias pra colocar o corpo em movimento e a constância na rotina. Começa 19 de outubro.">
+<meta property="og:type" content="website">
+<title>ELA FIT MOVE 50 · Desafio de 50 dias</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --navy:#192542;--navy-2:#243254;--ink:#1c2538;
+    --white:#fff;--bg:#f7f5f1;--bg-2:#efece5;--mist:#eef1f6;
+    --line:#e6e3dc;--muted:#6b7384;--muted-2:#9aa1af;--gold:#c9a876;--gold-2:#b8956a;
+    --r:20px;--r-sm:14px;--shadow:0 30px 70px -34px rgba(25,37,66,.4);--shadow-sm:0 16px 40px -26px rgba(25,37,66,.4);
+    --max:1140px;--ease:cubic-bezier(.22,.61,.36,1);
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--bg);line-height:1.62;font-size:16px;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  img{max-width:100%;display:block}
+  a{text-decoration:none;color:inherit}
+  ::selection{background:var(--gold);color:var(--navy)}
+  h1,h2,h3{font-weight:800;line-height:1.05;letter-spacing:-.02em;text-transform:uppercase}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 22px;width:100%}
+  .g{color:var(--gold)}
+
+  .eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.72rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-2)}
+  .eyebrow::before{content:"";width:22px;height:2px;background:var(--gold)}
+  .eyebrow.center{justify-content:center}.eyebrow.center::after{content:"";width:22px;height:2px;background:var(--gold)}
+
+  /* BUTTONS */
+  .btn{display:inline-flex;align-items:center;gap:10px;justify-content:center;font-weight:800;font-size:.9rem;letter-spacing:.06em;text-transform:uppercase;padding:15px 16px 15px 26px;border-radius:999px;border:2px solid transparent;cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s,color .2s;font-family:inherit}
+  .btn .circ{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;flex:none;font-size:1rem}
+  .btn.simple{padding:15px 28px}
+  .btn-primary{background:var(--navy);color:#fff;box-shadow:0 16px 34px -14px rgba(25,37,66,.6)}
+  .btn-primary .circ{background:#fff;color:var(--navy)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 22px 44px -16px rgba(25,37,66,.65)}
+  .btn-gold{background:var(--gold);color:var(--navy)}.btn-gold .circ{background:var(--navy);color:#fff}
+  .btn-gold:hover{background:var(--gold-2);transform:translateY(-2px)}
+  .btn-ghost{background:transparent;color:var(--navy);border-color:var(--navy)}.btn-ghost .circ{background:var(--navy);color:#fff}
+  .btn-ghost:hover{background:var(--navy);color:#fff}.btn-ghost:hover .circ{background:#fff;color:var(--navy)}
+  .btn-light{background:#fff;color:var(--navy)}.btn-light .circ{background:var(--navy);color:#fff}
+  .btn-light:hover{transform:translateY(-2px);box-shadow:0 18px 40px -16px rgba(0,0,0,.4)}
+  .btn-block{width:100%}
+  .btn .circ svg{width:15px;height:15px}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 22px;background:transparent;border-bottom:1px solid transparent;transition:background .3s,border-color .3s,box-shadow .3s,padding .3s}
+  nav.scrolled{background:rgba(255,255,255,.92);backdrop-filter:blur(16px);border-color:var(--line);box-shadow:0 6px 24px -18px rgba(25,37,66,.4);padding:10px 22px}
+  .brand{display:flex;align-items:center;gap:10px}
+  .brand-logo{height:28px;width:auto;display:block;filter:drop-shadow(0 1px 8px rgba(0,0,0,.3))}
+  .brand-logo.dark{display:none}
+  nav.scrolled .brand-logo.light{display:none}
+  nav.scrolled .brand-logo.dark{display:block;filter:none}
+  .brand-tag{font-size:.6rem;font-weight:800;letter-spacing:.2em;color:#fff;border:1.5px solid rgba(255,255,255,.55);padding:4px 9px;border-radius:999px;text-transform:uppercase}
+  nav.scrolled .brand-tag{color:var(--navy);border-color:var(--line)}
+  .nav-cta{padding:10px 14px 10px 20px;font-size:.78rem}
+  @media(max-width:560px){.brand-logo{height:25px}.nav-cta .circ{display:none}.nav-cta{padding:10px 18px}}
+
+  /* HERO */
+  .hero{position:relative;background:var(--navy);color:#fff;overflow:hidden;text-align:center}
+  .hero-photo{position:relative;width:100%;background:#0e1526;line-height:0}
+  .hero-photo img{width:100%;height:auto;display:block}
+  .hero-photo::before{content:"";position:absolute;top:0;left:0;right:0;height:92px;background:linear-gradient(180deg,rgba(14,21,38,.5),transparent);z-index:1;pointer-events:none}
+  .hero-photo::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:32%;background:linear-gradient(180deg,transparent,var(--navy));z-index:1;pointer-events:none}
+  .hero-inner{position:relative;z-index:2;max-width:820px;margin:-46px auto 0;padding:0 22px 50px;display:flex;flex-direction:column;align-items:center}
+  @media(min-width:760px){
+    .hero-photo img{height:60vh;object-fit:cover;object-position:center 36%}
+    .hero-inner{margin-top:-74px;padding-bottom:62px}
+  }
+  .hero .eyebrow{color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.4)}
+  .hero h1{color:#fff;font-size:clamp(3.6rem,17vw,8rem);line-height:.9;letter-spacing:-.04em;margin:16px 0 0;text-shadow:0 4px 30px rgba(0,0,0,.4)}
+  .hero .lead{color:rgba(255,255,255,.92);font-size:clamp(1.02rem,1.7vw,1.22rem);margin:18px auto 2px;max-width:40ch;text-shadow:0 1px 16px rgba(0,0,0,.5);font-weight:500;line-height:1.55}
+  .hero .data{font-size:.7rem;letter-spacing:.2em;color:rgba(255,255,255,.65);text-transform:uppercase;font-weight:800;margin-top:6px}
+  .hero-cta-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center;margin-top:24px}
+  .hero-cta-row .btn-ghost{color:#fff;border-color:rgba(255,255,255,.55)}.hero-cta-row .btn-ghost .circ{background:#fff;color:var(--navy)}
+  .hero-trust{display:flex;gap:0;flex-wrap:wrap;justify-content:center;margin-top:30px;padding-top:24px;border-top:1px solid rgba(255,255,255,.2)}
+  .hero-trust .t{padding:0 26px;position:relative}
+  .hero-trust .t+.t::before{content:"";position:absolute;left:0;top:6px;bottom:6px;width:1px;background:rgba(255,255,255,.2)}
+  .hero-trust .t b{display:block;font-size:2rem;color:#fff;font-weight:900;line-height:1;letter-spacing:-.03em}
+  .hero-trust .t span{font-size:.64rem;letter-spacing:.14em;color:rgba(255,255,255,.72);font-weight:700;text-transform:uppercase}
+  .hero-scroll{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:2;color:rgba(255,255,255,.55);animation:bob 1.8s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,7px)}}
+  @media(max-width:600px){.hero-scroll{display:none}.hero .btn{width:100%}.hero-trust .t{padding:0 18px}}
+
+  /* COUNTDOWN */
+  .countdown{display:flex;justify-content:center;gap:9px;margin:26px auto 2px;flex-wrap:wrap}
+  .cd-box{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);border-radius:12px;min-width:72px;padding:12px 10px;backdrop-filter:blur(6px)}
+  .cd-num{font-size:2.05rem;font-weight:900;color:#fff;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.03em}
+  .cd-lab{font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-top:7px;font-weight:800}
+  @media(max-width:460px){.cd-box{min-width:62px;padding:10px 7px}.cd-num{font-size:1.65rem}}
+
+  /* SECTIONS */
+  section{position:relative}
+  .pad{padding:92px 0}.pad-lg{padding:116px 0}
+  @media(max-width:700px){.pad,.pad-lg{padding:64px 0}}
+  .navy{background:var(--navy);color:#fff}
+  .paper{background:var(--bg)}
+  .mist{background:var(--bg-2)}
+  .white{background:#fff}
+  .sec-head{max-width:760px;margin:0 auto;text-align:center}
+  .sec-head h2{font-size:clamp(1.9rem,4.6vw,3rem);margin:14px 0 0}
+  .sec-head p.sub{color:var(--muted);font-size:1.08rem;margin-top:16px;font-weight:500;text-transform:none;letter-spacing:0}
+  .navy .sec-head h2{color:#fff}.navy .sec-head p.sub{color:#c3ccdf}.navy .eyebrow{color:var(--gold)}
+
+  /* PAIN */
+  .pain .wrap{max-width:720px;text-align:center}
+  .pain h2{font-size:clamp(1.8rem,4vw,2.6rem);color:#fff;margin:16px 0 22px}
+  .pain p{color:#c3ccdf;font-size:1.1rem;margin-bottom:14px;font-weight:500}
+  .pain p.close{color:#fff;font-weight:700;font-size:1.2rem;margin-top:22px}
+
+  /* SPLIT */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+  .split .copy h2{font-size:clamp(1.8rem,3.6vw,2.5rem);margin-top:14px}
+  .split .copy p{color:var(--muted);font-size:1.08rem;margin-top:16px;font-weight:500}
+  .split .copy .accent{margin-top:24px;padding:20px 24px;background:#fff;border-left:3px solid var(--gold);border-radius:0 14px 14px 0;box-shadow:var(--shadow-sm)}
+  .split .copy .accent b{color:var(--navy);font-size:1.04rem;font-weight:800}
+  .split .copy .accent span{color:var(--muted);font-size:.96rem;font-weight:500}
+  .split .photo{border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);aspect-ratio:3/2}
+  .split .photo img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
+  @media(max-width:820px){.split{grid-template-columns:1fr;gap:30px}.split .photo{order:-1}}
+
+  /* CARDS */
+  .grid{display:grid;gap:18px;margin-top:46px}
+  .grid.c3{grid-template-columns:repeat(3,1fr)}
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:26px 24px;transition:transform .25s var(--ease),box-shadow .25s,border-color .25s}
+  .card:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:transparent}
+  .card .badge{width:48px;height:48px;border-radius:12px;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:900;font-size:1.3rem;margin-bottom:16px}
+  .card h3{font-size:1.12rem;margin-bottom:8px;letter-spacing:-.01em}
+  .card p{color:var(--muted);font-size:.96rem;font-weight:500;text-transform:none}
+  .card .mins{display:inline-block;margin-top:14px;font-size:.66rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-2);background:rgba(201,168,118,.12);padding:5px 11px;border-radius:999px}
+  .seal{margin:34px auto 0;max-width:max-content;display:flex;align-items:center;gap:12px;background:var(--navy);color:#fff;padding:14px 26px;border-radius:999px;font-weight:700;font-size:.92rem;text-align:center}
+  @media(max-width:820px){.grid.c3{grid-template-columns:1fr}}
+
+  /* MOVE/EVOLVE */
+  .jbar{height:12px;border-radius:999px;background:rgba(25,37,66,.08);overflow:hidden;display:flex;margin:46px 0 24px}
+  .jbar .s1{width:50%;background:linear-gradient(90deg,#e7dcc4,var(--gold));transform:scaleX(0);transform-origin:left;transition:transform 1.1s var(--ease) .1s}
+  .jbar .s2{width:50%;background:linear-gradient(90deg,var(--navy-2),var(--navy));transform:scaleX(0);transform-origin:left;transition:transform 1.1s var(--ease) .5s}
+  .jbar.in .s1,.jbar.in .s2{transform:scaleX(1)}
+  .blocos{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .bloco{background:#fff;border:1px solid var(--line);border-top:5px solid var(--gold);border-radius:0 0 var(--r) var(--r);padding:30px;box-shadow:var(--shadow-sm)}
+  .bloco.alt{border-top-color:var(--navy)}
+  .bloco .lab{font-weight:800;font-size:.68rem;letter-spacing:.14em;color:var(--gold-2);text-transform:uppercase;margin-bottom:10px}
+  .bloco.alt .lab{color:var(--navy)}
+  .bloco h3{font-size:2.1rem;margin-bottom:4px;letter-spacing:-.03em}
+  .bloco .d{font-size:.78rem;color:var(--muted-2);margin-bottom:14px;text-transform:uppercase;letter-spacing:.1em;font-weight:700}
+  .bloco p{color:var(--muted);font-size:.98rem;font-weight:500}
+  @media(max-width:720px){.blocos{grid-template-columns:1fr}}
+
+  /* INCLUDES */
+  .inc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0 40px;margin-top:42px}
+  .inc-item{display:flex;gap:14px;align-items:flex-start;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.1)}
+  .inc-check{width:28px;height:28px;border-radius:9px;background:rgba(201,168,118,.18);display:grid;place-items:center;flex:none;margin-top:1px}
+  .inc-item .t{font-size:.96rem;color:#fff;font-weight:800;text-transform:uppercase;letter-spacing:.01em}
+  .inc-item .s{font-size:.9rem;color:#aeb8cc;font-weight:500;margin-top:2px}
+  @media(max-width:720px){.inc-grid{grid-template-columns:1fr;gap:0}}
+
+  /* COACH */
+  .coach{display:grid;grid-template-columns:.9fr 1.1fr;gap:50px;align-items:center}
+  .coach .frame{border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);aspect-ratio:4/5;position:relative}
+  .coach .frame img{width:100%;height:100%;object-fit:cover;object-position:center 20%}
+  .coach .cred{position:absolute;right:-14px;bottom:24px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 20px;box-shadow:var(--shadow-sm);max-width:200px}
+  .coach .cred b{color:var(--navy);font-size:1.9rem;display:block;line-height:1;font-weight:900}
+  .coach .cred span{font-size:.78rem;color:var(--muted);font-weight:600;text-transform:none}
+  .coach h2{font-size:clamp(1.9rem,3.6vw,2.6rem);margin:14px 0 18px}
+  .coach p{color:var(--muted);font-size:1.05rem;margin-bottom:14px;font-weight:500;text-transform:none}
+  .coach p em{color:var(--navy);font-weight:700;font-style:normal}
+  .chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}
+  .chip{background:var(--mist);color:var(--navy);padding:8px 16px;border-radius:999px;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.02em}
+  @media(max-width:820px){.coach{grid-template-columns:1fr;gap:40px}.coach .pic{max-width:420px;margin:0 auto}.coach .cred{right:8px}}
+
+  /* DEPOIMENTOS */
+  .marquee{position:relative;overflow:hidden;margin-top:46px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+  .marquee-track{display:flex;gap:20px;width:max-content;will-change:transform;animation:scrollx 54s linear infinite}
+  .marquee:hover .marquee-track{animation-play-state:paused}
+  @keyframes scrollx{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+  .tcard{flex:none;width:350px;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:26px;display:flex;flex-direction:column;box-shadow:var(--shadow-sm)}
+  .tcard .q{font-size:3rem;color:var(--gold);line-height:.5;height:24px;font-weight:900;opacity:.4}
+  .tcard .tb{color:var(--ink);font-size:.97rem;margin:12px 0 20px;flex:1;font-weight:500}
+  .tcard .who{display:flex;align-items:center;gap:13px;border-top:1px solid var(--line);padding-top:16px}
+  .tcard .av{width:46px;height:46px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:800;font-size:1.05rem;flex:none}
+  .tcard .who b{display:block;font-size:.92rem;color:var(--navy);font-weight:800;text-transform:uppercase;letter-spacing:.02em}
+  .tcard .who span{font-size:.78rem;color:var(--muted-2);font-weight:600}
+  @media(max-width:600px){.tcard{width:288px}}
+  @media(prefers-reduced-motion:reduce){.marquee-track{animation:none}.marquee{overflow-x:auto}}
+
+  /* ANTES & DEPOIS */
+  .ba{position:relative;margin-top:44px}
+  .ba-view{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;padding:6px 22px 10px;scrollbar-width:none}
+  .ba-view::-webkit-scrollbar{display:none}
+  .ba-card{flex:none;height:460px;aspect-ratio:var(--ar,1);border-radius:var(--r);overflow:hidden;position:relative;background:var(--mist);box-shadow:var(--shadow-sm);border:1px solid var(--line);scroll-snap-align:center}
+  .ba-card img{width:100%;height:100%;object-fit:cover}
+  .ba-card .tag{position:absolute;top:12px;left:12px;background:rgba(25,37,66,.92);color:#fff;font-size:.62rem;font-weight:800;letter-spacing:.1em;padding:5px 11px;border-radius:999px;text-transform:uppercase}
+  .ba-card .cap{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:center;gap:8px;padding:26px 16px 12px;color:#fff;font-size:.76rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;background:linear-gradient(0deg,rgba(15,23,41,.85),transparent)}
+  .ba-card .cap::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--gold);flex:none}
+  .ba-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:5;width:50px;height:50px;border-radius:50%;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow);display:grid;place-items:center;cursor:pointer;color:var(--navy);transition:transform .2s,background .2s,color .2s}
+  .ba-nav:hover{background:var(--navy);color:#fff;transform:translateY(-50%) scale(1.06)}
+  .ba-nav.prev{left:8px}.ba-nav.next{right:8px}
+  .ba-hint{text-align:center;margin-top:16px;font-size:.74rem;color:var(--muted-2);display:flex;align-items:center;justify-content:center;gap:7px;text-transform:uppercase;letter-spacing:.08em;font-weight:700}
+  @media(max-width:700px){.ba-card{height:340px}.ba-nav{width:42px;height:42px}.ba-nav.prev{left:4px}.ba-nav.next{right:4px}}
+
+  /* PLANOS */
+  .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:46px;align-items:stretch}
+  .price-card{background:#fff;border:1.5px solid var(--line);border-radius:var(--r);padding:32px 26px;display:flex;flex-direction:column;position:relative;transition:transform .25s,box-shadow .25s;cursor:pointer}
+  .price-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+  .price-card.featured{border-color:var(--navy);box-shadow:var(--shadow)}
+  .price-card.sel{outline:2px solid var(--gold);outline-offset:3px}
+  .price-flag{position:absolute;top:-13px;left:50%;transform:translateX(-50%);white-space:nowrap;background:var(--gold);color:var(--navy);padding:6px 16px;border-radius:999px;font-size:.66rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+  .price-name{font-weight:800;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-2)}
+  .price-vagas{font-size:.9rem;color:var(--muted);margin-top:6px;font-weight:600}
+  .price-value{display:flex;align-items:flex-start;gap:3px;margin:16px 0 2px}
+  .price-value .cur{font-size:1.2rem;font-weight:800;color:var(--navy);margin-top:8px}
+  .price-value .num{font-size:3.4rem;font-weight:900;color:var(--navy);line-height:.9;letter-spacing:-.04em}
+  .price-parcela{font-size:.88rem;color:var(--muted-2);min-height:20px;font-weight:500}
+  .vbar{height:7px;border-radius:999px;background:var(--mist);overflow:hidden;margin:16px 0}
+  .vbar i{display:block;height:100%;background:var(--gold);width:0;transition:width 1.2s var(--ease)}
+  .price-feats{list-style:none;margin:4px 0 22px;flex:1}
+  .price-feats li{display:flex;gap:10px;align-items:flex-start;font-size:.9rem;color:var(--ink);font-weight:500;margin-bottom:9px}
+  .price-feats li svg{flex:none;margin-top:3px}
+  .price-card .btn{margin-top:auto}
+  .price-card.locked{opacity:.68;filter:saturate(.55)}
+  .price-card.locked:hover{transform:none;box-shadow:none}
+  .price-card.locked{cursor:default}
+  .price-card.locked .price-flag{background:var(--muted-2);color:#fff}
+  .price-card.locked .vbar i{background:var(--muted-2)}
+  .btn-locked{background:var(--mist);color:var(--muted-2);cursor:not-allowed;pointer-events:none;border-color:transparent;gap:8px}
+  @media(max-width:820px){.price-grid{grid-template-columns:1fr;gap:26px}}
+
+  /* COMBO */
+  .combo{margin-top:24px;background:linear-gradient(120deg,var(--navy),var(--navy-2));border-radius:var(--r);color:#fff;padding:44px 38px;text-align:center;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .combo::before{content:"";position:absolute;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,118,.18),transparent 70%);top:-140px;right:-80px}
+  .combo .k{position:relative;font-size:.7rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+  .combo h3{position:relative;font-size:clamp(1.5rem,3.4vw,2.1rem);margin:12px 0 12px;color:#fff}
+  .combo p{position:relative;color:#c8d0e2;font-size:1rem;max-width:48ch;margin:0 auto 18px;font-weight:500;text-transform:none}
+  .combo .pr{position:relative;font-size:3.1rem;color:#fff;font-weight:900;line-height:1;letter-spacing:-.04em}.combo .pr .cur{font-size:1.3rem;vertical-align:top;color:#c8d0e2;font-weight:700}
+  .combo .eco{position:relative;display:inline-block;margin:12px 0 22px;background:var(--gold);color:var(--navy);font-weight:800;font-size:.72rem;letter-spacing:.08em;padding:7px 15px;border-radius:999px;text-transform:uppercase}
+  @media(max-width:600px){.combo{padding:38px 22px}}
+
+  /* PREMIO */
+  .premio{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:46px;align-items:end}
+  .premio-item{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);border-radius:var(--r);padding:30px 22px;text-align:center;transition:transform .25s}
+  .premio-item:hover{transform:translateY(-5px)}
+  .premio-item.p1{border-color:var(--gold);background:rgba(201,168,118,.1);padding-top:42px;padding-bottom:42px}
+  .premio-medal{font-size:2.4rem;color:var(--gold);font-weight:900;line-height:1;margin-bottom:12px;letter-spacing:-.03em}
+  .premio-tt{font-size:1.02rem;color:#fff;font-weight:800;margin-bottom:6px;text-transform:uppercase;letter-spacing:.01em}
+  .premio-ds{font-size:.88rem;color:#aeb8cc;font-weight:500}
+  @media(max-width:760px){.premio{grid-template-columns:1fr}.premio-item.p1{order:-1}}
+
+  /* PRA QUEM */
+  .pq{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:46px}
+  .pq-card{background:#fff;border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:0 var(--r) var(--r) 0;padding:28px 30px;box-shadow:var(--shadow-sm)}
+  .pq-card.no{border-left-color:#c06a6a}
+  .pq-card h3{font-size:1.14rem;color:var(--navy);margin-bottom:16px}
+  .pq-card.no h3{color:#c06a6a}
+  .pq-card ul{list-style:none}
+  .pq-card li{padding-left:28px;position:relative;margin-bottom:11px;font-size:.96rem;color:var(--ink);font-weight:500}
+  .pq-card li::before{position:absolute;left:0;top:1px;width:18px;height:18px;border-radius:50%;display:grid;place-items:center;font-size:.64rem;font-weight:800}
+  .pq-card li::before{content:"✓";color:var(--gold-2);background:rgba(201,168,118,.18)}
+  .pq-card.no li::before{content:"✕";color:#c06a6a;background:rgba(192,106,106,.14)}
+  @media(max-width:720px){.pq{grid-template-columns:1fr}}
+
+  /* GARANTIA */
+  .guarantee .wrap{background:linear-gradient(120deg,var(--navy),var(--navy-2));border-radius:var(--r);color:#fff;padding:48px;display:flex;align-items:center;gap:40px;box-shadow:var(--shadow)}
+  .guar-seal{width:134px;height:134px;border-radius:50%;flex:none;display:grid;place-items:center;text-align:center;border:2px dashed rgba(201,168,118,.6);background:rgba(255,255,255,.04)}
+  .guar-seal b{font-size:2.6rem;color:var(--gold);line-height:.9;font-weight:900}
+  .guar-seal span{font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:#cbd3e6;margin-top:4px;font-weight:700}
+  .guar-copy h2{color:#fff;font-size:clamp(1.5rem,3vw,2.1rem);margin-bottom:10px}
+  .guar-copy p{color:#c8d0e2;font-size:1.02rem;font-weight:500;text-transform:none}
+  @media(max-width:700px){.guarantee .wrap{flex-direction:column;text-align:center;padding:38px 24px;gap:24px}}
+
+  /* FAQ */
+  .faq-wrap{max-width:800px;margin:42px auto 0}
+  .faq-item{border-bottom:1px solid var(--line)}
+  .faq-q{width:100%;background:none;border:none;cursor:pointer;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 4px;font-family:inherit;font-size:1rem;font-weight:800;color:var(--navy);text-transform:uppercase;letter-spacing:.01em}
+  .faq-q .plus{width:22px;height:22px;flex:none;position:relative;transition:transform .3s}
+  .faq-q .plus::before,.faq-q .plus::after{content:"";position:absolute;background:var(--gold);border-radius:2px;top:50%;left:50%;transform:translate(-50%,-50%)}
+  .faq-q .plus::before{width:14px;height:2.4px}.faq-q .plus::after{width:2.4px;height:14px;transition:transform .3s}
+  .faq-item.open .faq-q .plus::after{transform:translate(-50%,-50%) scaleY(0)}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .35s var(--ease)}
+  .faq-a p{color:var(--muted);font-size:.98rem;padding:0 4px 22px;max-width:70ch;font-weight:500;text-transform:none}
+  @media(max-width:700px){.faq-q{font-size:.92rem}}
+
+  /* FINAL */
+  .final{background:var(--navy);color:#fff;text-align:center;overflow:hidden;position:relative}
+  .final::before{content:"";position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,118,.14),transparent 70%);top:-200px;right:-120px}
+  .final .wrap{max-width:760px;position:relative}
+  .final h2{font-size:clamp(2.1rem,5vw,3.4rem);color:#fff;letter-spacing:-.03em}
+  .final p{color:#c3ccdf;font-size:1.12rem;margin:18px auto 30px;max-width:44ch;font-weight:500;text-transform:none}
+
+  /* FOOTER */
+  footer{background:#0f1729;color:#aeb7ca;padding:54px 0 28px}
+  .foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:40px;padding-bottom:34px;border-bottom:1px solid rgba(255,255,255,.08)}
+  .foot-brand p{margin-top:16px;font-size:.9rem;max-width:34ch;color:#8b93a6;font-weight:500}
+  .foot-col h4{color:#fff;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:16px;font-weight:800}
+  .foot-col a{display:block;font-size:.9rem;margin-bottom:11px;color:#aeb7ca;transition:color .2s;font-weight:500}
+  .foot-col a:hover{color:#fff}
+  .socials{display:flex;gap:12px;margin-top:18px}
+  .socials a{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.07);display:grid;place-items:center;transition:background .2s}
+  .socials a:hover{background:var(--gold)}
+  .foot-legal{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:24px;font-size:.78rem;color:#7b8398;font-weight:500}
+  @media(max-width:760px){.foot-grid{grid-template-columns:1fr 1fr}.foot-brand{grid-column:1/-1}}
+
+  /* STICKY */
+  .sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:95;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 16px;transform:translateY(130%);transition:transform .45s var(--ease)}
+  .sticky-cta.show{transform:translateY(0)}
+  .sticky-cta .info b{font-size:1.25rem;color:var(--navy);display:block;line-height:1;font-weight:900;letter-spacing:-.02em}
+  .sticky-cta .info span{font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-2);font-weight:800}
+  .sticky-cta .btn{padding:12px 14px 12px 20px;font-size:.76rem}
+  @media(min-width:820px){.sticky-cta{display:none}}
+
+  .totop{position:fixed;right:18px;bottom:82px;z-index:90;width:44px;height:44px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;box-shadow:var(--shadow-sm);opacity:0;pointer-events:none;transform:translateY(10px);transition:opacity .3s,transform .3s;cursor:pointer;border:none}
+  .totop.show{opacity:1;pointer-events:auto;transform:none}
+  @media(min-width:820px){.totop{bottom:22px}}
+
+  /* REVEAL */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+  .reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="brand" href="#top" aria-label="Ela Fit">
+    <img class="brand-logo light" src="https://cdn.jsdelivr.net/gh/dmattos09-dotcom/teste@192762144b0ff91068746abf2e6ccff440b862b2/ela-fit/assets/logo-white.webp" alt="Ela Fit" width="640" height="219">
+    <img class="brand-logo dark" src="https://cdn.jsdelivr.net/gh/dmattos09-dotcom/teste@192762144b0ff91068746abf2e6ccff440b862b2/ela-fit/assets/logo-navy.webp" alt="Ela Fit" width="640" height="219">
+    <span class="brand-tag">Move 50</span>
+  </a>
+  <a href="#planos" class="btn btn-primary nav-cta">Garantir vaga <span class="circ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+</nav>
+
+<span id="top"></span>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-photo"><img src="https://cdn.jsdelivr.net/gh/dmattos09-dotcom/teste@3e75aa5bb5bb8328953c9ef3bbdb90128ad55c00/ela-fit/assets/move50-hero2.webp" alt="Treinador Lucas · Desafio Ela Fit Move 50" fetchpriority="high"></div>
+  <div class="hero-inner">
+    <span class="eyebrow">Desafio Ela Fit · Edição 01</span>
+    <h1>Move <span class="g">50</span></h1>
+    <p class="lead">50 dias pra colocar o corpo em movimento — e a constância na rotina. Começa 19 de outubro.</p>
+
+    <div class="countdown" id="countdown" aria-label="Contagem regressiva para o início">
+      <div class="cd-box"><div class="cd-num" id="cd-d">00</div><div class="cd-lab">Dias</div></div>
+      <div class="cd-box"><div class="cd-num" id="cd-h">00</div><div class="cd-lab">Horas</div></div>
+      <div class="cd-box"><div class="cd-num" id="cd-m">00</div><div class="cd-lab">Min</div></div>
+      <div class="cd-box"><div class="cd-num" id="cd-s">00</div><div class="cd-lab">Seg</div></div>
+    </div>
+
+    <div class="hero-cta-row">
+      <a href="#planos" class="btn btn-gold">Quero participar <span class="circ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      <a href="#metodo" class="btn btn-ghost simple">Conhecer o método</a>
+    </div>
+    <div class="data">Início · 19 de outubro de 2026</div>
+
+    <div class="hero-trust">
+      <div class="t"><b>50</b><span>Dias</span></div>
+      <div class="t"><b>5</b><span>Treinos</span></div>
+      <div class="t"><b>200</b><span>Vagas</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- EMOCIONAL -->
+<section class="pad navy pain" id="intro">
+  <div class="wrap">
+    <span class="eyebrow center">Chegou a hora</span>
+    <h2>O último capítulo <span class="g">do ano</span></h2>
+    <p>Você já entrou em janeiro dizendo que ia mudar. Já pagou academia em fevereiro. Já parou em março. Já recomeçou em agosto e culpou o inverno, o trabalho, a família.</p>
+    <p>Chegou outubro e você olha os últimos meses do ano como uma prova de que talvez você não consiga mesmo.</p>
+    <p class="close">A verdade? Você não precisa mudar quem você é. Precisa só de 50 dias pra provar que constância vence tudo.</p>
+  </div>
+</section>
+
+<!-- O QUE É -->
+<section class="pad paper" id="metodo">
+  <div class="wrap split">
+    <div class="copy reveal">
+      <span class="eyebrow">O que é o Move 50</span>
+      <h2>Um método pensado <span class="g">pra ela</span></h2>
+      <p>50 dias, 5 treinos, um só programa — porque constância se constrói com repetição, não com confusão. Você treina na frequência que cabe na sua rotina: 3, 4 ou 5x por semana.</p>
+      <div class="accent">
+        <b>Aqui não tem projeto de 10 dias com fórmula mágica.</b><br>
+        <span>Tem método, progressão e uma linha de chegada clara.</span>
+      </div>
+    </div>
+    <div class="photo reveal d1"><img src="https://cdn.jsdelivr.net/gh/dmattos09-dotcom/teste@192762144b0ff91068746abf2e6ccff440b862b2/ela-fit/assets/move50-split.webp" alt="Treinador Lucas treinando"></div>
+  </div>
+</section>
+
+<!-- OS 5 TREINOS -->
+<section class="pad white">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow center">A estrutura</span>
+      <h2>5 treinos, <span class="g">uma semana completa</span></h2>
+      <p class="sub">Você segue a sequência A → E no ritmo que a sua rotina permitir.</p>
+    </div>
+    <div class="grid c3">
+      <article class="card reveal"><div class="badge">A</div><h3>Glúteos + Quadríceps</h3><p>Agachamento, leg press, hip thrust, afundo, extensora e abdutora.</p><span class="mins">40–50 min</span></article>
+      <article class="card reveal d1"><div class="badge">B</div><h3>Superiores + Core</h3><p>Costas, peito, ombros, braços e abdômen — sem virar maratona.</p><span class="mins">35–45 min</span></article>
+      <article class="card reveal d2"><div class="badge">C</div><h3>Full Body Move</h3><p>O treino mais dinâmico da semana, com musculação como base.</p><span class="mins">35–45 min</span></article>
+      <article class="card reveal"><div class="badge">D</div><h3>Glúteos + Posteriores</h3><p>Segundo grande estímulo de pernas, ênfase na cadeia posterior.</p><span class="mins">40–50 min</span></article>
+      <article class="card reveal d1"><div class="badge">E</div><h3>Superiores + Glúteos</h3><p>Fecha o ciclo trabalhando superiores com estímulo extra de glúteos.</p><span class="mins">40–45 min</span></article>
+      <article class="card reveal d2"><div class="badge">◆</div><h3>Flexível 3·4·5x</h3><p>A frequência é sua. O método se adapta a você, não o contrário.</p><span class="mins">sua rotina</span></article>
+    </div>
+    <div class="seal reveal">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a876" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20"/></svg>
+      Todos os treinos com execução em vídeo e checklist diário
+    </div>
+  </div>
+</section>
+
+<!-- MOVE / EVOLVE -->
+<section class="pad mist">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow center">Como funciona</span>
+      <h2>Dois blocos, <span class="g">uma jornada</span></h2>
+      <p class="sub">Mesmos 5 treinos, intensidades diferentes. Você aprende, depois evolui.</p>
+    </div>
+    <div class="jbar reveal"><span class="s1"></span><span class="s2"></span></div>
+    <div class="blocos">
+      <div class="bloco reveal">
+        <div class="lab">Bloco 01 · Dias 1 a 25</div>
+        <h3>Move</h3>
+        <div class="d">Aprender · consistência · execução</div>
+        <p>A prioridade é aprender os movimentos, encontrar as cargas certas e criar o hábito. Trabalho próximo da zona confortável — você termina sentindo que ainda poderia fazer mais 2–3 repetições.</p>
+      </div>
+      <div class="bloco alt reveal d1">
+        <div class="lab">Bloco 02 · Dias 26 a 50</div>
+        <h3>Evolve</h3>
+        <div class="d">Progredir · intensificar · evoluir</div>
+        <p>A estrutura permanece, o que muda é a intensidade. Cargas sobem, execução refina, e você começa a enxergar na prática o que a constância faz com o corpo feminino.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- O QUE VOCÊ RECEBE -->
+<section class="pad navy">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow center">Tudo que vem junto</span>
+      <h2>O desafio completo</h2>
+      <p class="sub">Não é só treino. É uma experiência de 50 dias com acompanhamento, comunidade e método.</p>
+    </div>
+    <div class="inc-grid">
+      <div class="inc-item reveal"><span class="inc-check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c9a876" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><div><div class="t">Programa Move 50</div><div class="s">5 treinos, 50 dias progressivos, link exclusivo com checklist diário.</div></div></div>
+      <div class="inc-item reveal d1"><span class="inc-check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c9a876" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><div><div class="t">Plano alimentar</div><div class="s">Feito pela nutricionista Gabriela Louro especificamente pro desafio.</div></div></div>
+      <div class="inc-item reveal"><span class="inc-check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c9a876" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><div><div class="t">Meu Diário Ela Fit</div><div class="s">Calendário, medidas, fotos, metas e anotações. Sua jornada registrada.</div></div></div>
+      <div class="inc-item reveal d1"><span class="inc-check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c9a876" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><div><div class="t">Grupo exclusivo</div><div class="s">WhatsApp fechado só pras participantes, moderado pelo Lucas.</div></div></div>
+      <div class="inc-item reveal"><span class="inc-check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c9a876" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><div><div class="t">5 lives ao vivo</div><div class="s">A cada 10 dias, uma live com o Lucas sobre execução, nutrição e constância.</div></div></div>
+      <div class="inc-item reveal d1"><span class="inc-check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c9a876" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><div><div class="t">Mini-desafios semanais</div><div class="s">Missões de constância: hidratação, sono, movimento, autoestima.</div></div></div>
+      <div class="inc-item reveal"><span class="inc-check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c9a876" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><div><div class="t">Premiação real</div><div class="s">3 ganhadoras · Kit Savita, consultoria com Lucas e mês de plataforma.</div></div></div>
+      <div class="inc-item reveal d1"><span class="inc-check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c9a876" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><div><div class="t">10% off na plataforma</div><div class="s">Ao concluir o desafio, 10% de desconto no plano anual pra continuar.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- QUEM CONDUZ -->
+<section class="pad paper">
+  <div class="wrap coach">
+    <div class="pic reveal">
+      <div class="frame">
+        <img src="https://cdn.jsdelivr.net/gh/dmattos09-dotcom/teste@192762144b0ff91068746abf2e6ccff440b862b2/ela-fit/assets/move50-coach.webp" alt="Treinador Lucas Gonçalves">
+        <div class="cred"><b>10</b><span>anos formando mulheres mais fortes</span></div>
+      </div>
+    </div>
+    <div class="copy reveal d1">
+      <span class="eyebrow">Quem conduz</span>
+      <h2>Treinador <span class="g">Lucas Gonçalves</span></h2>
+      <p>Depois de 10 anos atendendo mulheres, criei o método Ela Fit porque entendi uma coisa: a maioria dos programas trata mulher como homem menor — e o corpo feminino não funciona assim.</p>
+      <p>O Move 50 nasceu vendo mulheres pedirem o mesmo: <em>“Lucas, me dá uma meta. Me dá uma linha de chegada.”</em> Essa é a linha de chegada. 50 dias. A gente vai juntos.</p>
+      <div class="chips">
+        <span class="chip">Pós em Saúde da Mulher</span>
+        <span class="chip">+5 mil alunas</span>
+        <span class="chip">10 anos</span>
+        <span class="chip">Alphaville-SP</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section class="pad white">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow center">Prova social</span>
+      <h2>Elas <span class="g">continuaram</span></h2>
+      <p class="sub">Histórias reais de alunas do método Ela Fit.</p>
+    </div>
+  </div>
+  <div class="marquee reveal"><div class="marquee-track" id="tmqTrack"></div></div>
+</section>
+
+<!-- ANTES & DEPOIS -->
+<section class="pad paper" id="resultados">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow center">Antes &amp; depois</span>
+      <h2>Transformações <span class="g">reais</span></h2>
+      <p class="sub">Resultado de método, progressão e constância — não de milagre de 21 dias.</p>
+    </div>
+  </div>
+  <div class="ba reveal">
+    <button class="ba-nav prev" id="baPrev" aria-label="Anterior"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <div class="ba-view" id="baTrack"></div>
+    <button class="ba-nav next" id="baNext" aria-label="Próximo"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+  </div>
+  <p class="ba-hint reveal"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Arraste para o lado ou use as setas</p>
+</section>
+
+<!-- PRA QUEM -->
+<section class="pad mist">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow center">Antes de entrar</span>
+      <h2>É <span class="g">pra você</span>?</h2>
+      <p class="sub">O Move 50 não é pra todo mundo. E tudo bem.</p>
+    </div>
+    <div class="pq">
+      <div class="pq-card reveal">
+        <h3>É pra você se…</h3>
+        <ul>
+          <li>Você já tentou várias vezes e sentiu a motivação acabar</li>
+          <li>Você treina sozinha e sente falta de método e acompanhamento</li>
+          <li>Você quer um plano que caiba numa rotina real, não ideal</li>
+          <li>Você quer terminar o ano com algo construído, não começado</li>
+          <li>Você acredita que constância vale mais que milagre</li>
+        </ul>
+      </div>
+      <div class="pq-card no reveal d1">
+        <h3>Não é pra você se…</h3>
+        <ul>
+          <li>Você quer perder peso em 10 dias com fórmula mágica</li>
+          <li>Você não tem acesso a academia ou equipamentos básicos</li>
+          <li>Você busca dieta restritiva ou protocolo extremo</li>
+          <li>Você não está disposta a aparecer nem no grupo</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLANOS -->
+<section class="pad white" id="planos">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow center">Investimento</span>
+      <h2>Escolha <span class="g">seu lote</span></h2>
+      <p class="sub">200 vagas no total. O preço sobe conforme as vagas acabam — o Lote 1 esgota rápido.</p>
+    </div>
+    <div class="price-grid">
+      <div class="price-card featured reveal" data-price="R$ 87" data-name="Lote 01 · fundadoras">
+        <span class="price-flag">Esgotando</span>
+        <div class="price-name">Lote 01</div>
+        <div class="price-vagas">60 vagas · fundadoras</div>
+        <div class="price-value"><span class="cur">R$</span><span class="num">87</span></div>
+        <div class="price-parcela">ou 2x de R$ 46 sem juros</div>
+        <div class="vbar"><i data-fill="82"></i></div>
+        <ul class="price-feats">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c9a876" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Acesso completo ao desafio</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c9a876" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Melhor preço de todos</li>
+        </ul>
+        <a href="https://pay.hotmart.com/B107917258X?off=zfjmbyrf" target="_blank" rel="noopener" class="btn btn-primary btn-block">Quero esse <span class="circ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      </div>
+      <div class="price-card reveal d1 locked" data-price="R$ 117" data-name="Lote 02">
+        <span class="price-flag">Em breve</span>
+        <div class="price-name">Lote 02</div>
+        <div class="price-vagas">Libera após o Lote 1</div>
+        <div class="price-value"><span class="cur">R$</span><span class="num">117</span></div>
+        <div class="price-parcela">ou 3x de R$ 42 sem juros</div>
+        <div class="vbar"><i data-fill="40"></i></div>
+        <ul class="price-feats">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c9a876" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Acesso completo ao desafio</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c9a876" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Abre quando o Lote 1 esgotar</li>
+        </ul>
+        <span class="btn btn-locked simple btn-block" aria-disabled="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="11" width="15" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Em breve</span>
+      </div>
+      <div class="price-card reveal d2 locked" data-price="R$ 137" data-name="Lote 03 · últimas">
+        <span class="price-flag">Em breve</span>
+        <div class="price-name">Lote 03</div>
+        <div class="price-vagas">Libera após o Lote 2</div>
+        <div class="price-value"><span class="cur">R$</span><span class="num">137</span></div>
+        <div class="price-parcela">ou 3x de R$ 49 sem juros</div>
+        <div class="vbar"><i data-fill="12"></i></div>
+        <ul class="price-feats">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c9a876" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Acesso completo ao desafio</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c9a876" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Últimas vagas do desafio</li>
+        </ul>
+        <span class="btn btn-locked simple btn-block" aria-disabled="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="11" width="15" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Em breve</span>
+      </div>
+    </div>
+
+    <div class="combo reveal">
+      <div class="k">Mais vantajoso</div>
+      <h3>Move 50 <span class="g">+</span> Plataforma Semestral</h3>
+      <p>O desafio de 50 dias + 6 meses de plataforma Ela Fit. Você começa a jornada e continua até março com todos os treinos liberados.</p>
+      <div class="pr"><span class="cur">R$ </span>367</div>
+      <div class="eco">Economia de ~25%</div>
+      <div><a href="#" class="btn btn-gold">Quero o combo <span class="circ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div>
+    </div>
+  </div>
+</section>
+
+<!-- PREMIAÇÃO -->
+<section class="pad navy">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow center">Premiação final</span>
+      <h2>3 lugares premiados</h2>
+      <p class="sub">Critério: constância, não transformação física. Premiamos quem apareceu todos os dias.</p>
+    </div>
+    <div class="premio">
+      <div class="premio-item reveal d1"><div class="premio-medal">2º</div><div class="premio-tt">Consultoria com o Lucas</div><div class="premio-ds">60 minutos de consultoria personalizada online, direto com o Treinador.</div></div>
+      <div class="premio-item p1 reveal"><div class="premio-medal">1º</div><div class="premio-tt">Kit Savita + 1 mês de plataforma</div><div class="premio-ds">Suplementação completa + acesso cortesia à plataforma por 30 dias.</div></div>
+      <div class="premio-item reveal d2"><div class="premio-medal">3º</div><div class="premio-tt">1 mês de plataforma cortesia</div><div class="premio-ds">Acesso cortesia à plataforma Ela Fit por 30 dias após o desafio.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- GARANTIA -->
+<section class="pad paper guarantee">
+  <div class="wrap reveal">
+    <div class="guar-seal"><div><b>7</b><span>dias · sem risco</span></div></div>
+    <div class="guar-copy">
+      <h2>Garantia <span class="g">incondicional</span> de 7 dias</h2>
+      <p>Entra, acessa o conteúdo, participa do grupo. Se nos primeiros 7 dias você sentir que não é pra você, devolvemos 100% do valor. Sem pergunta, sem burocracia.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="pad white">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow center">Dúvidas</span>
+      <h2>Perguntas frequentes</h2>
+    </div>
+    <div class="faq-wrap reveal">
+      <div class="faq-item"><button class="faq-q">Preciso ser aluna da plataforma pra participar?<span class="plus"></span></button><div class="faq-a"><p>Não. O Move 50 é um desafio independente. Mas se quiser continuar depois, participantes recebem 10% de desconto no plano anual da plataforma.</p></div></div>
+      <div class="faq-item"><button class="faq-q">Posso treinar em casa ou precisa de academia?<span class="plus"></span></button><div class="faq-a"><p>O programa foi pensado pra academia com equipamentos. Dá pra adaptar alguns exercícios em casa com halteres e elásticos, mas o ideal é ter acesso a uma academia básica.</p></div></div>
+      <div class="faq-item"><button class="faq-q">E se eu nunca tiver treinado?<span class="plus"></span></button><div class="faq-a"><p>Pode entrar. O Bloco Move (primeiros 25 dias) é dedicado a aprender a execução dos movimentos. O Lucas acompanha pelo grupo e corrige vídeos.</p></div></div>
+      <div class="faq-item"><button class="faq-q">E se eu perder uma live?<span class="plus"></span></button><div class="faq-a"><p>As lives acontecem no Instagram Close Friends e ficam disponíveis por 48h depois, pra quem não puder assistir ao vivo.</p></div></div>
+      <div class="faq-item"><button class="faq-q">Posso treinar menos que 5x por semana?<span class="plus"></span></button><div class="faq-a"><p>Pode. O programa funciona em 3, 4 ou 5x por semana. Você segue a sequência A→B→C→D→E continuamente, no ritmo que couber na sua rotina.</p></div></div>
+      <div class="faq-item"><button class="faq-q">O plano alimentar é restritivo?<span class="plus"></span></button><div class="faq-a"><p>Não. A nutricionista Gabriela Louro montou o plano com foco em alimentação sustentável, sem radicalismos. Nada de dieta de 1.000 calorias.</p></div></div>
+      <div class="faq-item"><button class="faq-q">Como funciona o pagamento?<span class="plus"></span></button><div class="faq-a"><p>Pelo Pix (à vista) ou cartão de crédito (parcelado), 100% seguro pela Hotmart. Acesso imediato após a confirmação.</p></div></div>
+      <div class="faq-item"><button class="faq-q">Tem garantia?<span class="plus"></span></button><div class="faq-a"><p>Sim, garantia de 7 dias. Se entrar e sentir que não é pra você, devolvemos 100% do valor sem perguntas.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL -->
+<section class="pad-lg final">
+  <div class="wrap reveal">
+    <span class="eyebrow center" style="color:var(--gold)">Última chamada</span>
+    <h2>Você <span class="g">precisa continuar</span></h2>
+    <p>50 dias. 5 treinos. Um método. Mais movimento, mais força, mais constância.</p>
+    <a href="#planos" class="btn btn-light simple" style="font-size:.95rem">Quero minha vaga <span class="circ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="#top" aria-label="Ela Fit"><img class="brand-logo" src="https://cdn.jsdelivr.net/gh/dmattos09-dotcom/teste@192762144b0ff91068746abf2e6ccff440b862b2/ela-fit/assets/logo-white.webp" alt="Ela Fit" width="640" height="219" style="height:38px;filter:none"></a>
+        <p>Move 50 · Desafio de 50 dias pra colocar o corpo em movimento e a constância na rotina.</p>
+        <div class="socials">
+          <a href="https://instagram.com/treinadorlucasg" target="_blank" rel="noopener" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/></svg></a>
+          <a href="#" aria-label="WhatsApp"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-4-1L3 20l1-5.5a8.5 8.5 0 0 1-1-4A8.38 8.38 0 0 1 11.5 3a8.38 8.38 0 0 1 9.5 8.5Z"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>Desafio</h4>
+        <a href="#metodo">O método</a>
+        <a href="#resultados">Resultados</a>
+        <a href="#planos">Lotes e preços</a>
+      </div>
+      <div class="foot-col">
+        <h4>Ela Fit</h4>
+        <a href="https://ela-fit.vercel.app" target="_blank" rel="noopener">Plataforma</a>
+        <a href="https://instagram.com/treinadorlucasg" target="_blank" rel="noopener">Instagram</a>
+        <a href="#planos">Participar</a>
+      </div>
+    </div>
+    <div class="foot-legal">
+      <span>© Treinador Lucas Gonçalves · Move 50 · Edição 01</span>
+      <span>CNPJ 54.392.228/0001-01 · Alphaville, Barueri — SP</span>
+    </div>
+  </div>
+</footer>
+
+<!-- STICKY -->
+<div class="sticky-cta" id="stickyCta">
+  <div class="info"><b id="stickyPrice">R$ 87</b><span id="stickyName">Lote 01 · fundadoras</span></div>
+  <a href="#planos" class="btn btn-primary">Garantir vaga <span class="circ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+</div>
+
+<button class="totop" id="toTop" aria-label="Voltar ao topo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg></button>
+
+<script>
+(function(){
+  "use strict";
+  var CDN='https://cdn.jsdelivr.net/gh/dmattos09-dotcom/teste@192762144b0ff91068746abf2e6ccff440b862b2/ela-fit/assets/';
+
+  var target=new Date('2026-10-19T00:00:00-03:00').getTime();
+  var elD=document.getElementById('cd-d'),elH=document.getElementById('cd-h'),elM=document.getElementById('cd-m'),elS=document.getElementById('cd-s');
+  function pad(n){return (n<10?'0':'')+n;}
+  function tick(){
+    var diff=target-Date.now();
+    if(diff<=0){var cd=document.getElementById('countdown');if(cd)cd.innerHTML='<div class="cd-box" style="min-width:auto;padding:14px 26px"><div class="cd-num" style="font-size:1.3rem">Começou!</div></div>';clearInterval(timer);return;}
+    var d=Math.floor(diff/864e5),h=Math.floor(diff%864e5/36e5),m=Math.floor(diff%36e5/6e4),s=Math.floor(diff%6e4/1e3);
+    if(elD)elD.textContent=pad(d);if(elH)elH.textContent=pad(h);if(elM)elM.textContent=pad(m);if(elS)elS.textContent=pad(s);
+  }
+  tick();var timer=setInterval(tick,1000);
+
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(!e.isIntersecting)return;var el=e.target;el.classList.add('in');if(el.querySelectorAll)el.querySelectorAll('.vbar i').forEach(function(i){i.style.width=(i.getAttribute('data-fill')||0)+'%';});io.unobserve(el);});
+  },{threshold:.14,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal,.jbar').forEach(function(el){io.observe(el);});
+
+  (function(){
+    var track=document.getElementById('tmqTrack');if(!track)return;
+    var t=[
+      {n:'Manoela',i:'M',d:'Voltei pra academia depois de 8 anos parada, morrendo de medo de me machucar de novo. Aqui eu aprendi a fazer cada exercício do jeito certo, sem pressa nenhuma. Hoje treino 5x na semana e me sinto mais forte do que quando eu era mais nova. 🙏'},
+      {n:'Carla',i:'C',d:'Gente, eu já tinha assinado um monte de app e largado tudo no meio. O que me fez ficar foi ver que os treinos fazem sentido e ter as meninas ali comigo. É a primeira vez na vida que consigo manter a constância de verdade.'},
+      {n:'Luciene',i:'L',d:'Eu achava que na minha idade não dava mais pra evoluir. Em um ano ganhei massa, minhas dores nas costas foram embora e hoje subo escada sem cansar. Mudou até o meu humor no dia a dia.'},
+      {n:'Patrícia',i:'P',d:'Comecei do zero, nunca tinha pisado numa academia e vivia perdida. Os vídeos me deram segurança pra treinar sozinha. Hoje o treino virou o meu momento do dia, não abro mão.'},
+      {n:'Renata',i:'R',d:'O que mudou tudo pra mim foi juntar o treino com a orientação da nutri. Emagreci sem passar fome e sem fazer loucura, e o melhor: consegui manter até hoje. Recomendo demais.'},
+      {n:'Juliana',i:'J',d:'Meu foco sempre foi glúteo e postura, e é exatamente isso que encontrei aqui. Minhas fotos de antes e depois falam por mim. Indico de olhos fechados pra qualquer mulher que quer começar direito.'}
+    ];
+    function card(x){return '<article class="tcard"><div class="q">&ldquo;</div><p class="tb">'+x.d+'</p><div class="who"><div class="av">'+x.i+'</div><div><b>'+x.n+'</b><span>Aluna Ela Fit</span></div></div></article>';}
+    var h='';t.forEach(function(x){h+=card(x);});t.forEach(function(x){h+=card(x);});track.innerHTML=h;
+  })();
+
+  (function(){
+    var track=document.getElementById('baTrack');if(!track)return;
+    var ar=[1,1,1.04,1,1.01,1,0.8,1,1.01,1,1.01,1,1,0.56];var h='';
+    for(var i=1;i<=ar.length;i++){var n=(i<10?'0':'')+i;h+='<figure class="ba-card" style="--ar:'+ar[i-1]+'"><span class="tag">Antes · Depois</span><img src="'+CDN+'ba-'+n+'.webp" alt="Transformação de aluna Ela Fit" loading="lazy" decoding="async"><figcaption class="cap">Transformação real · Aluna Ela Fit</figcaption></figure>';}
+    track.innerHTML=h;
+    var prev=document.getElementById('baPrev'),next=document.getElementById('baNext');
+    function step(){var c=track.querySelector('.ba-card');return c?c.getBoundingClientRect().width+18:340;}
+    prev&&prev.addEventListener('click',function(){track.scrollBy({left:-step(),behavior:'smooth'});});
+    next&&next.addEventListener('click',function(){track.scrollBy({left:step(),behavior:'smooth'});});
+  })();
+
+  var nav=document.getElementById('nav'),sticky=document.getElementById('stickyCta'),toTop=document.getElementById('toTop'),hero=document.querySelector('.hero');
+  function onScroll(){var y=window.scrollY;var past=hero?y>hero.offsetHeight-120:y>400;nav.classList.toggle('scrolled',y>20);sticky.classList.toggle('show',past);toTop.classList.toggle('show',y>900);}
+  onScroll();window.addEventListener('scroll',onScroll,{passive:true});
+  toTop.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+
+  var cards=document.querySelectorAll('.price-card'),sp=document.getElementById('stickyPrice'),sn=document.getElementById('stickyName');
+  cards.forEach(function(l){l.addEventListener('click',function(e){if(l.classList.contains('locked')||e.target.closest('.btn'))return;cards.forEach(function(x){x.classList.remove('sel');});l.classList.add('sel');if(sp)sp.textContent=l.getAttribute('data-price')||'';if(sn)sn.textContent=l.getAttribute('data-name')||'';});});
+
+  document.querySelectorAll('.faq-q').forEach(function(btn){btn.addEventListener('click',function(){var item=btn.parentElement,open=item.classList.contains('open'),a=item.querySelector('.faq-a');document.querySelectorAll('.faq-item.open').forEach(function(o){o.classList.remove('open');o.querySelector('.faq-a').style.maxHeight=null;});if(!open){item.classList.add('open');a.style.maxHeight=a.scrollHeight+'px';}});});
+
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var id=this.getAttribute('href');if(id==='#'||id.length<2)return;var t=document.querySelector(id);if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}});});
+})();
+</script>
+</body>
+</html>
