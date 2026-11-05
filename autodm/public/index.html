@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AutoDM · Painel</title>
+<meta name="robots" content="noindex">
+<style>
+  :root {
+    --bg: #0f0f10; --card: #18181b; --line: #2a2a2e; --text: #f4f4f5; --muted: #a1a1aa;
+    --accent: #e8794a; --accent-ink: #1a0f0a; --ok: #4ade80; --err: #f87171;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 24px 16px 64px; }
+  h1 { font-size: 22px; margin: 0; } h2 { font-size: 17px; margin: 0 0 12px; }
+  header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; gap: 12px; flex-wrap: wrap; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px; margin-bottom: 16px; }
+  .muted { color: var(--muted); font-size: 13px; }
+  label { display: block; font-size: 13px; color: var(--muted); margin: 12px 0 4px; }
+  input, textarea, select { width: 100%; background: #0b0b0c; color: var(--text); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font: inherit; }
+  textarea { min-height: 80px; resize: vertical; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 640px) { .row { grid-template-columns: 1fr; } }
+  .checks { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 12px; }
+  .checks label { display: flex; align-items: center; gap: 6px; margin: 0; color: var(--text); font-size: 14px; }
+  .checks input { width: auto; }
+  button { font: inherit; border: 0; border-radius: 10px; padding: 10px 16px; cursor: pointer; background: var(--line); color: var(--text); }
+  button.primary { background: var(--accent); color: var(--accent-ink); font-weight: 600; }
+  button.danger { background: transparent; color: var(--err); border: 1px solid #3f1d1d; }
+  button.small { padding: 6px 10px; font-size: 13px; }
+  .actions { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
+  .rule { display: flex; justify-content: space-between; gap: 12px; padding: 14px 0; border-top: 1px solid var(--line); align-items: flex-start; }
+  .rule:first-of-type { border-top: 0; }
+  .pill { display: inline-block; background: #27272a; border-radius: 999px; padding: 2px 10px; font-size: 12px; margin: 2px 4px 2px 0; }
+  .pill.kw { background: #3a2318; color: #f5b393; }
+  .off { opacity: .45; }
+  .warn { background: #2a2010; border: 1px solid #5a4410; color: #fcd34d; padding: 10px 14px; border-radius: 10px; font-size: 13px; margin-bottom: 16px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 8px 6px; border-top: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--muted); font-weight: 500; }
+  .table-wrap { overflow-x: auto; }
+  .ok { color: var(--ok); } .err { color: var(--err); }
+  #login { max-width: 360px; margin: 15vh auto; }
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div id="login" class="card">
+    <h1>AutoDM</h1>
+    <p class="muted">Entre com a senha do painel (variável ADMIN_PASSWORD).</p>
+    <form id="loginForm">
+      <input type="password" id="pwd" placeholder="Senha" autocomplete="current-password" required>
+      <div class="actions"><button class="primary" type="submit">Entrar</button></div>
+      <p id="loginErr" class="err hidden">Senha incorreta.</p>
+    </form>
+  </div>
+
+  <div id="app" class="hidden">
+    <header>
+      <div>
+        <h1>AutoDM</h1>
+        <div class="muted">Comentou a palavra-chave → resposta pública + DM automática</div>
+      </div>
+      <button class="small" id="logout">Sair</button>
+    </header>
+
+    <div id="noRedis" class="warn hidden">
+      ⚠️ Banco de dados não conectado. As regras ficam só na memória e somem. Conecte o Upstash Redis na Vercel (passo 6 do guia).
+    </div>
+
+    <section class="card">
+      <h2 id="formTitle">Nova automação</h2>
+      <form id="ruleForm">
+        <input type="hidden" name="id">
+        <div class="row">
+          <div>
+            <label>Nome (só pra você)</label>
+            <input name="name" placeholder="Ex.: E-book de roteiros" required>
+          </div>
+          <div>
+            <label>Palavras-chave (separe por vírgula)</label>
+            <input name="keywords" placeholder="QUERO, eu quero, link" required>
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label>Tipo de correspondência</label>
+            <select name="match">
+              <option value="contains">Contém a palavra ("quero sim!" ativa)</option>
+              <option value="exact">Exatamente a palavra</option>
+            </select>
+          </div>
+          <div>
+            <label>Só nestes posts (IDs, opcional — vazio = todos)</label>
+            <input name="mediaIds" placeholder="1789...., 1790....">
+          </div>
+        </div>
+
+        <label>Respostas públicas no comentário (uma por linha; sorteia uma para parecer natural)</label>
+        <textarea name="commentReplies" placeholder="Te mandei no direct! 📩&#10;Corre lá no direct, {nome} 💌&#10;Enviado! Confere sua DM ✨"></textarea>
+
+        <label>Mensagem da DM — use {nome} para o @ da pessoa</label>
+        <textarea name="dmText" placeholder="Oi {nome}! Aqui está o material que você pediu 👇"></textarea>
+
+        <div class="row">
+          <div>
+            <label>Texto do botão (opcional, máx. 20)</label>
+            <input name="buttonTitle" maxlength="20" placeholder="Acessar agora">
+          </div>
+          <div>
+            <label>Link do botão</label>
+            <input name="buttonUrl" type="url" placeholder="https://...">
+          </div>
+        </div>
+
+        <div class="checks">
+          <label><input type="checkbox" name="active" checked> Ativa</label>
+          <label><input type="checkbox" name="onComment" checked> Disparar em comentários</label>
+          <label><input type="checkbox" name="onDm"> Disparar também quando mandarem a palavra no direct</label>
+        </div>
+
+        <div class="actions">
+          <button class="primary" type="submit">Salvar</button>
+          <button type="button" id="cancelEdit" class="hidden">Cancelar edição</button>
+        </div>
+        <p id="formMsg" class="muted"></p>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Automações</h2>
+      <div id="rules"><p class="muted">Carregando…</p></div>
+    </section>
+
+    <section class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
+        <h2 style="margin:0">Histórico / leads</h2>
+        <div style="display:flex;gap:8px">
+          <button class="small" id="reloadLogs">Atualizar</button>
+          <button class="small" id="exportCsv">Exportar CSV</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Quando</th><th>Tipo</th><th>Quem</th><th>Texto</th><th>Automação</th><th>Status</th></tr></thead>
+          <tbody id="logs"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  let password = '';
+  let rules = [];
+  let events = [];
+
+  try { password = sessionStorage.getItem('autodm_pwd') || ''; } catch {}
+
+  const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+  async function api(path, opts = {}) {
+    const res = await fetch(path, {
+      ...opts,
+      headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + password, ...(opts.headers || {}) },
+    });
+    const data = await res.json().catch(() => ({}));
+    if (res.status === 401) throw Object.assign(new Error('auth'), { auth: true });
+    if (!res.ok) throw new Error(data.error || 'Erro ' + res.status);
+    return data;
+  }
+
+  async function start() {
+    try {
+      const data = await api('/api/rules');
+      rules = data.rules;
+      $('#noRedis').classList.toggle('hidden', data.persistent);
+      $('#login').classList.add('hidden');
+      $('#app').classList.remove('hidden');
+      renderRules();
+      loadLogs();
+    } catch (e) {
+      if (e.auth && password) $('#loginErr').classList.remove('hidden');
+      $('#login').classList.remove('hidden');
+      $('#app').classList.add('hidden');
+    }
+  }
+
+  $('#loginForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    password = $('#pwd').value;
+    try { sessionStorage.setItem('autodm_pwd', password); } catch {}
+    start();
+  });
+
+  $('#logout').addEventListener('click', () => {
+    password = '';
+    try { sessionStorage.removeItem('autodm_pwd'); } catch {}
+    location.reload();
+  });
+
+  function renderRules() {
+    const el = $('#rules');
+    if (!rules.length) { el.innerHTML = '<p class="muted">Nenhuma automação ainda. Crie a primeira acima 👆</p>'; return; }
+    el.innerHTML = rules.map((r) => `
+      <div class="rule ${r.active === false ? 'off' : ''}">
+        <div>
+          <strong>${esc(r.name)}</strong>${r.active === false ? ' <span class="pill">pausada</span>' : ''}<br>
+          ${r.keywords.map((k) => `<span class="pill kw">${esc(k)}</span>`).join('')}
+          <div class="muted" style="margin-top:4px">
+            ${r.onComment !== false ? 'Comentários' : ''}${r.onComment !== false && r.onDm ? ' + ' : ''}${r.onDm ? 'Direct' : ''}
+            · ${r.mediaIds?.length ? r.mediaIds.length + ' post(s)' : 'todos os posts'}
+            ${r.buttonUrl ? ' · botão: ' + esc(r.buttonTitle || r.buttonUrl) : ''}
+          </div>
+        </div>
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="small" data-toggle="${esc(r.id)}">${r.active === false ? 'Ativar' : 'Pausar'}</button>
+          <button class="small" data-edit="${esc(r.id)}">Editar</button>
+          <button class="small danger" data-del="${esc(r.id)}">Excluir</button>
+        </div>
+      </div>`).join('');
+  }
+
+  $('#rules').addEventListener('click', async (e) => {
+    const t = e.target.closest('button'); if (!t) return;
+    const id = t.dataset.edit || t.dataset.del || t.dataset.toggle;
+    const rule = rules.find((r) => r.id === id); if (!rule) return;
+    if (t.dataset.edit) fillForm(rule);
+    if (t.dataset.toggle) { await api('/api/rules', { method: 'POST', body: JSON.stringify({ ...rule, active: rule.active === false }) }); start(); }
+    if (t.dataset.del && confirm(`Excluir "${rule.name}"?`)) { await api('/api/rules?id=' + encodeURIComponent(id), { method: 'DELETE' }); start(); }
+  });
+
+  const form = $('#ruleForm');
+  function fillForm(r) {
+    form.id.value = r.id;
+    form.name.value = r.name;
+    form.keywords.value = r.keywords.join(', ');
+    form.match.value = r.match || 'contains';
+    form.mediaIds.value = (r.mediaIds || []).join(', ');
+    form.commentReplies.value = (r.commentReplies || []).join('\n');
+    form.dmText.value = r.dmText || '';
+    form.buttonTitle.value = r.buttonTitle || '';
+    form.buttonUrl.value = r.buttonUrl || '';
+    form.active.checked = r.active !== false;
+    form.onComment.checked = r.onComment !== false;
+    form.onDm.checked = !!r.onDm;
+    $('#formTitle').textContent = 'Editando: ' + r.name;
+    $('#cancelEdit').classList.remove('hidden');
+    form.scrollIntoView({ behavior: 'smooth' });
+  }
+  function resetForm() {
+    form.reset(); form.id.value = '';
+    $('#formTitle').textContent = 'Nova automação';
+    $('#cancelEdit').classList.add('hidden');
+  }
+  $('#cancelEdit').addEventListener('click', resetForm);
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const body = {
+      id: form.id.value || undefined,
+      name: form.name.value,
+      keywords: form.keywords.value,
+      match: form.match.value,
+      mediaIds: form.mediaIds.value,
+      commentReplies: form.commentReplies.value.split('\n'),
+      dmText: form.dmText.value,
+      buttonTitle: form.buttonTitle.value,
+      buttonUrl: form.buttonUrl.value,
+      active: form.active.checked,
+      onComment: form.onComment.checked,
+      onDm: form.onDm.checked,
+    };
+    try {
+      await api('/api/rules', { method: 'POST', body: JSON.stringify(body) });
+      $('#formMsg').textContent = '✅ Salvo!';
+      resetForm(); start();
+    } catch (err) { $('#formMsg').textContent = '❌ ' + err.message; }
+  });
+
+  async function loadLogs() {
+    try { events = (await api('/api/logs?count=300')).events; } catch { events = []; }
+    const tbody = $('#logs');
+    if (!events.length) { tbody.innerHTML = '<tr><td colspan="6" class="muted">Nada ainda.</td></tr>'; return; }
+    tbody.innerHTML = events.map((ev) => `
+      <tr>
+        <td>${esc(new Date(ev.at).toLocaleString('pt-BR'))}</td>
+        <td>${esc({ comment: 'Comentário', dm: 'Direct', token: 'Token' }[ev.type] || ev.type)}</td>
+        <td>${ev.username ? '@' + esc(ev.username) : esc(ev.senderId || '')}</td>
+        <td>${esc(ev.text || '')}</td>
+        <td>${esc(ev.rule || '')}</td>
+        <td>${ev.errors ? `<span class="err" title="${esc(ev.errors.join(' | '))}">erro ⓘ</span>` : '<span class="ok">ok</span>'}</td>
+      </tr>`).join('');
+  }
+  $('#reloadLogs').addEventListener('click', loadLogs);
+
+  $('#exportCsv').addEventListener('click', () => {
+    const rows = [['data', 'tipo', 'username', 'id', 'texto', 'automacao', 'dm_enviada', 'erros']].concat(
+      events.filter((e) => e.type !== 'token').map((e) => [e.at, e.type, e.username || '', e.senderId || '', e.text || '', e.rule || '', e.dmSent ? 'sim' : 'nao', (e.errors || []).join(' | ')])
+    );
+    const csv = rows.map((r) => r.map((v) => '"' + String(v).replace(/"/g, '""') + '"').join(',')).join('\n');
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob(['﻿' + csv], { type: 'text/csv' }));
+    a.download = 'leads-autodm.csv';
+    a.click();
+  });
+
+  if (password) start(); else $('#login').classList.remove('hidden');
+})();
+</script>
+</body>
+</html>
