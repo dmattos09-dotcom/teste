@@ -12,14 +12,14 @@ import {
 } from 'remotion';
 
 // ---------- grade de batidas (librosa: período 0.4916 s, fase 0.078 s) ----------
-const bf = (n: number) => Math.round(2.34 + 14.748 * n);
+export const bf = (n: number) => Math.round(2.34 + 14.748 * n);
 export const REEL_DURATION = bf(42) + 18;
 
-const CL = { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' } as const;
-const FONT = 'Inter, "Noto Color Emoji", sans-serif';
+export const CL = { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' } as const;
+export const FONT = 'Inter, "Noto Color Emoji", sans-serif';
 
 // ---------- paleta (WhatsApp dark + Black November do avatar do grupo) ----------
-const C = {
+export const C = {
   bg: '#0b141a',
   bubble: '#1f2c34',
   green: '#25D366',
@@ -90,7 +90,7 @@ const camAt = (f: number) => {
 };
 
 // ---------- peças ----------
-const HandCircle: React.FC<{ box: [number, number, number, number]; t: number; opacity: number }> = ({ box, t, opacity }) => {
+export const HandCircle: React.FC<{ box: [number, number, number, number]; t: number; opacity: number }> = ({ box, t, opacity }) => {
   const [x0, y0, x1, y1] = box;
   const cx = (x0 + x1) / 2;
   const cy = (y0 + y1) / 2;
@@ -113,7 +113,7 @@ const HandCircle: React.FC<{ box: [number, number, number, number]; t: number; o
   );
 };
 
-const Burst: React.FC<{ size: number; label: string }> = ({ size, label }) => {
+export const Burst: React.FC<{ size: number; label: string }> = ({ size, label }) => {
   const pts: string[] = [];
   const n = 16;
   for (let i = 0; i < n * 2; i++) {
@@ -200,7 +200,7 @@ const Caption: React.FC<{ frame: number }> = ({ frame }) => {
   );
 };
 
-const slam = (frame: number, land: number, from = 2.4, dur = 5) => {
+export const slam = (frame: number, land: number, from = 2.4, dur = 5) => {
   const s = interpolate(frame, [land - dur, land], [from, 1], { ...CL, easing: Easing.in(Easing.quad) });
   const o = interpolate(frame, [land - dur, land - dur + 2], [0, 1], CL);
   const t = frame - land;
@@ -371,7 +371,7 @@ const DeckText: React.FC<{ frame: number }> = ({ frame }) => {
 };
 
 // ---------- CTA ----------
-const WaIcon: React.FC<{ size: number }> = ({ size }) => (
+export const WaIcon: React.FC<{ size: number }> = ({ size }) => (
   <svg width={size} height={size} viewBox="0 0 100 100">
     <path d="M50 8C27 8 9 26 9 48c0 8 2 15 6 21L9 91l23-6c5 3 11 4 18 4 23 0 41-18 41-41S73 8 50 8z" fill={C.white} />
     <path d="M36 30c-2 0-4 1-5 3-2 3-3 7-1 12 3 8 10 16 19 20 5 2 9 1 12-1 2-1 3-3 3-5l-1-2-8-4c-1 0-2 0-3 1l-2 3c-1 1-2 1-3 0-4-2-8-6-10-10 0-1 0-2 1-3l2-2c1-1 1-2 0-3l-3-8c-1-1-1-1-1-1z" fill={C.green} />
